@@ -221,8 +221,7 @@ Priority languages for v1 (based on largest international student populations in
 ## File Structure
 
 ```
-gospel-story/
-├── src/
+jesus-story/          ├── src/
 │   ├── app/
 │   │   ├── page.tsx                  # Language selection home
 │   │   ├── [lang]/

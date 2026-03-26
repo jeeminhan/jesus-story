@@ -6,8 +6,8 @@
   },
   "mode": "initial_scan",
   "scan_level": "quick",
-  "project_root": "/Users/jeeminhan/code/gospel-story",
-  "project_knowledge": "/Users/jeeminhan/code/gospel-story/docs",
+  "project_root": "/Users/jeeminhan/Code/jesus-story",
+  "project_knowledge": "/Users/jeeminhan/Code/jesus-story/docs",
   "repository_type": "monolith",
   "project_types": [
     {

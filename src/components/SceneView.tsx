@@ -105,7 +105,7 @@ export function SceneView({ scene, lang, arcSlug, sceneIndex = 0, emotionalKey }
 
   useEffect(() => {
     const documentKey = document.documentElement.getAttribute('data-key');
-    const resolvedKey = isEmotionalKey(documentKey) ? documentKey : emotionalKey ?? null;
+    const resolvedKey = emotionalKey ?? (isEmotionalKey(documentKey) ? documentKey : null);
     if (resolvedKey) {
       document.documentElement.setAttribute('data-key', resolvedKey);
     }

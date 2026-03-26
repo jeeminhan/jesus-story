@@ -3,7 +3,7 @@
 ## Annotated Directory Tree
 
 ```
-gospel-story/                          # Project root
+jesus-story/          # Project root
 │
 ├── src/                               # All application source code
 │   ├── app/                           # Next.js App Router

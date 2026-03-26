@@ -12,7 +12,7 @@ The app is built as a **Next.js 15 App Router monolith** backed by **Supabase** 
 
 | Field               | Value                                      |
 |---------------------|--------------------------------------------|
-| **Name**            | gospel-story                               |
+| **Name**            | jesus-story                               |
 | **Version**         | 0.1.0                                      |
 | **Repository Type** | Monolith                                   |
 | **Primary Language**| TypeScript                                 |
@@ -63,7 +63,7 @@ The app is built as a **Next.js 15 App Router monolith** backed by **Supabase** 
 ## Repository Structure
 
 ```
-gospel-story/          # Monolith root
+jesus-story/          # Monolith root
 ├── src/               # Application source
 │   ├── app/           # Next.js App Router (pages, layouts, actions)
 │   ├── components/    # Reusable UI components
