@@ -3,10 +3,10 @@ import { notFound } from 'next/navigation';
 import { ArtCard } from '@/components/ArtCard';
 import { MirrorMomentGate } from '@/components/MirrorMomentGate';
 import { isValidLang } from '@/lib/constants';
-import { getArcBySlug, getScene, getStartScene, getWitnessVideo } from '@/lib/queries';
+import { getArcBySlug, getScene, getSceneProgress, getStartScene, getWitnessVideo } from '@/lib/queries';
 
 type StoryPageParams = Promise<{ lang: string; arc: string }>;
-type StorySearchParams = Promise<{ scene?: string; from?: string; note?: string }>;
+type StorySearchParams = Promise<{ scene?: string; card?: string }>;
 
 function humanizeStoryFigure(arcSlug: string) {
   return arcSlug
@@ -30,15 +30,13 @@ export async function generateMetadata({
   searchParams: StorySearchParams;
 }): Promise<Metadata> {
   const { lang, arc: arcSlug } = await params;
-  const { from, note } = await searchParams;
-  const scene = await getStartScene(arcSlug, lang);
+  const { scene: sceneId } = await searchParams;
+  const scene = sceneId ? await getScene(sceneId, lang) : await getStartScene(arcSlug, lang);
   const quote = scene?.body?.slice(0, 120) ?? 'A story for you';
-  const isCarrier = from === 'carrier';
-  const noteQuery = isCarrier && note?.trim() ? `&note=${encodeURIComponent(note.trim().slice(0, 200))}` : '';
-  const carrierQuery = isCarrier ? '&carrier=1' : '';
   const encodedArcSlug = encodeURIComponent(arcSlug);
   const encodedLang = encodeURIComponent(lang);
-  const baseImageUrl = `/api/og?arc=${encodedArcSlug}&lang=${encodedLang}${carrierQuery}${noteQuery}`;
+  const sceneQuery = scene?.id ? `&scene=${encodeURIComponent(scene.id)}` : '';
+  const baseImageUrl = `/api/og?arc=${encodedArcSlug}&lang=${encodedLang}${sceneQuery}`;
   const squareImageUrl = `${baseImageUrl}&square=1`;
 
   return {
@@ -63,7 +61,7 @@ export default async function StoryPage({
   searchParams: StorySearchParams;
 }) {
   const { lang, arc: arcSlug } = await params;
-  const { scene: sceneId } = await searchParams;
+  const { scene: sceneId, card } = await searchParams;
 
   if (!isValidLang(lang)) {
     notFound();
@@ -74,21 +72,21 @@ export default async function StoryPage({
     notFound();
   }
 
-  if (!sceneId) {
-    const startScene = await getStartScene(arcSlug, lang);
-    if (!startScene) {
+  if (!sceneId || card === '1') {
+    const entryScene = sceneId ? await getScene(sceneId, lang) : await getStartScene(arcSlug, lang);
+    if (!entryScene) {
       notFound();
     }
 
     return (
       <ArtCard
-        quote={startScene.body.slice(0, 120)}
+        quote={entryScene.body.slice(0, 120)}
         arcSlug={arcSlug}
         lang={lang}
         emotionalKey={arc.emotional_key}
-        startSceneId={startScene.id}
-        sceneSlug={startScene.slug}
-        lightWorld={startScene.light_world}
+        startSceneId={entryScene.id}
+        sceneSlug={entryScene.slug}
+        lightWorld={entryScene.light_world}
       />
     );
   }
@@ -97,6 +95,7 @@ export default async function StoryPage({
   if (!scene) {
     notFound();
   }
+  const progress = await getSceneProgress(arcSlug, scene.id, lang);
   const witnessVideo = scene.is_end ? await getWitnessVideo(arc.emotional_key ?? 'searching', lang) : null;
 
   return (
@@ -109,6 +108,8 @@ export default async function StoryPage({
       hasWitnessVideo={witnessVideo !== null}
       witnessVideoId={witnessVideo?.id ?? null}
       hasSceneParam={Boolean(sceneId)}
+      sceneIndex={progress?.index ?? 0}
+      totalScenes={progress?.total ?? 1}
     />
   );
 }

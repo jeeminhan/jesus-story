@@ -1,0 +1,22 @@
+<svg width="1200" height="1800" viewBox="0 0 1200 1800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="1800" fill="#EAF6F2"/>
+  <rect width="1200" height="980" fill="url(#sky)"/>
+  <ellipse cx="600" cy="1560" rx="530" ry="220" fill="#CADFD8"/>
+  <path d="M132 1210C242 1042 396 950 600 950C804 950 958 1042 1068 1210V1668H132V1210Z" fill="#D9EEE7"/>
+  <ellipse cx="600" cy="1126" rx="368" ry="84" fill="#6A8E86"/>
+  <ellipse cx="600" cy="1126" rx="338" ry="58" fill="#F4F8F7"/>
+  <path d="M292 1180H908V1228H292V1180Z" fill="#7CA49A"/>
+  <path d="M322 1228H386V1506H322V1228Z" fill="#55776E"/>
+  <path d="M814 1228H878V1506H814V1228Z" fill="#55776E"/>
+  <circle cx="458" cy="1094" r="34" fill="#9DD7CD" fill-opacity=".32"/>
+  <circle cx="562" cy="1076" r="26" fill="#9DD7CD" fill-opacity=".3"/>
+  <circle cx="654" cy="1078" r="28" fill="#9DD7CD" fill-opacity=".28"/>
+  <circle cx="748" cy="1096" r="34" fill="#9DD7CD" fill-opacity=".32"/>
+  <defs>
+    <linearGradient id="sky" x1="600" y1="0" x2="600" y2="980" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F9FFFD"/>
+      <stop offset=".45" stop-color="#DDF5EF"/>
+      <stop offset="1" stop-color="#EAF6F2"/>
+    </linearGradient>
+  </defs>
+</svg>

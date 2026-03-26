@@ -1,21 +1,25 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 520">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#f6efe4"/>
+    <linearGradient id="tombSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f7efe3"/>
       <stop offset="44%" stop-color="#dfb88f"/>
-      <stop offset="100%" stop-color="#8a5d4f"/>
+      <stop offset="100%" stop-color="#8b5e4f"/>
     </linearGradient>
-    <radialGradient id="light" cx="62%" cy="28%" r="44%">
-      <stop offset="0%" stop-color="#fffaf0" stop-opacity=".95"/>
-      <stop offset="100%" stop-color="#fffaf0" stop-opacity="0"/>
+    <radialGradient id="tombLight" cx="68%" cy="20%" r="34%">
+      <stop offset="0%" stop-color="#fffdf4" stop-opacity=".96"/>
+      <stop offset="100%" stop-color="#fffdf4" stop-opacity="0"/>
     </radialGradient>
   </defs>
-  <rect width="390" height="520" fill="url(#bg)"/>
-  <circle cx="252" cy="128" r="104" fill="url(#light)"/>
-  <path d="M0 332 C66 301 127 314 197 295 C269 276 329 281 390 266 L390 520 L0 520 Z" fill="#b68d6e"/>
-  <path d="M0 412 C79 389 143 395 210 379 C280 362 334 368 390 356 L390 520 L0 520 Z" fill="#835746"/>
-  <ellipse cx="98" cy="313" rx="56" ry="40" fill="#705041"/>
-  <ellipse cx="106" cy="313" rx="34" ry="24" fill="#2c1f1c"/>
-  <circle cx="236" cy="329" r="12" fill="#3b2a26"/>
-  <rect x="224" y="341" width="24" height="84" rx="11" fill="#3b2a26"/>
+  <rect width="390" height="520" fill="url(#tombSky)"/>
+  <circle cx="255" cy="108" r="108" fill="url(#tombLight)"/>
+  <path d="M0 322 C66 293 129 304 198 287 C270 270 331 276 390 262 L390 520 L0 520 Z" fill="#b78e6d"/>
+  <path d="M0 402 C81 381 145 387 211 372 C281 355 335 361 390 350 L390 520 L0 520 Z" fill="#855847"/>
+  <ellipse cx="100" cy="301" rx="59" ry="42" fill="#735243"/>
+  <ellipse cx="109" cy="301" rx="36" ry="26" fill="#2d201d"/>
+  <path d="M148 520 C150 459 170 403 208 357 C227 334 244 322 269 318" fill="none" stroke="#f4ead5" stroke-width="27" stroke-linecap="round" opacity=".52"/>
+  <g fill="#3b2a26">
+    <circle cx="237" cy="330" r="13"/>
+    <path d="M224 343 C225 364 221 393 217 424 C229 431 245 431 258 424 C254 393 251 364 251 343 Z"/>
+  </g>
+  <path d="M275 520 C270 478 280 438 306 405 C320 428 331 465 338 520 Z" fill="#6c4b3d" opacity=".26"/>
 </svg>

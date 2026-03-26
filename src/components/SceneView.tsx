@@ -38,6 +38,7 @@ interface SceneViewProps {
   lang: string;
   arcSlug: string;
   sceneIndex?: number;
+  totalScenes?: number;
   emotionalKey?: EmotionalKey | null;
 }
 
@@ -61,7 +62,7 @@ function splitIntoWordGroups(paragraph: string) {
   return groups;
 }
 
-export function SceneView({ scene, lang, arcSlug, sceneIndex = 0, emotionalKey }: SceneViewProps) {
+export function SceneView({ scene, lang, arcSlug, sceneIndex = 0, totalScenes = 1, emotionalKey }: SceneViewProps) {
   const router = useRouter();
   const { saveScene, clearSession } = useSession(lang, arcSlug);
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -74,15 +75,17 @@ export function SceneView({ scene, lang, arcSlug, sceneIndex = 0, emotionalKey }
   const [isExpanded, setIsExpanded] = useState(false);
   const [isDocked, setIsDocked] = useState(false);
   const [hasOverflow, setHasOverflow] = useState(false);
-  const [localSceneIndex, setLocalSceneIndex] = useState(sceneIndex);
   const isLightWorld = Boolean(scene.light_world);
   const hasSingleChoice = !scene.is_end && scene.choices.length === 1;
   const singleChoice = hasSingleChoice ? scene.choices[0] : null;
-  const collapsedPanelHeight = hasSingleChoice ? '27vh' : '40vh';
-  const collapsedGradientHeight = hasSingleChoice ? '33vh' : '46vh';
+  const collapsedPanelHeight = hasSingleChoice ? 'clamp(8.5rem, 15vh, 10rem)' : '39vh';
+  const collapsedGradientHeight = hasSingleChoice ? 'clamp(12rem, 24vh, 16rem)' : '45vh';
   const showChoiceList = !scene.is_end && !hasSingleChoice;
   const emotionalLabel = activeKey ? EMOTIONAL_LABELS[activeKey] ?? null : null;
-  const sceneEyebrow = scene.is_end ? 'Final scene' : `Scene ${localSceneIndex + 1}`;
+  const normalizedTotalScenes = Math.max(1, totalScenes);
+  const progressValue = Math.min(sceneIndex + 1, normalizedTotalScenes);
+  const progressRatio = normalizedTotalScenes > 1 ? sceneIndex / (normalizedTotalScenes - 1) : 1;
+  const sceneEyebrow = scene.is_end ? 'Final scene' : `Scene ${progressValue} of ${normalizedTotalScenes}`;
 
   const bodyParagraphs = useMemo(() => {
     let sequenceIndex = 0;
@@ -97,7 +100,7 @@ export function SceneView({ scene, lang, arcSlug, sceneIndex = 0, emotionalKey }
     });
   }, [scene.body]);
 
-  const saturation = Math.min(100, 15 + localSceneIndex * 42.5);
+  const saturation = Math.min(100, 18 + progressRatio * 82);
 
   useEffect(() => {
     titleRef.current?.focus();
@@ -167,7 +170,6 @@ export function SceneView({ scene, lang, arcSlug, sceneIndex = 0, emotionalKey }
       return;
     }
 
-    setLocalSceneIndex((previousIndex) => previousIndex + 1);
     const documentKey = document.documentElement.getAttribute('data-key');
     const keyForSession = activeKey ?? (isEmotionalKey(documentKey) ? documentKey : null);
     saveScene(nextSceneId, keyForSession);
@@ -211,13 +213,13 @@ export function SceneView({ scene, lang, arcSlug, sceneIndex = 0, emotionalKey }
     >
       <button
         type="button"
-        aria-label={isExpanded ? 'Collapse text panel' : hasSingleChoice ? 'Tap scene to continue' : 'Advance scene'}
+        aria-label={isExpanded ? 'Collapse text panel' : hasSingleChoice ? 'Advance to next scene' : 'Advance scene'}
         onClick={handleIllustrationTap}
         disabled={!singleChoice && !isExpanded}
         className={`absolute left-0 right-0 top-0 z-10 border-0 bg-transparent p-0 ${
           singleChoice || isExpanded ? 'cursor-pointer' : 'cursor-default'
         } focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]`}
-        style={{ height: isDocked ? '100vh' : isExpanded ? '28vh' : '65vh' }}
+        style={{ height: isDocked ? '100vh' : isExpanded ? '32vh' : '72vh' }}
       />
 
       <div
@@ -288,7 +290,7 @@ export function SceneView({ scene, lang, arcSlug, sceneIndex = 0, emotionalKey }
       <motion.div
         animate={{ y: hasSingleChoice && isDocked ? '100%' : '0%' }}
         transition={prefersReducedMotion ? { duration: 0 } : { type: 'spring', stiffness: 280, damping: 34 }}
-        className={`scene-text absolute bottom-0 left-0 right-0 z-20 flex flex-col gap-4 overflow-hidden rounded-t-[30px] px-5 pb-5 pt-4 shadow-[0_-24px_60px_rgba(0,0,0,0.18)] backdrop-blur-[14px] sm:px-7 ${
+        className={`scene-text absolute bottom-0 left-0 right-0 z-20 flex flex-col gap-3 overflow-hidden rounded-t-[30px] px-5 pb-4 pt-3 shadow-[0_-24px_60px_rgba(0,0,0,0.18)] backdrop-blur-[14px] sm:px-7 ${
           hasSingleChoice && !isExpanded && hasOverflow ? 'cursor-pointer' : ''
         }`}
         onClick={handlePanelExpand}
@@ -309,37 +311,62 @@ export function SceneView({ scene, lang, arcSlug, sceneIndex = 0, emotionalKey }
                 event.stopPropagation();
                 setIsDocked(true);
               }}
-              className="rounded-full px-2 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
-            >
-              <span
-                aria-hidden="true"
-                className="block h-1 w-12 rounded-full"
-                style={{ backgroundColor: isLightWorld ? 'rgba(15,46,40,0.18)' : 'rgba(255,255,255,0.18)' }}
-              />
-            </button>
-          </div>
-        ) : null}
+                className="rounded-full px-2 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
+              >
+                <span
+                  aria-hidden="true"
+                  className="block h-1 w-10 rounded-full"
+                  style={{ backgroundColor: isLightWorld ? 'rgba(15,46,40,0.18)' : 'rgba(255,255,255,0.18)' }}
+                />
+              </button>
+            </div>
+          ) : null}
 
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
             <div
-              className="mb-2 flex flex-wrap items-center gap-2 text-[0.68rem] font-medium uppercase tracking-[0.22em]"
+              className="mb-1.5 flex flex-wrap items-center gap-2 text-[0.64rem] font-medium uppercase tracking-[0.22em]"
               style={{ color: 'var(--text-secondary)', fontFamily: 'var(--font-ui)' }}
             >
               <span>{sceneEyebrow}</span>
               {emotionalLabel ? <span aria-hidden="true">•</span> : null}
-              {emotionalLabel ? <span>{emotionalLabel} path</span> : null}
+              {emotionalLabel ? <span>{emotionalLabel}</span> : null}
             </div>
 
             <h1
               id="scene-title"
               ref={titleRef}
               tabIndex={-1}
-              className="pr-2 text-[1.85rem] font-semibold leading-tight outline-none sm:text-3xl"
+              className="pr-2 text-[1.65rem] font-semibold leading-tight outline-none sm:text-[2rem]"
               style={{ fontFamily: 'var(--font-narrative)', color: 'var(--text-primary)' }}
             >
               {scene.title}
             </h1>
+
+            {!scene.is_end && normalizedTotalScenes > 1 ? (
+              <div className="mt-2.5 flex items-center gap-1.5" aria-hidden="true">
+                {Array.from({ length: normalizedTotalScenes }).map((_, index) => {
+                  const isFilled = index <= sceneIndex;
+                  const isCurrent = index === sceneIndex;
+
+                  return (
+                    <span
+                      key={`${scene.id}-progress-${index}`}
+                      className="h-1.5 rounded-full transition-all duration-500"
+                      style={{
+                        width: isCurrent ? '1.6rem' : '0.9rem',
+                        background: isFilled
+                          ? `linear-gradient(90deg, color-mix(in srgb, var(--accent) ${isCurrent ? 92 : 72}%, white 10%) 0%, var(--accent) 100%)`
+                          : isLightWorld
+                            ? 'rgba(15,46,40,0.12)'
+                            : 'rgba(255,255,255,0.12)',
+                        opacity: isFilled ? 1 : 0.7,
+                      }}
+                    />
+                  );
+                })}
+              </div>
+            ) : null}
           </div>
 
           {((hasOverflow && !hasSingleChoice) || isExpanded) ? (
@@ -372,7 +399,7 @@ export function SceneView({ scene, lang, arcSlug, sceneIndex = 0, emotionalKey }
             style={{
               overflowY: isExpanded ? 'auto' : 'hidden',
               paddingRight: isExpanded ? '0.35rem' : undefined,
-              paddingBottom: hasOverflow && !isExpanded ? '3.5rem' : undefined,
+              paddingBottom: hasOverflow && !isExpanded ? '2.75rem' : undefined,
               overscrollBehavior: 'contain',
               scrollbarGutter: 'stable',
             }}
@@ -433,6 +460,7 @@ export function SceneView({ scene, lang, arcSlug, sceneIndex = 0, emotionalKey }
               }}
             />
           ) : null}
+
         </div>
 
         {scene.audio_url ? (

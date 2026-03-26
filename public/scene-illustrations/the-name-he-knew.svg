@@ -1,19 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 520">
+<svg width="1200" height="1800" viewBox="0 0 1200 1800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="1800" fill="#EDF7F3"/>
+  <rect width="1200" height="1040" fill="url(#sky)"/>
+  <circle cx="612" cy="368" r="180" fill="#FFFFFF" fill-opacity=".55"/>
+  <path d="M0 1112C134 1006 278 948 448 934C610 920 756 958 922 932C1026 916 1118 878 1200 830V1800H0V1112Z" fill="#9EBCB1"/>
+  <path d="M0 1298C142 1206 296 1160 460 1150C620 1140 778 1174 948 1144C1042 1128 1124 1092 1200 1048V1800H0V1298Z" fill="#6B8C80"/>
+  <path d="M518 1800C542 1458 582 1248 612 1092C646 1246 690 1454 722 1800H518Z" fill="#34504A" fill-opacity=".84"/>
+  <circle cx="618" cy="1054" r="26" fill="#34504A"/>
+  <path d="M224 762C318 660 416 612 528 594" stroke="#277366" stroke-width="18" stroke-linecap="round" opacity=".65"/>
+  <path d="M890 624C812 690 738 726 642 742" stroke="#7DAEA2" stroke-width="10" stroke-linecap="round" opacity=".55"/>
+  <ellipse cx="970" cy="256" rx="86" ry="34" fill="#D9F1EA" fill-opacity=".68"/>
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#eef5f1"/>
-      <stop offset="46%" stop-color="#bdd7c9"/>
-      <stop offset="100%" stop-color="#5f7f73"/>
+    <linearGradient id="sky" x1="600" y1="0" x2="600" y2="1040" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8FEFC"/>
+      <stop offset=".45" stop-color="#C6E0D3"/>
+      <stop offset="1" stop-color="#6B8D80"/>
     </linearGradient>
-    <radialGradient id="halo" cx="52%" cy="24%" r="44%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity=".92"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-    </radialGradient>
   </defs>
-  <rect width="390" height="520" fill="url(#bg)"/>
-  <circle cx="198" cy="122" r="104" fill="url(#halo)"/>
-  <path d="M0 334 C82 307 141 316 209 299 C274 283 331 289 390 276 L390 520 L0 520 Z" fill="#83a094"/>
-  <path d="M0 408 C79 386 146 394 214 379 C281 364 336 369 390 360 L390 520 L0 520 Z" fill="#617d71"/>
-  <circle cx="196" cy="307" r="12" fill="#32423d"/><rect x="184" y="320" width="24" height="88" rx="11" fill="#32423d"/>
-  <path d="M117 214 C141 188 161 178 193 175" fill="none" stroke="#1f6f63" stroke-width="5" stroke-linecap="round" opacity=".6"/>
 </svg>

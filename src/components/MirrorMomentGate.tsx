@@ -15,6 +15,8 @@ interface MirrorMomentGateProps {
   hasWitnessVideo?: boolean;
   witnessVideoId?: string | null;
   hasSceneParam?: boolean;
+  sceneIndex?: number;
+  totalScenes?: number;
 }
 
 export function MirrorMomentGate({
@@ -26,6 +28,8 @@ export function MirrorMomentGate({
   hasWitnessVideo = false,
   witnessVideoId = null,
   hasSceneParam = true,
+  sceneIndex = 0,
+  totalScenes = 1,
 }: MirrorMomentGateProps) {
   const router = useRouter();
   const shouldShowMirrorMoment = hasSceneParam && scene.is_end;
@@ -51,7 +55,8 @@ export function MirrorMomentGate({
       scene={scene}
       lang={lang}
       arcSlug={arcSlug}
-      sceneIndex={0}
+      sceneIndex={sceneIndex}
+      totalScenes={totalScenes}
       emotionalKey={emotionalKey}
     />
   );

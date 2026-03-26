@@ -219,25 +219,19 @@ export function EmotionalEntryScreen({ arcs, lang }: EmotionalEntryScreenProps) 
       </div>
 
       <div className="relative mx-auto flex min-h-[calc(100vh-5rem)] w-full max-w-3xl flex-col justify-center">
-        <div className="mb-10 max-w-xl">
+        <div className="mb-8 max-w-xl">
           <p
-            className="mb-4 text-xs uppercase tracking-[0.28em] text-white/35"
+            className="text-[0.68rem] uppercase tracking-[0.28em] text-white/38"
             style={{ fontFamily: 'var(--font-ui)' }}
           >
-            Gospel Story
+            Begin
           </p>
           <h1
-            className="text-[clamp(2.5rem,7vw,4.5rem)] font-medium leading-[0.95] text-[var(--text-primary)]"
+            className="mt-3 text-[clamp(2.5rem,7vw,4.5rem)] font-medium leading-[0.95] text-[var(--text-primary)]"
             style={{ fontFamily: 'var(--font-narrative)' }}
           >
-            What are you carrying right now?
+            Choose a door.
           </h1>
-          <p
-            className="mt-5 max-w-lg text-base leading-7 text-white/58 sm:text-lg"
-            style={{ fontFamily: 'var(--font-narrative)' }}
-          >
-            Choose the word that feels closest. The story will meet you there.
-          </p>
         </div>
 
         <div className="grid gap-3">
@@ -252,11 +246,11 @@ export function EmotionalEntryScreen({ arcs, lang }: EmotionalEntryScreenProps) 
                 type="button"
                 aria-label={`Choose ${copy.title}`}
                 onClick={() => handleSelect(key)}
-                className="group relative overflow-hidden rounded-[28px] border px-5 py-5 text-left transition duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] sm:px-6 sm:py-6"
+                className="group relative overflow-hidden rounded-[32px] border px-5 py-5 text-left transition duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] sm:px-6 sm:py-6"
                 style={
                   {
                     borderColor: `${copy.accent}40`,
-                    background: `linear-gradient(135deg, ${copy.surface} 0%, rgba(255,255,255,0.02) 100%)`,
+                    background: `linear-gradient(180deg, ${copy.surface} 0%, rgba(255,255,255,0.02) 100%)`,
                     '--entry-accent': copy.accent,
                   } as CSSProperties
                 }
@@ -266,16 +260,27 @@ export function EmotionalEntryScreen({ arcs, lang }: EmotionalEntryScreenProps) 
                   className="absolute inset-y-0 left-0 w-1 rounded-full opacity-80 transition-opacity duration-300 group-hover:opacity-100"
                   style={{ backgroundColor: copy.accent }}
                 />
+                <span
+                  aria-hidden="true"
+                  className="absolute right-[-20px] top-[-28px] h-28 w-28 rounded-full opacity-60 blur-2xl transition-opacity duration-300 group-hover:opacity-80"
+                  style={{ backgroundColor: `${copy.accent}30` }}
+                />
                 <div className="flex items-start justify-between gap-6">
-                  <div>
+                  <div className="min-w-0">
                     <span
-                      className="block text-[1.75rem] font-medium capitalize sm:text-[2rem]"
+                      className="block text-[0.62rem] uppercase tracking-[0.2em] text-white/32"
+                      style={{ fontFamily: 'var(--font-ui)' }}
+                    >
+                      Enter here
+                    </span>
+                    <span
+                      className="mt-2 block text-[1.85rem] font-medium capitalize leading-[0.95] sm:text-[2.2rem]"
                       style={{ color: copy.text, fontFamily: 'var(--font-narrative)' }}
                     >
                       {copy.title}
                     </span>
                     <span
-                      className="mt-2 block max-w-xl text-sm leading-6 text-white/55 sm:text-base"
+                      className="mt-3 block max-w-xl text-sm leading-6 text-white/52 sm:text-base"
                       style={{ fontFamily: 'var(--font-narrative)' }}
                     >
                       {detail}
@@ -283,16 +288,23 @@ export function EmotionalEntryScreen({ arcs, lang }: EmotionalEntryScreenProps) 
                   </div>
                   <span
                     aria-hidden="true"
-                    className="mt-2 text-sm uppercase tracking-[0.24em] text-white/28 transition-transform duration-300 group-hover:translate-x-1"
-                    style={{ fontFamily: 'var(--font-ui)' }}
+                    className="mt-2 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border text-white/35 transition-transform duration-300 group-hover:translate-x-0.5"
+                    style={{ borderColor: `${copy.accent}40` }}
                   >
-                    Enter
+                    •
                   </span>
                 </div>
               </button>
             );
           })}
         </div>
+
+        <p
+          className="mt-6 text-sm leading-6 text-white/42"
+          style={{ fontFamily: 'var(--font-narrative)' }}
+        >
+          There is no right answer here. Choose the word that feels nearest and let the story meet you there.
+        </p>
       </div>
     </main>
   );

@@ -1,15 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 520">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#0a0f16"/>
-      <stop offset="54%" stop-color="#1a2d43"/>
-      <stop offset="100%" stop-color="#4b2222"/>
+    <linearGradient id="stormSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#091019"/>
+      <stop offset="50%" stop-color="#173049"/>
+      <stop offset="100%" stop-color="#451f22"/>
     </linearGradient>
   </defs>
-  <rect width="390" height="520" fill="url(#bg)"/>
-  <path d="M0 278 C61 242 103 293 149 266 C196 238 239 291 286 264 C329 240 354 288 390 266 L390 520 L0 520 Z" fill="#294b68"/>
-  <path d="M0 350 C62 320 106 370 152 342 C196 314 243 367 289 340 C329 316 354 364 390 342 L390 520 L0 520 Z" fill="#203b57"/>
-  <path d="M168 128 L202 226 L228 162" fill="none" stroke="#ffcf5a" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M95 308 L174 276 L270 298 L222 332 Z" fill="#433331"/>
-  <circle cx="206" cy="272" r="11" fill="#181118"/><rect x="195" y="284" width="22" height="58" rx="11" fill="#181118"/>
+  <rect width="390" height="520" fill="url(#stormSky)"/>
+  <path d="M0 226 C61 192 104 241 149 214 C196 186 242 238 286 212 C333 186 356 234 390 212 L390 520 L0 520 Z" fill="#284c68"/>
+  <path d="M0 286 C65 257 104 307 151 280 C196 254 243 307 291 278 C332 253 357 304 390 280 L390 520 L0 520 Z" fill="#21415d"/>
+  <path d="M0 352 C60 324 107 371 152 345 C196 320 245 372 290 346 C334 320 358 368 390 347 L390 520 L0 520 Z" fill="#1a344c"/>
+  <path d="M176 86 L214 189 L236 136 L220 218" fill="none" stroke="#ffd56a" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M87 305 L175 271 L282 296 L231 337 Z" fill="#463733"/>
+  <path d="M95 312 C114 291 133 284 159 284 C176 284 191 291 201 304 C182 311 166 322 155 338 Z" fill="#56413a"/>
+  <path d="M185 289 C203 274 225 269 244 272 C260 274 274 282 286 297" fill="none" stroke="#6a554d" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="207" cy="273" r="12" fill="#181118"/>
+  <path d="M195 285 C196 301 193 321 190 344 C200 348 214 348 224 344 C221 321 218 301 219 285 Z" fill="#181118"/>
+  <path d="M26 430 C52 394 85 379 124 378 C104 404 88 451 80 520 L0 520 Z" fill="#132535" opacity=".34"/>
 </svg>

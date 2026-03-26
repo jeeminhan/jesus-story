@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import type { EmotionalKey } from '@/lib/constants';
 import { useSession } from '@/lib/useSession';
@@ -30,12 +30,10 @@ export function ArtCard({
   onEnter,
 }: ArtCardProps) {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const { savedSceneId } = useSession(lang, arcSlug);
   const [resolvedStartSceneId, setResolvedStartSceneId] = useState(startSceneId);
   const [showResumeIndicator, setShowResumeIndicator] = useState(false);
   const resumeTimeoutRef = useRef<number | null>(null);
-  const isReturningCarrier = searchParams.get('from') === 'carrier';
 
   function clearResumeTimer() {
     if (resumeTimeoutRef.current !== null) {
@@ -101,31 +99,6 @@ export function ArtCard({
         <span className="sr-only">Begin story</span>
       </button>
 
-      {isReturningCarrier ? (
-        <div className="absolute left-4 top-4 z-50">
-          <button
-            type="button"
-            onClick={(event) => {
-              event.preventDefault();
-              event.stopPropagation();
-              router.push(`/${lang}/${arcSlug}/share`);
-            }}
-            className="rounded-full border px-3 py-1.5 text-[0.68rem] uppercase tracking-[0.16em] focus-visible:outline-none focus-visible:ring-2"
-            style={
-              {
-                color: 'var(--text-secondary)',
-                borderColor: 'rgba(255,255,255,0.12)',
-                backgroundColor: 'rgba(0,0,0,0.28)',
-                backdropFilter: 'blur(12px)',
-                '--tw-ring-color': 'var(--accent)',
-              } as CSSProperties
-            }
-          >
-            Share again
-          </button>
-        </div>
-      ) : null}
-
       <SceneIllustration
         emotionalKey={emotionalKey ?? null}
         sceneSlug={sceneSlug}
@@ -137,42 +110,40 @@ export function ArtCard({
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 z-20"
         style={{
-          background: 'linear-gradient(to bottom, transparent 0%, var(--surface) 80%)',
+          background:
+            'linear-gradient(180deg, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0) 22%, rgba(0,0,0,0.28) 72%, rgba(0,0,0,0.58) 100%)',
         }}
       />
 
-      <div className="pointer-events-none absolute bottom-[13%] left-[5%] right-[5%] z-30">
+      <div className="pointer-events-none absolute bottom-[12%] left-[5%] right-[5%] z-30">
         <blockquote
-          className="mx-auto max-w-xl rounded-[28px] border px-5 py-5 text-[21px] italic leading-relaxed shadow-[0_24px_60px_rgba(0,0,0,0.22)] sm:px-6"
+          className="mx-auto max-w-lg rounded-[30px] border px-5 py-4 text-[1.15rem] italic leading-[1.72] shadow-[0_24px_60px_rgba(0,0,0,0.22)] sm:px-6 sm:text-[1.28rem]"
           style={{
             fontFamily: 'var(--font-narrative)',
             color: 'var(--text-primary)',
-            borderColor: 'rgba(255,255,255,0.1)',
-            backgroundColor: 'rgba(7,6,6,0.32)',
-            backdropFilter: 'blur(16px)',
+            borderColor: 'rgba(255,255,255,0.08)',
+            backgroundColor: 'rgba(7,6,6,0.22)',
+            backdropFilter: 'blur(14px)',
           }}
         >
           {quote}
         </blockquote>
       </div>
 
-      <div className="absolute bottom-6 left-0 right-0 z-40 flex justify-center">
-        <button
-          type="button"
-          onClick={() => handleEnter()}
-          className="rounded-full border px-4 py-2 text-[0.68rem] uppercase tracking-[0.18em] transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2"
+      <div className="pointer-events-none absolute bottom-6 left-0 right-0 z-40 flex justify-center">
+        <span
+          className="rounded-full border px-3 py-1.5 text-[0.6rem] font-medium uppercase tracking-[0.2em]"
           style={
             {
               color: 'var(--text-secondary)',
-              borderColor: 'rgba(255,255,255,0.12)',
-              backgroundColor: 'rgba(7,6,6,0.42)',
+              borderColor: 'rgba(255,255,255,0.08)',
+              backgroundColor: 'rgba(7,6,6,0.2)',
               backdropFilter: 'blur(12px)',
-              '--tw-ring-color': 'var(--accent)',
             } as CSSProperties
           }
         >
-          Tap anywhere
-        </button>
+          Tap to enter
+        </span>
       </div>
 
       {showResumeIndicator ? (

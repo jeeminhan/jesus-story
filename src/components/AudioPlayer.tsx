@@ -65,23 +65,24 @@ export function AudioPlayer({ audioUrl, onNearEnd }: AudioPlayerProps) {
 
   return (
     <div
-      className="rounded-[22px] border px-4 py-3"
+      className="rounded-[20px] border px-3.5 py-3"
       style={{
-        borderColor: 'rgba(255,255,255,0.12)',
-        backgroundColor: 'rgba(255,255,255,0.06)',
+        borderColor: 'rgba(255,255,255,0.08)',
+        backgroundColor: 'rgba(255,255,255,0.04)',
+        backdropFilter: 'blur(10px)',
       }}
     >
-      <audio ref={audioRef} src={audioUrl} preload="none" onTimeUpdate={handleTimeUpdate} onEnded={handleEnded} />
+      <audio ref={audioRef} src={audioUrl} preload="metadata" onTimeUpdate={handleTimeUpdate} onEnded={handleEnded} />
 
-      <div className="mb-3 flex items-center justify-between gap-3">
-        <div>
+      <div className="mb-2.5 flex items-center justify-between gap-3">
+        <div className="min-w-0">
           <div
-            className="text-[0.68rem] font-medium uppercase tracking-[0.18em]"
+            className="text-[0.62rem] font-medium uppercase tracking-[0.18em]"
             style={{ color: 'var(--text-secondary)' }}
           >
             Narration
           </div>
-          <div className="text-sm" style={{ color: 'var(--text-primary)' }}>
+          <div className="truncate text-[0.9rem]" style={{ color: 'var(--text-primary)' }}>
             {playing ? 'Playing now' : 'Listen to this scene'}
           </div>
         </div>
@@ -89,10 +90,10 @@ export function AudioPlayer({ audioUrl, onNearEnd }: AudioPlayerProps) {
         <button
           type="button"
           onClick={togglePlayback}
-          className="flex h-11 min-w-11 items-center justify-center rounded-full border px-3 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
+          className="flex h-10 min-w-10 items-center justify-center rounded-full border px-3 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
           style={{
             borderColor: 'var(--accent)',
-            backgroundColor: 'var(--surface)',
+            backgroundColor: 'rgba(255,255,255,0.06)',
             color: 'var(--text-primary)',
           }}
           aria-label={playing ? 'Pause narration' : 'Play narration'}

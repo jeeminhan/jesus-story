@@ -7,10 +7,11 @@ test('emotional entry screen shows five human-word choices', async ({ page }) =>
   }
 });
 
-test('emotional entry screen asks the planned question', async ({ page }) => {
+test('emotional entry screen opens with the doorway framing', async ({ page }) => {
   await page.goto('/en');
-  await expect(page.getByRole('heading', { name: /what are you carrying right now/i })).toBeVisible();
-  await expect(page.getByText(/the story will meet you there/i)).toBeVisible();
+  await expect(page.getByText(/^begin$/i)).toBeVisible();
+  await expect(page.getByRole('heading', { name: /choose a door/i })).toBeVisible();
+  await expect(page.getByText(/there is no right answer here/i)).toBeVisible();
 });
 
 test('different emotional choices route to different authored arcs', async ({ page }) => {

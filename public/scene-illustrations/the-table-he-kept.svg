@@ -1,0 +1,25 @@
+<svg width="1200" height="1800" viewBox="0 0 1200 1800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="1800" fill="#120E09"/>
+  <rect width="1200" height="980" fill="url(#sky)"/>
+  <ellipse cx="600" cy="1586" rx="544" ry="220" fill="#090603"/>
+  <path d="M136 1218C246 1040 402 948 600 948C798 948 954 1040 1064 1218V1672H136V1218Z" fill="#1A140B"/>
+  <path d="M230 1132H970V1188H230V1132Z" fill="#5B4020"/>
+  <path d="M278 1188H342V1516H278V1188Z" fill="#3A2813"/>
+  <path d="M858 1188H922V1516H858V1188Z" fill="#3A2813"/>
+  <ellipse cx="600" cy="1128" rx="374" ry="84" fill="#7A5528"/>
+  <ellipse cx="600" cy="1128" rx="342" ry="62" fill="#8D6732"/>
+  <circle cx="452" cy="1088" r="34" fill="#F2C77E" fill-opacity=".2"/>
+  <circle cx="546" cy="1068" r="28" fill="#F2C77E" fill-opacity=".18"/>
+  <circle cx="650" cy="1076" r="30" fill="#F2C77E" fill-opacity=".16"/>
+  <circle cx="744" cy="1090" r="34" fill="#F2C77E" fill-opacity=".2"/>
+  <path d="M238 834C342 730 468 676 600 676C736 676 858 730 962 834V930H238V834Z" fill="#261A0A"/>
+  <circle cx="600" cy="512" r="108" fill="#F4BB45" fill-opacity=".16"/>
+  <circle cx="600" cy="512" r="74" fill="#F7D17C" fill-opacity=".16"/>
+  <defs>
+    <linearGradient id="sky" x1="600" y1="0" x2="600" y2="980" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5B3F12"/>
+      <stop offset=".45" stop-color="#241808"/>
+      <stop offset="1" stop-color="#120E09"/>
+    </linearGradient>
+  </defs>
+</svg>

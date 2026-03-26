@@ -18,6 +18,11 @@ import type {
   WitnessVideo,
 } from './types';
 
+export interface SceneProgress {
+  index: number;
+  total: number;
+}
+
 type SceneRow = {
   id: string;
   arc_id: string;
@@ -53,6 +58,72 @@ type WitnessVideoRow = {
 
 function hasSupabaseConfig() {
   return Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+}
+
+function deriveSceneProgress(scenes: SceneWithContent[], sceneId: string): SceneProgress | null {
+  const startScene = scenes.find((scene) => scene.is_start);
+  if (!startScene) {
+    return null;
+  }
+
+  const sceneMap = new Map(scenes.map((scene) => [scene.id, scene]));
+
+  function findPath(currentSceneId: string, trail: string[]): string[] | null {
+    const currentScene = sceneMap.get(currentSceneId);
+    if (!currentScene) {
+      return null;
+    }
+
+    const nextTrail = [...trail, currentSceneId];
+    if (currentSceneId === sceneId) {
+      return nextTrail;
+    }
+
+    for (const choice of currentScene.choices) {
+      if (trail.includes(choice.next_scene_id)) {
+        continue;
+      }
+
+      const resolvedPath = findPath(choice.next_scene_id, nextTrail);
+      if (resolvedPath) {
+        return resolvedPath;
+      }
+    }
+
+    return null;
+  }
+
+  const memo = new Map<string, number>();
+
+  function longestRemainingPath(currentSceneId: string): number {
+    if (memo.has(currentSceneId)) {
+      return memo.get(currentSceneId) ?? 1;
+    }
+
+    const currentScene = sceneMap.get(currentSceneId);
+    if (!currentScene) {
+      return 1;
+    }
+
+    if (currentScene.is_end || currentScene.choices.length === 0) {
+      memo.set(currentSceneId, 1);
+      return 1;
+    }
+
+    const resolvedLength =
+      1 + Math.max(...currentScene.choices.map((choice) => longestRemainingPath(choice.next_scene_id)));
+    memo.set(currentSceneId, resolvedLength);
+    return resolvedLength;
+  }
+
+  const pathToCurrent = findPath(startScene.id, []);
+  if (!pathToCurrent) {
+    return null;
+  }
+
+  const index = Math.max(0, pathToCurrent.length - 1);
+  const total = Math.max(index + 1, index + longestRemainingPath(sceneId));
+  return { index, total };
 }
 
 export async function getActiveLanguages(): Promise<Language[]> {
@@ -251,6 +322,15 @@ export async function getScene(sceneId: string, lang: string): Promise<SceneWith
   }
 
   return withChoices(data as SceneRow, lang);
+}
+
+export async function getSceneProgress(arcSlug: string, sceneId: string, lang: string): Promise<SceneProgress | null> {
+  const scenes = await getScenesForArc(arcSlug, lang);
+  if (!scenes.length) {
+    return null;
+  }
+
+  return deriveSceneProgress(scenes, sceneId);
 }
 
 export async function getWitnessVideo(emotionalKey: EmotionalKey, lang: string): Promise<WitnessVideo | null> {

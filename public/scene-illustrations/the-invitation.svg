@@ -1,21 +1,25 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 520">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#f8f2e1"/>
-      <stop offset="45%" stop-color="#e9c58d"/>
+    <linearGradient id="inviteSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#faf4e5"/>
+      <stop offset="42%" stop-color="#eac78f"/>
       <stop offset="100%" stop-color="#a46a46"/>
     </linearGradient>
-    <radialGradient id="doorlight" cx="50%" cy="42%" r="44%">
-      <stop offset="0%" stop-color="#fffaf0" stop-opacity="1"/>
+    <radialGradient id="inviteLight" cx="50%" cy="40%" r="44%">
+      <stop offset="0%" stop-color="#fffdf6" stop-opacity="1"/>
+      <stop offset="72%" stop-color="#fff1c2" stop-opacity=".18"/>
       <stop offset="100%" stop-color="#fff1c2" stop-opacity="0"/>
     </radialGradient>
   </defs>
-  <rect width="390" height="520" fill="url(#bg)"/>
-  <path d="M0 335 C72 304 137 315 203 294 C270 272 327 280 390 258 L390 520 L0 520 Z" fill="#d0a373"/>
-  <path d="M0 404 C79 382 145 388 207 373 C272 357 329 360 390 350 L390 520 L0 520 Z" fill="#9b6b49"/>
-  <rect x="143" y="132" width="104" height="210" rx="44" fill="#5d3f31"/>
-  <rect x="160" y="150" width="70" height="176" rx="30" fill="url(#doorlight)"/>
-  <circle cx="221" cy="237" r="4.5" fill="#5d3f31" opacity=".45"/>
-  <path d="M 195 342 C 166 372 150 410 149 520" fill="none" stroke="#f8edd6" stroke-width="28" stroke-linecap="round" opacity=".55"/>
-  <path d="M 195 342 C 224 372 240 410 241 520" fill="none" stroke="#f8edd6" stroke-width="28" stroke-linecap="round" opacity=".48"/>
+  <rect width="390" height="520" fill="url(#inviteSky)"/>
+  <path d="M0 328 C74 300 140 312 206 289 C273 266 332 274 390 252 L390 520 L0 520 Z" fill="#d4ab78"/>
+  <path d="M0 398 C82 378 146 384 212 369 C278 354 334 359 390 348 L390 520 L0 520 Z" fill="#a4724e"/>
+  <rect x="139" y="122" width="112" height="224" rx="50" fill="#5f4132"/>
+  <rect x="158" y="145" width="74" height="184" rx="32" fill="url(#inviteLight)"/>
+  <path d="M162 329 L228 329 L273 520 L117 520 Z" fill="rgba(255,247,225,0.52)"/>
+  <circle cx="221" cy="238" r="5" fill="#6d4c3d" opacity=".44"/>
+  <path d="M123 344 C150 366 168 402 171 520" fill="none" stroke="#faefd9" stroke-width="24" stroke-linecap="round" opacity=".42"/>
+  <path d="M267 344 C240 366 222 402 219 520" fill="none" stroke="#faefd9" stroke-width="24" stroke-linecap="round" opacity=".42"/>
+  <path d="M46 520 C62 470 78 438 106 412 C116 446 123 477 128 520 Z" fill="#84593f" opacity=".32"/>
+  <path d="M344 520 C333 474 320 441 292 411 C283 447 277 478 272 520 Z" fill="#84593f" opacity=".3"/>
 </svg>

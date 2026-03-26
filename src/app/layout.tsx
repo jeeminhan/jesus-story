@@ -9,6 +9,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: 'The Story',
   description: 'An interactive gospel storybook for international students',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3100'),
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,

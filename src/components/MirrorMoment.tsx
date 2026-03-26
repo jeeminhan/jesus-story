@@ -23,6 +23,41 @@ function getTransition(delay: number, reduceMotion: boolean) {
   return { duration: 0.5, delay };
 }
 
+const MIRROR_COPY: Record<
+  EmotionalKey,
+  {
+    lead: string;
+    reflection: string;
+    linger: string;
+  }
+> = {
+  grief: {
+    lead: 'You came in carrying grief.',
+    reflection: 'You met a story that does not hurry the hurting.',
+    linger: 'Nothing is being demanded from you here. You can stay close, reach outward, or leave this in silence.',
+  },
+  doubt: {
+    lead: 'You came in with questions still awake.',
+    reflection: 'You met a story that does not shame doubt. It stays long enough to answer it slowly.',
+    linger: 'You do not have to force certainty tonight. You can go deeper, ask for a human reply, or step away without pretending.',
+  },
+  searching: {
+    lead: 'You came in looking for something real.',
+    reflection: 'You met a story that moved toward you first.',
+    linger: 'You can keep following that thread, leave a few honest words, or let the story stay with you awhile.',
+  },
+  curiosity: {
+    lead: 'You came in open, but unconvinced.',
+    reflection: 'You met a story that invited attention instead of demanding agreement.',
+    linger: 'You can lean in further, leave a note for someone real, or simply keep this question with you.',
+  },
+  anger: {
+    lead: 'You came in carrying heat.',
+    reflection: 'You met a story strong enough to hold anger without turning away.',
+    linger: 'You do not need to calm yourself down before taking the next step. You can keep going, reach for someone, or leave this here.',
+  },
+};
+
 export function MirrorMoment({
   emotionalKey,
   storyFigure = 'the story',
@@ -37,6 +72,31 @@ export function MirrorMoment({
   const [sitting, setSitting] = useState(false);
   const figureName = useMemo(() => storyFigure.trim() || 'the story', [storyFigure]);
   const mood = emotionalKey.trim() || 'this moment';
+  const copy = MIRROR_COPY[emotionalKey];
+  const primaryLine = copy?.lead ?? `You came in ${mood}.`;
+  const secondaryLine = copy?.reflection ?? `You met ${figureName}.`;
+  const options = [
+    hasWitnessVideo
+      ? {
+          key: 'tell-me-more',
+          label: 'Tell me more',
+          detail: 'Hear one honest witness from someone who walked this same road too.',
+          onSelect: onTellMeMore,
+        }
+      : null,
+    {
+      key: 'leave-a-message',
+      label: 'Leave a message',
+      detail: 'Write a few words and let a real person read them later, without putting you on the spot.',
+      onSelect: onLeaveMessage,
+    },
+    {
+      key: 'sit-with-this',
+      label: 'Sit with this',
+      detail: 'Leave without explaining yourself. Come back if and when you want.',
+      onSelect: () => setSitting(true),
+    },
+  ].filter(Boolean) as Array<{ key: string; label: string; detail: string; onSelect: () => void }>;
 
   if (sitting) {
     return (
@@ -44,20 +104,37 @@ export function MirrorMoment({
         className="fixed inset-0 flex items-center justify-center px-6"
         style={{ backgroundColor: 'rgba(0, 0, 0, 0.92)' }}
       >
-        <div className="flex flex-col items-center gap-6 text-center">
+        <div className="flex max-w-lg flex-col items-center gap-6 text-center">
           <p
-            className="max-w-md text-sm"
+            className="text-[11px] uppercase tracking-[0.28em]"
+            style={{ color: 'var(--text-secondary)', fontFamily: 'var(--font-ui)' }}
+          >
+            Not yet
+          </p>
+          <p
+            className="max-w-md text-[1.35rem] leading-relaxed"
+            style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-narrative)' }}
+          >
+            That is enough for now.
+          </p>
+          <p
+            className="max-w-md text-sm leading-7"
             style={{ color: 'var(--text-secondary)', fontFamily: 'var(--font-narrative)' }}
           >
-            You can leave this here for now, or return to the beginning.
+            You can leave this here without guilt. If you want to return later, the story will still be here.
           </p>
           <button
             type="button"
             onClick={onSitWithThis}
-            className="border-0 bg-transparent p-0 text-sm transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
-            style={{ color: 'var(--text-secondary)', fontFamily: 'var(--font-narrative)' }}
+            className="inline-flex min-h-[52px] items-center justify-center rounded-full border px-6 text-sm transition-opacity hover:opacity-85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
+            style={{
+              color: 'var(--text-primary)',
+              borderColor: 'rgba(255,255,255,0.1)',
+              backgroundColor: 'rgba(255,255,255,0.04)',
+              fontFamily: 'var(--font-narrative)',
+            }}
           >
-            &larr; Beginning
+            Return to the beginning
           </button>
         </div>
       </div>
@@ -83,71 +160,77 @@ export function MirrorMoment({
           initial={reduceMotion ? false : { opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={reduceMotion ? { duration: 0 } : { duration: 0.8 }}
-          className="leading-relaxed"
+          className="leading-[1.15]"
           style={{
             color: 'var(--text-primary)',
             fontFamily: 'var(--font-narrative)',
             fontWeight: 500,
-            fontSize: 'clamp(22px, 4vw, 26px)',
+            fontSize: 'clamp(24px, 4vw, 32px)',
           }}
         >
-          {`You came in ${mood}. You met ${figureName}.`}
+          {primaryLine}
         </motion.p>
 
-        <div className="flex w-full max-w-sm flex-col items-center gap-4">
-          {hasWitnessVideo ? (
+        <motion.p
+          initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={reduceMotion ? { duration: 0 } : { duration: 0.9, delay: 0.15 }}
+          className="max-w-xl text-base leading-8 sm:text-lg"
+          style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-narrative)' }}
+        >
+          {secondaryLine} In {figureName}, something answered back.
+        </motion.p>
+
+        <motion.p
+          initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={reduceMotion ? { duration: 0 } : { duration: 0.9, delay: 0.25 }}
+          className="max-w-xl text-sm leading-7 sm:text-base"
+          style={{ color: 'var(--text-secondary)', fontFamily: 'var(--font-narrative)' }}
+        >
+          {copy?.linger}
+        </motion.p>
+
+        <div className="grid w-full max-w-xl gap-3">
+          {options.map((option, index) => (
             <motion.button
+              key={option.key}
               type="button"
-              aria-label="Tell me more"
-              onClick={onTellMeMore}
+              aria-label={option.label}
+              onClick={option.onSelect}
               initial={reduceMotion ? false : { opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={getTransition(0.4, reduceMotion)}
-              className="border-0 bg-transparent p-0 transition-opacity hover:opacity-85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
+              transition={getTransition(0.35 + index * 0.18, reduceMotion)}
+              className="w-full rounded-[24px] border px-5 py-5 text-left transition-opacity hover:opacity-85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
               style={{
-                color: 'var(--text-primary)',
-                fontFamily: 'var(--font-narrative)',
-                fontSize: '18px',
-                opacity: 1,
+                borderColor: 'rgba(255,255,255,0.08)',
+                background:
+                  option.key === 'tell-me-more'
+                    ? 'linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.04) 100%)'
+                    : 'linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.025) 100%)',
               }}
             >
-              Tell me more
+              <span className="flex items-start justify-between gap-4">
+                <span>
+                  <span
+                    className="block text-[1.15rem] leading-tight"
+                    style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-narrative)' }}
+                  >
+                    {option.label}
+                  </span>
+                  <span
+                    className="mt-2 block max-w-lg text-sm leading-7"
+                    style={{ color: 'var(--text-secondary)', fontFamily: 'var(--font-narrative)' }}
+                  >
+                    {option.detail}
+                  </span>
+                </span>
+                <span aria-hidden="true" className="pt-1 text-lg" style={{ color: 'var(--text-secondary)' }}>
+                  →
+                </span>
+              </span>
             </motion.button>
-          ) : null}
-
-          <motion.button
-            type="button"
-            aria-label="Talk to someone"
-            onClick={onLeaveMessage}
-            initial={reduceMotion ? false : { opacity: 0, y: 6 }}
-            animate={{ opacity: 0.55, y: 0 }}
-            transition={getTransition(0.7, reduceMotion)}
-            className="border-0 bg-transparent p-0 transition-opacity hover:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
-            style={{
-              color: 'var(--text-primary)',
-              fontFamily: 'var(--font-narrative)',
-              fontSize: '16px',
-            }}
-          >
-            Talk to someone
-          </motion.button>
-
-          <motion.button
-            type="button"
-            aria-label="Sit with this"
-            onClick={() => setSitting(true)}
-            initial={reduceMotion ? false : { opacity: 0, y: 6 }}
-            animate={{ opacity: 0.3, y: 0 }}
-            transition={getTransition(1.0, reduceMotion)}
-            className="border-0 bg-transparent p-0 transition-opacity hover:opacity-45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
-            style={{
-              color: 'var(--text-primary)',
-              fontFamily: 'var(--font-narrative)',
-              fontSize: '14px',
-            }}
-          >
-            Sit with this
-          </motion.button>
+          ))}
         </div>
       </div>
     </div>

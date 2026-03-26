@@ -4,7 +4,7 @@ test('home page redirects to the emotional entry experience', async ({ page }) =
   await page.goto('/');
 
   await expect(page).toHaveURL('/en');
-  await expect(page.getByRole('heading', { name: /what are you carrying right now/i })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /choose a door/i })).toBeVisible();
   await expect(page.getByRole('button', { name: /choose grief/i })).toBeVisible();
 });
 

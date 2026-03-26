@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { VALID_LANGS } from '@/lib/constants';
 import type { SceneWithContent } from '@/lib/types';
+import { SceneIllustration } from './SceneIllustration';
 import { Button } from './ui/button';
 import { Textarea } from './ui/textarea';
 
@@ -64,14 +65,16 @@ export function CardGenerator({ arcSlug, lang, scenes, emotionalKey, availableLa
   }, [toastMessage]);
 
   async function copyLink(shareUrl: string) {
+    const copyValue = trimmedNote ? `${trimmedNote}\n\n${shareUrl}` : shareUrl;
+
     if (typeof navigator === 'undefined' || !navigator.clipboard?.writeText) {
       setToastMessage('Unable to copy link');
       return;
     }
 
     try {
-      await navigator.clipboard.writeText(shareUrl);
-      setToastMessage('Link copied');
+      await navigator.clipboard.writeText(copyValue);
+      setToastMessage(trimmedNote ? 'Message and link copied' : 'Link copied');
       setShareState('shared');
     } catch (_error) {
       setToastMessage('Unable to copy link');
@@ -84,16 +87,16 @@ export function CardGenerator({ arcSlug, lang, scenes, emotionalKey, availableLa
     }
 
     const origin = window.location.origin;
-    const shareUrl = `${origin}/${selectedLang}/${arcSlug}?from=carrier`;
-    const ogUrl = `${origin}/api/og?arc=${encodeURIComponent(arcSlug)}&lang=${encodeURIComponent(selectedLang)}&carrier=1${
-      trimmedNote ? `&note=${encodeURIComponent(trimmedNote)}` : ''
-    }`;
+    const shareUrl = `${origin}/${selectedLang}/${arcSlug}?scene=${encodeURIComponent(selectedScene.id)}&card=1`;
+    const ogUrl = `${origin}/api/og?arc=${encodeURIComponent(arcSlug)}&lang=${encodeURIComponent(selectedLang)}&scene=${encodeURIComponent(
+      selectedScene.id,
+    )}`;
 
     void ogUrl;
 
     if (typeof navigator !== 'undefined' && 'share' in navigator && typeof navigator.share === 'function') {
       try {
-        await navigator.share({ title: 'A story for you', url: shareUrl });
+        await navigator.share({ title: 'A story for you', text: trimmedNote || undefined, url: shareUrl });
         setShareState('shared');
       } catch (error) {
         if (error instanceof Error && error.name === 'AbortError') {
@@ -159,8 +162,13 @@ export function CardGenerator({ arcSlug, lang, scenes, emotionalKey, availableLa
           className="min-h-28"
         />
         <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
-          {note.length} / 200
+          shared as text, not printed on the card
         </p>
+        {note.length >= 160 ? (
+          <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
+            {note.length} / 200
+          </p>
+        ) : null}
       </section>
 
       <section className="space-y-2">
@@ -188,20 +196,58 @@ export function CardGenerator({ arcSlug, lang, scenes, emotionalKey, availableLa
 
       <section
         aria-live="polite"
-        className="rounded-2xl border p-5"
+        className="overflow-hidden rounded-[28px] border"
         style={{ borderColor: 'var(--surface)', backgroundColor: 'var(--bg)' }}
       >
-        <p className="text-sm uppercase tracking-[0.12em]" style={{ color: 'var(--text-secondary)' }}>
-          Live preview
-        </p>
-        <blockquote className="mt-3 text-xl leading-relaxed" style={{ fontFamily: 'var(--font-narrative)', color: 'var(--text-primary)' }}>
-          {quote}
-        </blockquote>
-        {trimmedNote ? (
-          <p className="mt-3 text-sm italic" style={{ color: 'var(--text-secondary)' }}>
-            Note from them: {trimmedNote}
+        <div className="relative h-[420px]">
+          {selectedScene ? (
+            <SceneIllustration
+              emotionalKey={emotionalKey ?? null}
+              sceneSlug={selectedScene.slug}
+              lightWorld={selectedScene.light_world}
+              className="absolute inset-0"
+            />
+          ) : null}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0"
+            style={{
+              background:
+                'linear-gradient(180deg, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0) 22%, rgba(0,0,0,0.28) 72%, rgba(0,0,0,0.58) 100%)',
+            }}
+          />
+          <div className="absolute inset-x-5 bottom-5">
+            <blockquote
+              className="rounded-[28px] border px-5 py-4 text-[1.05rem] italic leading-[1.65]"
+              style={{
+                fontFamily: 'var(--font-narrative)',
+                color: 'var(--text-primary)',
+                borderColor: 'rgba(255,255,255,0.08)',
+                backgroundColor: 'rgba(7,6,6,0.22)',
+                backdropFilter: 'blur(14px)',
+              }}
+            >
+              {quote}
+            </blockquote>
+          </div>
+        </div>
+        <div className="flex items-center justify-between gap-3 px-5 py-4">
+          <div>
+            <p className="text-[0.7rem] uppercase tracking-[0.18em]" style={{ color: 'var(--text-secondary)' }}>
+              Live preview
+            </p>
+            <p
+              data-testid="share-preview-title"
+              className="mt-1 text-sm"
+              style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-narrative)' }}
+            >
+              {selectedScene?.title ?? 'A story for you'}
+            </p>
+          </div>
+          <p className="text-[0.7rem] uppercase tracking-[0.18em]" style={{ color: 'var(--text-secondary)' }}>
+            Quote only
           </p>
-        ) : null}
+        </div>
       </section>
 
       {shareState === 'idle' ? (
