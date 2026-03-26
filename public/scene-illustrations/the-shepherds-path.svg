@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 520">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#07111f"/>
+      <stop offset="52%" stop-color="#14253a"/>
+      <stop offset="100%" stop-color="#2a1d1b"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="50%" cy="24%" r="46%">
+      <stop offset="0%" stop-color="#fff7cc" stop-opacity=".72"/>
+      <stop offset="100%" stop-color="#fff7cc" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="390" height="520" fill="url(#bg)"/>
+  <circle cx="198" cy="110" r="84" fill="url(#halo)"/>
+  <polygon points="195,74 152,322 238,322" fill="#fff7cf" opacity=".26"/>
+  <path d="M0 316 C70 286 125 294 190 281 C260 266 319 271 390 250 L390 520 L0 520 Z" fill="#142133"/>
+  <path d="M0 390 C76 362 132 373 208 357 C283 342 336 348 390 334 L390 520 L0 520 Z" fill="#221814"/>
+  <circle cx="124" cy="356" r="12" fill="#0b1016"/><rect x="112" y="368" width="24" height="62" rx="10" fill="#0b1016"/>
+  <rect x="146" y="338" width="4" height="108" fill="#0b1016"/>
+  <circle cx="252" cy="365" r="11" fill="#0b1016"/><rect x="241" y="376" width="22" height="54" rx="10" fill="#0b1016"/>
+  <ellipse cx="284" cy="398" rx="24" ry="15" fill="#0f1318"/><ellipse cx="314" cy="403" rx="18" ry="12" fill="#0f1318"/>
+</svg>

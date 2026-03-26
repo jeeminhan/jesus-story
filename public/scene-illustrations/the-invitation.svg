@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 520">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f8f2e1"/>
+      <stop offset="45%" stop-color="#e9c58d"/>
+      <stop offset="100%" stop-color="#a46a46"/>
+    </linearGradient>
+    <radialGradient id="doorlight" cx="50%" cy="42%" r="44%">
+      <stop offset="0%" stop-color="#fffaf0" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#fff1c2" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="390" height="520" fill="url(#bg)"/>
+  <path d="M0 335 C72 304 137 315 203 294 C270 272 327 280 390 258 L390 520 L0 520 Z" fill="#d0a373"/>
+  <path d="M0 404 C79 382 145 388 207 373 C272 357 329 360 390 350 L390 520 L0 520 Z" fill="#9b6b49"/>
+  <rect x="143" y="132" width="104" height="210" rx="44" fill="#5d3f31"/>
+  <rect x="160" y="150" width="70" height="176" rx="30" fill="url(#doorlight)"/>
+  <circle cx="221" cy="237" r="4.5" fill="#5d3f31" opacity=".45"/>
+  <path d="M 195 342 C 166 372 150 410 149 520" fill="none" stroke="#f8edd6" stroke-width="28" stroke-linecap="round" opacity=".55"/>
+  <path d="M 195 342 C 224 372 240 410 241 520" fill="none" stroke="#f8edd6" stroke-width="28" stroke-linecap="round" opacity=".48"/>
+</svg>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 520">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#05070d"/>
+      <stop offset="58%" stop-color="#151224"/>
+      <stop offset="100%" stop-color="#4b2d1d"/>
+    </linearGradient>
+    <radialGradient id="star" cx="50%" cy="24%" r="54%">
+      <stop offset="0%" stop-color="#fef3c7" stop-opacity=".78"/>
+      <stop offset="100%" stop-color="#fbbf24" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="390" height="520" fill="url(#bg)"/>
+  <circle cx="284" cy="92" r="88" fill="url(#star)"/>
+  <path d="M 118 164 C 185 121 224 105 286 92" fill="none" stroke="#fbbf24" stroke-width="4" stroke-linecap="round" opacity=".4"/>
+  <path d="M0 332 C84 314 143 298 205 286 C273 274 331 274 390 262 L390 520 L0 520 Z" fill="#7a4a2a"/>
+  <path d="M0 382 C90 362 147 351 221 338 C294 326 338 326 390 316 L390 520 L0 520 Z" fill="#4f2d1a"/>
+  <path d="M82 382 C92 354 108 340 130 340 C144 340 153 347 158 360 C146 362 138 369 133 381 Z" fill="#1a0f12"/>
+  <path d="M149 386 C159 359 176 344 197 344 C212 344 221 352 226 365 C214 367 205 374 200 386 Z" fill="#1a0f12"/>
+  <path d="M216 388 C227 360 244 346 265 346 C280 346 288 354 294 366 C281 368 272 376 267 389 Z" fill="#1a0f12"/>
+</svg>

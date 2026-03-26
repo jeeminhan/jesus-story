@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-narrative: 'Lora', Georgia, serif;
+  --font-ui: 'Inter', system-ui, sans-serif;
+  --bg: #0d0a05;
+  --surface: #1a1508;
+  --accent: #c4832a;
+  --text-primary: #f5ede0;
+  --text-secondary: #c4a87a;
+  --transition-duration: 500ms;
+  color-scheme: dark;
+}
+
+html[data-key='grief'] {
+  --bg: #0d0508;
+  --surface: #1a0a10;
+  --accent: #8b2d42;
+  --text-primary: #f0e8ec;
+  --text-secondary: #c4a0ab;
+  --transition-duration: 800ms;
+}
+
+html[data-key='doubt'] {
+  --bg: #0a0d12;
+  --surface: #131820;
+  --accent: #4a6fa5;
+  --text-primary: #e8ecf0;
+  --text-secondary: #8fa0b5;
+  --transition-duration: 700ms;
+}
+
+html[data-key='searching'] {
+  --bg: #0d0a05;
+  --surface: #1a1508;
+  --accent: #c4832a;
+  --text-primary: #f5ede0;
+  --text-secondary: #c4a87a;
+  --transition-duration: 500ms;
+}
+
+html[data-key='curiosity'] {
+  --bg: #f0f7f5;
+  --surface: #e0f0ec;
+  --accent: #2a7a6a;
+  --text-primary: #0f2e28;
+  --text-secondary: #3d6b60;
+  --transition-duration: 400ms;
+  color-scheme: light;
+}
+
+html[data-key='anger'] {
+  --bg: #0d0505;
+  --surface: #1a0808;
+  --accent: #b52020;
+  --text-primary: #f5e8e8;
+  --text-secondary: #c48080;
+  --transition-duration: 450ms;
+}
+
+body {
+  font-family: var(--font-ui);
+  background-color: var(--bg);
+  color: var(--text-primary);
+}
+
+/* Desktop: center content in phone frame */
+@media (min-width: 1024px) {
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    background-color: #111;
+  }
+
+  #phone-frame {
+    position: relative;
+    width: 480px;
+    min-height: 100vh;
+    background-color: var(--bg);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 20px 60px rgba(0, 0, 0, 0.8);
+    border-radius: 40px;
+    overflow: hidden;
+    transform: translateZ(0);
+  }
+}
+
+.prose-story {
+  font-family: var(--font-narrative);
+  font-size: 1.125rem;
+  line-height: 1.74;
+  letter-spacing: 0.01em;
+  color: var(--text-primary);
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+  text-wrap: pretty;
+}
+
+.prose-story p {
+  margin-bottom: 1.25rem;
+}
+
+.prose-story p:last-child {
+  margin-bottom: 0;
+}
