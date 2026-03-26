@@ -1,0 +1,2591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gospel Story — Design Directions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --grief-bg: #14080f;
+    --grief-surface: #220d18;
+    --grief-accent: #9b3a6e;
+    --grief-text: #f4c2db;
+    --grief-dim: #7a2c55;
+
+    --searching-bg: #0f0900;
+    --searching-surface: #1f1400;
+    --searching-accent: #fbbf24;
+    --searching-text: #fffbeb;
+    --searching-dim: #c9950f;
+
+    --doubt-bg: #0a0d10;
+    --doubt-surface: #141a20;
+    --doubt-accent: #64748b;
+    --doubt-text: #e2e8f0;
+    --doubt-dim: #475569;
+
+    --curiosity-bg: #031412;
+    --curiosity-surface: #071f1d;
+    --curiosity-accent: #14b8a6;
+    --curiosity-text: #ccfbf1;
+    --curiosity-dim: #0d9488;
+
+    --anger-bg: #0f0000;
+    --anger-surface: #1f0000;
+    --anger-accent: #dc2626;
+    --anger-text: #fee2e2;
+    --anger-dim: #b91c1c;
+
+    --revelation-bg: #0a0800;
+    --revelation-surface: #1a1400;
+    --revelation-accent: #f59e0b;
+    --revelation-text: #fef3c7;
+
+    --font-serif: 'Lora', Georgia, serif;
+    --font-sans: 'Inter', system-ui, sans-serif;
+  }
+
+  body {
+    background: #0c0c0f;
+    color: #e8e8ec;
+    font-family: var(--font-sans);
+    min-height: 100vh;
+  }
+
+  /* ─── HEADER ─── */
+  .header {
+    padding: 28px 40px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .header-title {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.9);
+    letter-spacing: 0.01em;
+  }
+  .header-subtitle {
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 3px;
+  }
+  .header-sep { flex: 1; }
+  .direction-counter {
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    font-feature-settings: "tnum";
+    letter-spacing: 0.06em;
+  }
+
+  /* ─── AUDIENCE GLOSSARY BAR ─── */
+  .audience-bar {
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.015);
+  }
+  .audience-bar-toggle {
+    width: 100%;
+    padding: 11px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.06em;
+    text-align: left;
+    transition: color 0.2s;
+  }
+  .audience-bar-toggle:hover { color: rgba(255,255,255,0.55); }
+  .toggle-arrow {
+    font-size: 12px;
+    transition: transform 0.25s ease;
+  }
+  .toggle-arrow.open { transform: rotate(180deg); }
+
+  .audience-glossary {
+    display: none;
+    padding: 20px 40px 28px;
+    display: none;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .audience-glossary.open {
+    display: grid;
+  }
+  .glossary-card {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .glossary-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .glossary-body {}
+  .glossary-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 6px;
+    letter-spacing: 0.02em;
+    font-family: var(--font-sans);
+  }
+  .glossary-desc {
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.38);
+    line-height: 1.65;
+    margin-bottom: 8px;
+    font-family: var(--font-serif);
+    font-style: italic;
+  }
+  .glossary-desc em {
+    color: rgba(255,255,255,0.55);
+    font-style: normal;
+  }
+  .glossary-example {
+    font-size: 10px;
+    color: rgba(255,255,255,0.2);
+    line-height: 1.5;
+    font-family: var(--font-sans);
+    letter-spacing: 0.02em;
+    border-left: 2px solid rgba(255,255,255,0.07);
+    padding-left: 8px;
+  }
+
+  @media (max-width: 1100px) {
+    .audience-glossary { grid-template-columns: repeat(2, 1fr); }
+    .audience-bar-toggle { padding: 11px 20px; }
+    .audience-glossary { padding: 16px 20px 24px; }
+  }
+  @media (max-width: 600px) {
+    .audience-glossary { grid-template-columns: 1fr; }
+  }
+
+  /* ─── NAV TABS ─── */
+  .nav-tabs {
+    display: flex;
+    gap: 0;
+    padding: 0 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+
+  .nav-tab {
+    padding: 14px 20px;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.35);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    letter-spacing: 0.03em;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-family: var(--font-sans);
+  }
+  .nav-tab:hover { color: rgba(255,255,255,0.65); }
+  .nav-tab.active {
+    color: rgba(255,255,255,0.9);
+    border-bottom-color: rgba(255,255,255,0.5);
+  }
+
+  /* ─── MAIN LAYOUT ─── */
+  .main {
+    display: flex;
+    min-height: calc(100vh - 100px);
+  }
+
+  /* ─── SIDEBAR ─── */
+  .sidebar {
+    width: 320px;
+    flex-shrink: 0;
+    padding: 32px 28px;
+    border-right: 1px solid rgba(255,255,255,0.06);
+  }
+  /* ─── AUDIENCE BADGES ─── */
+  .audience-row {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .audience-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px 4px 8px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    font-family: var(--font-sans);
+  }
+  .audience-badge::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .badge-receiver {
+    background: rgba(20,184,166,0.1);
+    border: 1px solid rgba(20,184,166,0.25);
+    color: rgba(204,251,241,0.75);
+  }
+  .badge-receiver::before { background: #14b8a6; }
+  .badge-carrier {
+    background: rgba(251,191,36,0.08);
+    border: 1px solid rgba(251,191,36,0.2);
+    color: rgba(255,251,235,0.65);
+  }
+  .badge-carrier::before { background: #fbbf24; }
+  .badge-both {
+    background: rgba(148,163,184,0.08);
+    border: 1px solid rgba(148,163,184,0.18);
+    color: rgba(226,232,240,0.5);
+  }
+  .badge-both::before { background: #94a3b8; }
+  .badge-bridge {
+    background: rgba(155,58,110,0.1);
+    border: 1px solid rgba(155,58,110,0.25);
+    color: rgba(244,194,219,0.65);
+  }
+  .badge-bridge::before { background: #9b3a6e; }
+
+  /* Audience legend in header */
+  .audience-legend {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.05em;
+    font-family: var(--font-sans);
+  }
+  .legend-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+
+  /* Tab audience pip */
+  .tab-pip {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    margin-left: 5px;
+    vertical-align: middle;
+    margin-bottom: 1px;
+  }
+
+  .direction-label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+    margin-bottom: 10px;
+  }
+  .direction-name {
+    font-family: var(--font-serif);
+    font-size: 26px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+  .direction-tagline {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.6;
+    margin-bottom: 28px;
+    font-style: italic;
+    font-family: var(--font-serif);
+  }
+  .direction-color-key {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .color-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .color-key-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .design-notes {
+    margin-bottom: 28px;
+  }
+  .note-heading {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+    margin-bottom: 12px;
+  }
+  .note-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: flex-start;
+  }
+  .note-bullet {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    margin-top: 7px;
+    flex-shrink: 0;
+  }
+  .note-text {
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.6;
+  }
+
+  .eval-section {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 22px;
+  }
+  .eval-heading {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+    margin-bottom: 14px;
+  }
+  .eval-bar {
+    margin-bottom: 12px;
+  }
+  .eval-bar-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  .eval-name {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+  }
+  .eval-score {
+    font-size: 10px;
+    color: rgba(255,255,255,0.25);
+    font-feature-settings: "tnum";
+  }
+  .eval-track {
+    height: 2px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 1px;
+    overflow: hidden;
+  }
+  .eval-fill {
+    height: 100%;
+    border-radius: 1px;
+    background: rgba(255,255,255,0.3);
+    transition: width 0.4s ease;
+  }
+
+  /* ─── PHONE CANVAS ─── */
+  .canvas-area {
+    flex: 1;
+    padding: 48px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+
+  .phone-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .phone-label {
+    font-size: 10px;
+    color: rgba(255,255,255,0.2);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .phone-frame {
+    width: 280px;
+    height: 607px; /* ~19.5:9 ratio */
+    border-radius: 42px;
+    border: 1.5px solid rgba(255,255,255,0.1);
+    overflow: hidden;
+    position: relative;
+    box-shadow:
+      0 0 0 1px rgba(0,0,0,0.8),
+      0 24px 80px rgba(0,0,0,0.8),
+      0 4px 16px rgba(0,0,0,0.5);
+    background: #000;
+  }
+
+  /* notch */
+  .phone-frame::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 22px;
+    background: #000;
+    border-radius: 0 0 14px 14px;
+    z-index: 100;
+  }
+
+  .phone-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ─── DIRECTION 1: Scene — Dark World (Grief Path) ─── */
+  .d1-scene {
+    width: 100%;
+    height: 100%;
+    background: var(--grief-bg);
+    position: relative;
+  }
+
+  .d1-illustration {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 65%;
+    overflow: hidden;
+  }
+
+  /* Watercolor-style scene simulation using CSS */
+  .d1-illustration-inner {
+    width: 100%;
+    height: 100%;
+    background:
+      radial-gradient(ellipse at 40% 30%, rgba(155,58,110,0.35) 0%, transparent 55%),
+      radial-gradient(ellipse at 70% 60%, rgba(87,23,60,0.5) 0%, transparent 50%),
+      radial-gradient(ellipse at 20% 70%, rgba(34,13,24,0.8) 0%, transparent 45%),
+      radial-gradient(ellipse at 80% 20%, rgba(60,10,40,0.4) 0%, transparent 40%),
+      linear-gradient(185deg, #1a0b14 0%, #0e0509 40%, #14080f 100%);
+    position: relative;
+  }
+
+  /* Figure silhouette — woman at the well */
+  .figure-woman {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-40%);
+  }
+  .figure-woman svg { display: block; }
+
+  /* Well stone */
+  .well-stone {
+    position: absolute;
+    bottom: 10px;
+    right: 60px;
+    width: 28px;
+    height: 20px;
+    background: rgba(100,40,70,0.6);
+    border-radius: 4px 4px 0 0;
+    border-top: 2px solid rgba(155,58,110,0.3);
+  }
+
+  /* Water shimmer */
+  .water-shimmer {
+    position: absolute;
+    bottom: 0;
+    left: 0; right: 0;
+    height: 25px;
+    background: linear-gradient(to top, rgba(155,58,110,0.15), transparent);
+  }
+
+  /* Light bloom */
+  .light-bloom {
+    position: absolute;
+    top: 15%;
+    right: 20%;
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, rgba(244,194,219,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  /* Holzer text inscription zone */
+  .holzer-inscription {
+    position: absolute;
+    bottom: 0;
+    left: 0; right: 0;
+    height: 35%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 20px 24px 28px;
+    background: linear-gradient(to bottom,
+      transparent 0%,
+      rgba(20,8,15,0.7) 30%,
+      rgba(20,8,15,0.95) 60%,
+      rgba(20,8,15,1) 100%
+    );
+  }
+
+  .holzer-text {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--grief-text);
+    opacity: 0.95;
+    margin-bottom: 16px;
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  .holzer-text .word-dim { opacity: 0.45; }
+  .holzer-text .word-bright { opacity: 1; }
+
+  .scene-progress {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 14px;
+  }
+  .prog-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: rgba(244,194,219,0.2);
+  }
+  .prog-dot.active { background: rgba(244,194,219,0.7); }
+
+  .scene-action {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  .continue-hint {
+    font-size: 11px;
+    color: rgba(244,194,219,0.3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ─── DIRECTION 2: Scene — Light World (Searching) ─── */
+  .d2-scene {
+    width: 100%;
+    height: 100%;
+    background: #f5e8c4;
+    position: relative;
+  }
+  .d2-illustration {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 65%;
+    background:
+      radial-gradient(ellipse at 50% 20%, rgba(255,220,120,0.6) 0%, transparent 60%),
+      radial-gradient(ellipse at 30% 60%, rgba(200,140,50,0.4) 0%, transparent 45%),
+      radial-gradient(ellipse at 75% 50%, rgba(255,200,80,0.3) 0%, transparent 40%),
+      linear-gradient(180deg, #e8c86a 0%, #c9a04c 35%, #9a7030 65%, #5a3d1a 100%);
+    overflow: hidden;
+    position: absolute;
+  }
+
+  .d2-sky {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 40%;
+    background: linear-gradient(180deg,
+      #f5dfa0 0%,
+      #f0c96a 50%,
+      transparent 100%
+    );
+  }
+
+  /* Figures - woman and Jesus at well, light world */
+  .d2-figures {
+    position: absolute;
+    bottom: 0;
+    left: 0; right: 0;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  .d2-text-zone {
+    position: absolute;
+    bottom: 0;
+    left: 0; right: 0;
+    height: 38%;
+    padding: 18px 22px 24px;
+    background: linear-gradient(to bottom,
+      transparent 0%,
+      rgba(245,232,196,0.85) 25%,
+      rgba(245,232,196,0.98) 60%,
+      #f5e8c4 100%
+    );
+  }
+  .d2-scene-text {
+    font-family: var(--font-serif);
+    font-size: 14.5px;
+    line-height: 1.72;
+    color: #4a2e08;
+    margin-bottom: 14px;
+    font-style: italic;
+  }
+  .d2-progress {
+    display: flex;
+    gap: 5px;
+  }
+  .d2-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: rgba(74,46,8,0.15);
+  }
+  .d2-dot.active { background: rgba(74,46,8,0.5); }
+
+  /* ─── DIRECTION 3: Emotional Entry Screen ─── */
+  .d3-scene {
+    width: 100%;
+    height: 100%;
+    background: #080808;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 28px;
+  }
+
+  .d3-prompt {
+    font-family: var(--font-serif);
+    font-size: 13px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.04em;
+    margin-bottom: 28px;
+    padding-top: 20px;
+    font-style: italic;
+  }
+
+  .d3-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .d3-option {
+    padding: 14px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .d3-option-label {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 3px;
+  }
+
+  .d3-option-sub {
+    font-size: 11px;
+    line-height: 1.4;
+    opacity: 0.55;
+    font-family: var(--font-sans);
+    font-weight: 400;
+  }
+
+  .d3-opt-grief {
+    background: rgba(155,58,110,0.1);
+    border: 1px solid rgba(155,58,110,0.2);
+  }
+  .d3-opt-grief .d3-option-label { color: #f4c2db; }
+  .d3-opt-grief .d3-option-sub { color: rgba(244,194,219,0.55); }
+
+  .d3-opt-searching {
+    background: rgba(251,191,36,0.08);
+    border: 1px solid rgba(251,191,36,0.15);
+  }
+  .d3-opt-searching .d3-option-label { color: #fffbeb; }
+  .d3-opt-searching .d3-option-sub { color: rgba(255,251,235,0.5); }
+
+  .d3-opt-doubt {
+    background: rgba(100,116,139,0.08);
+    border: 1px solid rgba(100,116,139,0.15);
+  }
+  .d3-opt-doubt .d3-option-label { color: #e2e8f0; }
+  .d3-opt-doubt .d3-option-sub { color: rgba(226,232,240,0.5); }
+
+  .d3-opt-curiosity {
+    background: rgba(20,184,166,0.08);
+    border: 1px solid rgba(20,184,166,0.15);
+  }
+  .d3-opt-curiosity .d3-option-label { color: #ccfbf1; }
+  .d3-opt-curiosity .d3-option-sub { color: rgba(204,251,241,0.5); }
+
+  .d3-opt-anger {
+    background: rgba(220,38,38,0.08);
+    border: 1px solid rgba(220,38,38,0.15);
+  }
+  .d3-opt-anger .d3-option-label { color: #fee2e2; }
+  .d3-opt-anger .d3-option-sub { color: rgba(254,226,226,0.5); }
+
+  .d3-footer {
+    padding: 20px 0;
+    font-size: 10px;
+    color: rgba(255,255,255,0.15);
+    letter-spacing: 0.06em;
+    text-align: center;
+  }
+
+  /* ─── DIRECTION 4: Mirror Moment ─── */
+  .d4-scene {
+    width: 100%;
+    height: 100%;
+    background: #0a0508;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .d4-ambient {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 40%, rgba(155,58,110,0.12) 0%, transparent 65%),
+      radial-gradient(ellipse at 20% 70%, rgba(100,30,70,0.08) 0%, transparent 50%);
+  }
+
+  .d4-content {
+    position: relative;
+    z-index: 1;
+    padding: 0 32px;
+    text-align: center;
+  }
+
+  .d4-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(155,58,110,0.6);
+    margin-bottom: 24px;
+  }
+
+  .d4-reflection {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    line-height: 1.65;
+    color: rgba(244,194,219,0.9);
+    font-style: italic;
+    margin-bottom: 32px;
+    font-weight: 400;
+  }
+
+  .d4-divider {
+    width: 28px;
+    height: 1px;
+    background: rgba(155,58,110,0.3);
+    margin: 0 auto 24px;
+  }
+
+  .d4-path-taken {
+    font-size: 11px;
+    color: rgba(244,194,219,0.3);
+    letter-spacing: 0.08em;
+    margin-bottom: 40px;
+  }
+
+  .d4-cta-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .d4-cta-primary {
+    padding: 13px 28px;
+    background: rgba(155,58,110,0.25);
+    border: 1px solid rgba(155,58,110,0.4);
+    border-radius: 8px;
+    font-size: 13px;
+    color: rgba(244,194,219,0.9);
+    font-family: var(--font-sans);
+    letter-spacing: 0.04em;
+    width: 100%;
+  }
+
+  .d4-cta-secondary {
+    font-size: 11px;
+    color: rgba(244,194,219,0.25);
+    letter-spacing: 0.06em;
+    padding: 8px;
+  }
+
+  /* ─── DIRECTION 5: GRIS — Color Bloom ─── */
+  .d5-scene {
+    width: 100%;
+    height: 100%;
+    background: #0e0b0c;
+    position: relative;
+  }
+
+  .d5-illustration {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 62%;
+    overflow: hidden;
+  }
+
+  /* Desaturated upper scene with color bloom emerging */
+  .d5-desat {
+    width: 100%;
+    height: 100%;
+    background:
+      radial-gradient(ellipse at 45% 50%, rgba(251,191,36,0.18) 0%, transparent 35%),
+      radial-gradient(ellipse at 45% 50%, rgba(200,170,100,0.12) 0%, transparent 55%),
+      linear-gradient(180deg, #2a2520 0%, #1a1612 50%, #0e0b0c 100%);
+    position: relative;
+  }
+
+  .d5-bloom-glow {
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, rgba(251,191,36,0.25) 0%, rgba(251,191,36,0.06) 40%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(2px);
+  }
+
+  .d5-color-stripe {
+    position: absolute;
+    bottom: 0;
+    left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(to right,
+      transparent 0%,
+      rgba(251,191,36,0.05) 20%,
+      rgba(251,191,36,0.4) 50%,
+      rgba(251,191,36,0.05) 80%,
+      transparent 100%
+    );
+  }
+
+  .d5-text-zone {
+    position: absolute;
+    bottom: 0;
+    left: 0; right: 0;
+    height: 40%;
+    padding: 20px 24px 26px;
+    background: linear-gradient(to bottom,
+      transparent,
+      rgba(14,11,12,0.9) 30%,
+      #0e0b0c 70%
+    );
+  }
+
+  .d5-scene-moment {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    color: rgba(251,191,36,0.4);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .d5-text {
+    font-family: var(--font-serif);
+    font-size: 14px;
+    line-height: 1.72;
+    color: rgba(255,251,235,0.8);
+    font-style: italic;
+    margin-bottom: 16px;
+  }
+
+  .d5-color-bars {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 14px;
+  }
+
+  .d5-bar {
+    height: 2px;
+    border-radius: 1px;
+    flex: 1;
+    background: rgba(255,255,255,0.06);
+  }
+  .d5-bar.earned { background: rgba(251,191,36,0.5); }
+  .d5-bar.partial { background: rgba(251,191,36,0.2); }
+
+  /* ─── DIRECTION 6: Scene Card (Share Object) ─── */
+  .d6-card {
+    width: 100%;
+    height: 100%;
+    background: var(--grief-bg);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Card occupies top 82% as "art" */
+  .d6-art-zone {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse at 55% 35%, rgba(155,58,110,0.4) 0%, transparent 60%),
+      radial-gradient(ellipse at 25% 65%, rgba(87,23,60,0.5) 0%, transparent 50%),
+      linear-gradient(165deg, #200d18 0%, #110609 50%, #14080f 100%);
+  }
+
+  .d6-art-text {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 16px 20px;
+    background: linear-gradient(to bottom,
+      transparent,
+      rgba(20,8,15,0.8) 40%,
+      rgba(20,8,15,0.97) 80%
+    );
+  }
+
+  .d6-card-verse {
+    font-family: var(--font-serif);
+    font-size: 13px;
+    line-height: 1.65;
+    color: rgba(244,194,219,0.85);
+    font-style: italic;
+    margin-bottom: 8px;
+  }
+
+  .d6-card-ref {
+    font-size: 10px;
+    color: rgba(155,58,110,0.6);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .d6-share-bar {
+    height: 72px;
+    background: rgba(255,255,255,0.03);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  .d6-share-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    font-family: var(--font-sans);
+    flex: 1;
+  }
+
+  .d6-share-btn {
+    padding: 7px 16px;
+    border-radius: 20px;
+    background: rgba(155,58,110,0.25);
+    border: 1px solid rgba(155,58,110,0.4);
+    font-size: 11px;
+    color: rgba(244,194,219,0.8);
+    font-family: var(--font-sans);
+    letter-spacing: 0.04em;
+  }
+
+  /* ─── DIRECTION 7: Carrier Sharing Interface ─── */
+  .d7-scene {
+    width: 100%;
+    height: 100%;
+    background: #08060a;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 28px 22px 24px;
+  }
+
+  .d7-back {
+    font-size: 11px;
+    color: rgba(255,255,255,0.2);
+    margin-bottom: 24px;
+    letter-spacing: 0.06em;
+  }
+
+  .d7-heading {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    color: rgba(255,255,255,0.85);
+    font-weight: 500;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .d7-sub {
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.35);
+    line-height: 1.6;
+    margin-bottom: 28px;
+    font-family: var(--font-serif);
+    font-style: italic;
+  }
+
+  .d7-contact-card {
+    padding: 14px 16px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .d7-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(251,191,36,0.2);
+    border: 1px solid rgba(251,191,36,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: rgba(255,251,235,0.6);
+    font-family: var(--font-sans);
+    flex-shrink: 0;
+  }
+
+  .d7-contact-info { flex: 1; }
+  .d7-contact-name {
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 2px;
+    font-family: var(--font-sans);
+    font-weight: 500;
+  }
+  .d7-contact-detail {
+    font-size: 10px;
+    color: rgba(255,255,255,0.2);
+    font-family: var(--font-sans);
+    letter-spacing: 0.03em;
+  }
+
+  .d7-check {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(251,191,36,0.3);
+  }
+  .d7-check.selected {
+    background: rgba(251,191,36,0.2);
+    border-color: rgba(251,191,36,0.5);
+  }
+
+  .d7-path-select {
+    margin: 16px 0 20px;
+  }
+  .d7-path-label {
+    font-size: 10px;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .d7-path-pills {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .d7-pill {
+    padding: 5px 12px;
+    border-radius: 14px;
+    font-size: 11px;
+    font-family: var(--font-sans);
+    border: 1px solid;
+    white-space: nowrap;
+  }
+  .d7-pill-grief { color: rgba(244,194,219,0.6); border-color: rgba(155,58,110,0.2); background: rgba(155,58,110,0.05); }
+  .d7-pill-searching { color: rgba(255,251,235,0.7); border-color: rgba(251,191,36,0.3); background: rgba(251,191,36,0.08); }
+  .d7-pill-doubt { color: rgba(226,232,240,0.5); border-color: rgba(100,116,139,0.2); background: rgba(100,116,139,0.05); }
+
+  .d7-send-btn {
+    margin-top: auto;
+    padding: 14px;
+    background: rgba(251,191,36,0.15);
+    border: 1px solid rgba(251,191,36,0.25);
+    border-radius: 10px;
+    font-size: 13px;
+    color: rgba(255,251,235,0.75);
+    font-family: var(--font-sans);
+    letter-spacing: 0.03em;
+    text-align: center;
+  }
+
+  /* ─── DIRECTION 8: Connect / Not Yet ─── */
+  .d8-scene {
+    width: 100%;
+    height: 100%;
+    background: #070508;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 26px;
+  }
+
+  .d8-ambient {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 45%, rgba(155,58,110,0.08) 0%, transparent 60%);
+  }
+
+  .d8-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .d8-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(155,58,110,0.12);
+    border: 1px solid rgba(155,58,110,0.2);
+    margin: 0 auto 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .d8-heading {
+    font-family: var(--font-serif);
+    font-size: 19px;
+    color: rgba(244,194,219,0.85);
+    text-align: center;
+    margin-bottom: 12px;
+    line-height: 1.35;
+    font-weight: 500;
+  }
+
+  .d8-sub {
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.35);
+    text-align: center;
+    line-height: 1.65;
+    margin-bottom: 36px;
+    font-family: var(--font-serif);
+    font-style: italic;
+  }
+
+  .d8-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .d8-input {
+    padding: 12px 14px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    font-family: var(--font-sans);
+  }
+
+  .d8-input-message {
+    padding: 12px 14px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 8px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+    font-family: var(--font-serif);
+    font-style: italic;
+    height: 56px;
+    line-height: 1.5;
+  }
+
+  .d8-send {
+    padding: 13px;
+    background: rgba(155,58,110,0.2);
+    border: 1px solid rgba(155,58,110,0.35);
+    border-radius: 8px;
+    font-size: 13px;
+    color: rgba(244,194,219,0.8);
+    text-align: center;
+    font-family: var(--font-sans);
+    letter-spacing: 0.03em;
+  }
+
+  .d8-not-yet {
+    text-align: center;
+    font-size: 12px;
+    color: rgba(255,255,255,0.2);
+    padding: 12px;
+    font-family: var(--font-serif);
+    font-style: italic;
+    letter-spacing: 0.02em;
+  }
+
+  /* ─── DIRECTION PANELS ─── */
+  .direction-panel { display: none; }
+  .direction-panel.active { display: flex; }
+
+  /* ─── COMPARISON VIEW ─── */
+  .compare-view {
+    display: none;
+    flex-wrap: wrap;
+    gap: 32px;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .compare-view.active { display: flex; }
+
+  .compare-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .compare-tag {
+    font-size: 10px;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .compare-frame {
+    width: 160px;
+    height: 347px;
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,0.08);
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+  }
+  .compare-frame .phone-inner { transform-origin: top left; transform: scale(0.571); width: calc(100% / 0.571); height: calc(100% / 0.571); }
+
+  /* ─── FIGURE ELEMENTS (SVG-free CSS art) ─── */
+  .css-figure {
+    position: absolute;
+    bottom: 0;
+  }
+
+  /* woman silhouette */
+  .fig-woman-body {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-30%);
+    width: 20px;
+    height: 60px;
+    background: rgba(80,20,50,0.7);
+    border-radius: 3px 3px 0 0;
+  }
+  .fig-woman-head {
+    position: absolute;
+    bottom: 58px;
+    left: 50%;
+    transform: translateX(-30%);
+    width: 14px;
+    height: 14px;
+    background: rgba(100,30,60,0.8);
+    border-radius: 50%;
+    margin-left: 3px;
+  }
+  .fig-woman-jar {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(10px);
+    width: 10px;
+    height: 15px;
+    background: rgba(155,58,110,0.4);
+    border-radius: 2px 2px 4px 4px;
+  }
+  .fig-man-body {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-80%);
+    width: 18px;
+    height: 55px;
+    background: rgba(50,15,35,0.6);
+    border-radius: 3px 3px 0 0;
+  }
+  .fig-man-head {
+    position: absolute;
+    bottom: 53px;
+    left: 50%;
+    transform: translateX(-80%);
+    width: 12px;
+    height: 12px;
+    background: rgba(70,20,45,0.7);
+    border-radius: 50%;
+    margin-left: 3px;
+  }
+
+  /* tabs state */
+  #tab-compare { display: none; }
+
+  /* status bar sim */
+  .status-bar {
+    position: absolute;
+    top: 30px;
+    left: 0; right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 50;
+    pointer-events: none;
+  }
+  .status-time {
+    font-size: 10px;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.02em;
+  }
+  .status-icons {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+  .status-icon {
+    width: 12px;
+    height: 8px;
+    border-radius: 1px;
+    background: rgba(255,255,255,0.35);
+  }
+
+  .status-bar.dark .status-time { color: rgba(255,255,255,0.45); }
+  .status-bar.dark .status-icon { background: rgba(255,255,255,0.3); }
+  .status-bar.light .status-time { color: rgba(0,0,0,0.3); }
+  .status-bar.light .status-icon { background: rgba(0,0,0,0.2); }
+
+  /* home indicator */
+  .home-indicator {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    border-radius: 2px;
+    z-index: 50;
+    pointer-events: none;
+  }
+  .home-indicator.dark { background: rgba(255,255,255,0.2); }
+  .home-indicator.light { background: rgba(0,0,0,0.15); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1200px) {
+    .sidebar { width: 260px; }
+    .phone-frame { width: 240px; height: 520px; }
+  }
+  @media (max-width: 900px) {
+    .main { flex-direction: column; }
+    .sidebar { width: 100%; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .nav-tabs { padding: 0 20px; }
+    .header { padding: 20px 20px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div>
+    <div class="header-title">Gospel Story — Design Directions</div>
+    <div class="header-subtitle">Step 9 · Visual Exploration · 9 Directions</div>
+  </div>
+  <div class="header-sep"></div>
+  <div class="audience-legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#14b8a6;"></div>Receiver</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#fbbf24;"></div>Carrier</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#9b3a6e;"></div>Bridge</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#94a3b8;"></div>Both</div>
+  </div>
+  <div class="header-sep"></div>
+  <div class="direction-counter" id="dir-counter">Direction 1 of 8</div>
+</div>
+
+<!-- AUDIENCE GLOSSARY BAR -->
+<div class="audience-bar" id="audience-bar">
+  <button class="audience-bar-toggle" onclick="toggleGlossary()" id="glossary-toggle">
+    <span>Who are these people?</span>
+    <span class="toggle-arrow" id="toggle-arrow">▾</span>
+  </button>
+  <div class="audience-glossary" id="audience-glossary">
+    <div class="glossary-card">
+      <div class="glossary-dot" style="background:#14b8a6;"></div>
+      <div class="glossary-body">
+        <div class="glossary-name">The Receiver</div>
+        <div class="glossary-desc">The non-believer the product is ultimately for. She arrives via a shared card — she doesn't know it's a gospel app. She taps because it felt personal. She has no church background, no patience for religious language, and zero tolerance for feeling converted. The experience has to earn her trust one scene at a time.</div>
+        <div class="glossary-example">e.g. Priya — gets a card from her friend Maya after a hard month</div>
+      </div>
+    </div>
+    <div class="glossary-card">
+      <div class="glossary-dot" style="background:#fbbf24;"></div>
+      <div class="glossary-body">
+        <div class="glossary-name">The Carrier</div>
+        <div class="glossary-desc">The believer who shares it. She experienced the product herself, felt something real, and wants to send it to someone specific — not as a mission, just as a gift. She knows which path fits this person. She decides how transparent the card should be. Her key moment: <em>"Who in my life needs to hear this right now?"</em></div>
+        <div class="glossary-example">e.g. Maya — sends Priya a card tuned to the grief path, Art Card style so Priya doesn't see the source yet</div>
+      </div>
+    </div>
+    <div class="glossary-card">
+      <div class="glossary-dot" style="background:#9b3a6e;"></div>
+      <div class="glossary-body">
+        <div class="glossary-name">The Bridge</div>
+        <div class="glossary-desc">Anything that crosses between Carrier and Receiver. The scene card is a Bridge — the Carrier creates it, the Receiver sees it cold in a WhatsApp thread before she knows anything about the app. It has to look like art to the Receiver and feel meaningful to the Carrier at the exact same moment.</div>
+        <div class="glossary-example">e.g. the scene card — an Art Card has no source attribution; a Story Card shows "John 4:29"</div>
+      </div>
+    </div>
+    <div class="glossary-card">
+      <div class="glossary-dot" style="background:#94a3b8;"></div>
+      <div class="glossary-body">
+        <div class="glossary-name">The Coordinator</div>
+        <div class="glossary-desc">Backstage — a ministry team member who follows up with Receivers who opted into connecting. Her UX is a simple dashboard: name, path taken, what they wrote. She needs context, not just contact info. She doesn't appear in these screens but is the reason D8 exists.</div>
+        <div class="glossary-example">e.g. Sarah — sees "Priya · grief path · 'I didn't expect to feel this'"</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV TABS -->
+<div class="nav-tabs">
+  <button class="nav-tab active" onclick="showDirection(1)">D1 · Dark Scene<span class="tab-pip" style="background:#14b8a6;"></span></button>
+  <button class="nav-tab" onclick="showDirection(2)">D2 · Light Scene<span class="tab-pip" style="background:#14b8a6;"></span></button>
+  <button class="nav-tab" onclick="showDirection(3)">D3 · Emotional Entry<span class="tab-pip" style="background:#fbbf24;"></span></button>
+  <button class="nav-tab" onclick="showDirection(4)">D4 · Mirror Moment<span class="tab-pip" style="background:#14b8a6;"></span></button>
+  <button class="nav-tab" onclick="showDirection(5)">D5 · Color Bloom<span class="tab-pip" style="background:#14b8a6;"></span></button>
+  <button class="nav-tab" onclick="showDirection(6)">D6 · Scene Card<span class="tab-pip" style="background:#9b3a6e;"></span></button>
+  <button class="nav-tab" onclick="showDirection(7)">D7 · Carrier Send<span class="tab-pip" style="background:#fbbf24;"></span></button>
+  <button class="nav-tab" onclick="showDirection(8)">D8 · Connect<span class="tab-pip" style="background:#14b8a6;"></span></button>
+  <button class="nav-tab" onclick="showDirection(9)">D9 · Witness<span class="tab-pip" style="background:#14b8a6;"></span></button>
+  <button class="nav-tab" onclick="showCompare()" id="tab-compare">◎ Compare All</button>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <!-- D1 -->
+    <div class="direction-panel active" id="panel-1">
+      <div>
+        <div class="direction-label">Direction 1</div>
+        <div class="direction-name">"The Well"</div>
+        <div class="audience-row">
+          <span class="audience-badge badge-receiver">Receiver</span>
+        </div>
+        <div class="direction-tagline">The Receiver's first screen. She arrived via a shared card. No UI chrome, no menus — just the world she was sent into.</div>
+        <div class="direction-color-key">
+          <div class="color-dot" style="background: #9b3a6e;"></div>
+          <div class="color-key-label">Grief · Wine · Dark World</div>
+        </div>
+        <div class="design-notes">
+          <div class="note-heading">Design Choices</div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">Upper 65% is pure illustration — no UI chrome, no borders</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">Text sits in the lower 35% safe zone, built into scene gradient</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">Lora italic, 15px, 1.7 leading — reads like something spoken</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">Progress dots only. No visible nav buttons.</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">Tap anywhere advances — "continue" hint faint, non-urgent</div></div>
+        </div>
+        <div class="eval-section">
+          <div class="eval-heading">Evaluation</div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Immersion</span><span class="eval-score">95</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:95%; background: rgba(155,58,110,0.6);"></div></div>
+          </div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Readability</span><span class="eval-score">80</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:80%; background: rgba(155,58,110,0.4);"></div></div>
+          </div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Brand Alignment</span><span class="eval-score">98</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:98%; background: rgba(155,58,110,0.6);"></div></div>
+          </div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Cold Entry Readiness</span><span class="eval-score">90</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:90%; background: rgba(155,58,110,0.5);"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- D2 -->
+    <div class="direction-panel" id="panel-2">
+      <div>
+        <div class="direction-label">Direction 2</div>
+        <div class="direction-name">"The Morning"</div>
+        <div class="audience-row">
+          <span class="audience-badge badge-receiver">Receiver</span>
+        </div>
+        <div class="direction-tagline">Same Receiver scene — light world variant. Validates the <code style="font-size:10px;opacity:0.6;">lightWorld</code> token system works for bright scenes without changing the layout.</div>
+        <div class="direction-color-key">
+          <div class="color-dot" style="background: #fbbf24;"></div>
+          <div class="color-key-label">Searching · Golden Hour · Light World</div>
+        </div>
+        <div class="design-notes">
+          <div class="note-heading">Design Choices</div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">Light world: illustration palette flips to warm amber/gold</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">Text zone uses paper-cream background, dark ink — not reversed out</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">Same layout, same text positions. Just the color world changes.</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">Validates: the system works for both dark and light worlds</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">Scene data model drives this automatically — no design per-scene</div></div>
+        </div>
+        <div class="eval-section">
+          <div class="eval-heading">Evaluation</div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Immersion</span><span class="eval-score">90</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:90%; background: rgba(251,191,36,0.5);"></div></div>
+          </div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Readability</span><span class="eval-score">95</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:95%; background: rgba(251,191,36,0.6);"></div></div>
+          </div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Brand Alignment</span><span class="eval-score">88</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:88%; background: rgba(251,191,36,0.4);"></div></div>
+          </div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Tonal Range</span><span class="eval-score">96</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:96%; background: rgba(251,191,36,0.5);"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- D3 -->
+    <div class="direction-panel" id="panel-3">
+      <div>
+        <div class="direction-label">Direction 3</div>
+        <div class="direction-name">"What Are You Carrying?"</div>
+        <div class="audience-row">
+          <span class="audience-badge badge-carrier">Carrier</span>
+          <span class="audience-badge badge-both">Direct visitor</span>
+        </div>
+        <div class="direction-tagline">Primarily a Carrier screen — they choose their own path, or explore before sending. A Receiver rarely sees this first; the Carrier already chose her path in D7.</div>
+        <div class="direction-color-key">
+          <div class="color-dot" style="background: linear-gradient(90deg, #9b3a6e, #fbbf24, #64748b, #14b8a6, #dc2626); width: 36px; border-radius: 6px; height: 10px; margin-top: 1px;"></div>
+          <div class="color-key-label">All 5 Emotional Keys</div>
+        </div>
+        <div class="design-notes">
+          <div class="note-heading">Design Choices</div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text"><strong style="color:rgba(251,191,36,0.6);">Carrier path:</strong> They arrive at the homepage, pick their own journey, or preview before sending</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text"><strong style="color:rgba(20,184,166,0.5);">Receiver path:</strong> Only sees this on a return visit — "I want to try a different path"</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">Receiver's first entry is pre-chosen by Carrier in D7 — no menu needed</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">Sub-text under each word humanizes without defining — language must feel non-religious to both audiences</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">No submit button — tap the word. The selection IS the action.</div></div>
+        </div>
+        <div class="eval-section">
+          <div class="eval-heading">Evaluation</div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Emotional Safety</span><span class="eval-score">96</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:96%; background: rgba(255,255,255,0.25);"></div></div>
+          </div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Non-religious Feel</span><span class="eval-score">94</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:94%; background: rgba(255,255,255,0.2);"></div></div>
+          </div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Color System Reveal</span><span class="eval-score">88</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:88%; background: rgba(255,255,255,0.2);"></div></div>
+          </div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Entry Urgency</span><span class="eval-score">82</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:82%; background: rgba(255,255,255,0.18);"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- D4 -->
+    <div class="direction-panel" id="panel-4">
+      <div>
+        <div class="direction-label">Direction 4</div>
+        <div class="direction-name">"The Mirror"</div>
+        <div class="audience-row">
+          <span class="audience-badge badge-receiver">Receiver</span>
+        </div>
+        <div class="direction-tagline">The Receiver's peak moment — at the end of her journey. She didn't know she was in a story. Now the story reflects her back. This screen gets screenshotted.</div>
+        <div class="direction-color-key">
+          <div class="color-dot" style="background: #9b3a6e;"></div>
+          <div class="color-key-label">Grief · Post-narrative peak</div>
+        </div>
+        <div class="design-notes">
+          <div class="note-heading">Design Choices</div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">No illustration — this moment belongs entirely to the words</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">Three paths, not two — each one honors a different place she might be in</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text"><strong style="color:rgba(244,194,219,0.5);">"Tell me more"</strong> — her curiosity leads her to the source on her own terms. Not told; she asks.</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text"><strong style="color:rgba(255,255,255,0.35);">"Talk to someone"</strong> — connects to D8. Still no pressure; she decided, nothing pushed her.</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text"><strong style="color:rgba(255,255,255,0.25);">"Sit with this"</strong> — the lightest option. Smallest text. She can close the app. That's a valid ending.</div></div>
+        </div>
+        <div class="eval-section">
+          <div class="eval-heading">Evaluation</div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Emotional Impact</span><span class="eval-score">98</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:98%; background: rgba(155,58,110,0.6);"></div></div>
+          </div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Receiver-First Design</span><span class="eval-score">96</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:96%; background: rgba(155,58,110,0.55);"></div></div>
+          </div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Zero Pressure</span><span class="eval-score">97</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:97%; background: rgba(155,58,110,0.55);"></div></div>
+          </div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Screenshot Worthiness</span><span class="eval-score">95</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:95%; background: rgba(155,58,110,0.5);"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- D5 -->
+    <div class="direction-panel" id="panel-5">
+      <div>
+        <div class="direction-label">Direction 5</div>
+        <div class="direction-name">"Color Bloom"</div>
+        <div class="audience-row">
+          <span class="audience-badge badge-receiver">Receiver</span>
+        </div>
+        <div class="direction-tagline">Receiver mid-journey on the searching path. Color is being earned — she doesn't know it yet, but the world is slowly warming around her.</div>
+        <div class="direction-color-key">
+          <div class="color-dot" style="background: linear-gradient(90deg, #3a3330, #fbbf24); width: 36px; border-radius: 6px; height: 10px; margin-top: 1px;"></div>
+          <div class="color-key-label">Searching · GRIS Desaturation · Scene 3 of 5</div>
+        </div>
+        <div class="design-notes">
+          <div class="note-heading">Design Choices</div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">Upper illustration is near-greyscale except for one warm bloom of color</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">Color stripe at illustration base shows gradient from grey → earned gold</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">Progress bars replace dots — 3 of 5 bars filled, showing how much color has been earned</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">Scene text begins to read warmer — typography toning shifts slightly</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">"Scene 3 of 5" label — user knows they're earning something</div></div>
+        </div>
+        <div class="eval-section">
+          <div class="eval-heading">Evaluation</div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">GRIS Method Clarity</span><span class="eval-score">91</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:91%; background: rgba(251,191,36,0.5);"></div></div>
+          </div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Reward Sensation</span><span class="eval-score">88</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:88%; background: rgba(251,191,36,0.4);"></div></div>
+          </div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Narrative Integration</span><span class="eval-score">85</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:85%; background: rgba(251,191,36,0.4);"></div></div>
+          </div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Subtlety</span><span class="eval-score">80</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:80%; background: rgba(251,191,36,0.35);"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- D6 -->
+    <div class="direction-panel" id="panel-6">
+      <div>
+        <div class="direction-label">Direction 6</div>
+        <div class="direction-name">"The Card"</div>
+        <div class="audience-row">
+          <span class="audience-badge badge-bridge">Bridge</span>
+        </div>
+        <div class="direction-tagline">The handoff point. The Carrier sends it — the Receiver sees it first. No Bible citation on the face. No app name. No path label. Just art. The meaning reveals itself inside.</div>
+        <div class="direction-color-key">
+          <div class="color-dot" style="background: #9b3a6e;"></div>
+          <div class="color-key-label">Grief · Share Surface · OG Image</div>
+        </div>
+        <div class="design-notes">
+          <div class="note-heading">Design Choices</div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">One card format. No source attribution, ever. A believer recognizes the quote; a non-believer meets it as literature.</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">Upper 82% is pure illustration — no UI, no branding, no path label</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">Quote only at the illustration base — no "John 4:29", no chapter, no verse number</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">OG link previews show the illustration — no religious markers in WhatsApp or iMessage thumbnails</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">Bottom bar is minimal: "Thinking of someone?" + share. Not a nav bar.</div></div>
+        </div>
+        <div class="eval-section">
+          <div class="eval-heading">Evaluation</div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Scroll-Stop Power</span><span class="eval-score">93</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:93%; background: rgba(155,58,110,0.55);"></div></div>
+          </div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Non-churchy Look</span><span class="eval-score">90</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:90%; background: rgba(155,58,110,0.5);"></div></div>
+          </div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Standalone Readability</span><span class="eval-score">87</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:87%; background: rgba(155,58,110,0.45);"></div></div>
+          </div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Share Clarity</span><span class="eval-score">85</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:85%; background: rgba(155,58,110,0.4);"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- D7 -->
+    <div class="direction-panel" id="panel-7">
+      <div>
+        <div class="direction-label">Direction 7</div>
+        <div class="direction-name">"Who Needs This?"</div>
+        <div class="audience-row">
+          <span class="audience-badge badge-carrier">Carrier</span>
+        </div>
+        <div class="direction-tagline">Carrier-only screen. She picks a person from her contacts, selects the emotional path that fits them, and chooses how transparent the card should be.</div>
+        <div class="direction-color-key">
+          <div class="color-dot" style="background: #fbbf24;"></div>
+          <div class="color-key-label">Post-Revelation · Carrier UX</div>
+        </div>
+        <div class="design-notes">
+          <div class="note-heading">Design Choices</div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">Carrier picks a specific person — not a broadcast. Feels like writing a letter.</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">Carrier selects the emotional path that fits this person — they know her</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">One card format for everyone — no source shown. Believers recognize the quote; that's enough.</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">Send button warm gold — activation energy, not a form submission</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">No "back" affordance — this isn't interruptible</div></div>
+        </div>
+        <div class="eval-section">
+          <div class="eval-heading">Evaluation</div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Personal Feel</span><span class="eval-score">92</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:92%; background: rgba(251,191,36,0.5);"></div></div>
+          </div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Non-mission Feel</span><span class="eval-score">86</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:86%; background: rgba(251,191,36,0.4);"></div></div>
+          </div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Path Personalization</span><span class="eval-score">94</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:94%; background: rgba(251,191,36,0.55);"></div></div>
+          </div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Friction</span><span class="eval-score">78</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:78%; background: rgba(251,191,36,0.35);"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- D8 -->
+    <div class="direction-panel" id="panel-8">
+      <div>
+        <div class="direction-label">Direction 8</div>
+        <div class="direction-name">"I'm Here"</div>
+        <div class="audience-row">
+          <span class="audience-badge badge-receiver">Receiver</span>
+        </div>
+        <div class="direction-tagline">Receiver-only. Post-mirror moment. She can connect — or step back. Both feel equally valid. No pressure. This is the last screen she sees and it must leave her feeling respected either way.</div>
+        <div class="direction-color-key">
+          <div class="color-dot" style="background: #9b3a6e;"></div>
+          <div class="color-key-label">Grief · Post-Mirror · Connect Prompt</div>
+        </div>
+        <div class="design-notes">
+          <div class="note-heading">Design Choices</div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">Sarah's face and name shown — a real person, not a system. Trust through specificity.</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">"She'll read what you write and reach out <em>if you want her to</em>" — she confirms the opt-in</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">"No agenda. She won't try to convince you of anything." — said plainly, not in small print</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">CTA: "Send my story" — not "submit" or "connect." She's sharing something, not filling out a form.</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">"Not yet" same visual weight as send — closing the app is a complete, valid ending</div></div>
+        </div>
+        <div class="eval-section">
+          <div class="eval-heading">Evaluation</div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Emotional Safety</span><span class="eval-score">95</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:95%; background: rgba(155,58,110,0.55);"></div></div>
+          </div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Non-pressure Feel</span><span class="eval-score">91</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:91%; background: rgba(155,58,110,0.5);"></div></div>
+          </div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Form Simplicity</span><span class="eval-score">97</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:97%; background: rgba(155,58,110,0.6);"></div></div>
+          </div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Trust Signal</span><span class="eval-score">88</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:88%; background: rgba(155,58,110,0.45);"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- D9 -->
+    <div class="direction-panel" id="panel-9">
+      <div>
+        <div class="direction-label">Direction 9</div>
+        <div class="direction-name">"I Was There Too"</div>
+        <div class="audience-row">
+          <span class="audience-badge badge-receiver">Receiver</span>
+        </div>
+        <div class="direction-tagline">Post-mirror witness moment. Reached via "Tell me more." A real person — same emotional path — looks at camera and says: I was where you are.</div>
+        <div class="direction-color-key">
+          <div class="color-dot" style="background: #9b3a6e;"></div>
+          <div class="color-key-label">Grief · Post-Mirror · Witness</div>
+        </div>
+        <div class="design-notes">
+          <div class="note-heading">Design Choices</div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">Short vertical video, 15–20 seconds. Raw, not produced. Filmed like a voice memo — personal.</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">One person per emotional path — grief gets a grief story, not a general testimonial</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">Name visible, no last name. Brief context: what path they took, nothing religious.</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">Their words shown below the video as a single pull quote — she can read it without sound</div></div>
+          <div class="note-item"><div class="note-bullet"></div><div class="note-text">Same three paths below — now heavier, because she's seen a real person carry them</div></div>
+        </div>
+        <div class="eval-section">
+          <div class="eval-heading">Evaluation</div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Human Proof</span><span class="eval-score">96</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:96%; background: rgba(155,58,110,0.6);"></div></div>
+          </div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Non-religious Feel</span><span class="eval-score">90</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:90%; background: rgba(155,58,110,0.5);"></div></div>
+          </div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Emotional Weight</span><span class="eval-score">94</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:94%; background: rgba(155,58,110,0.55);"></div></div>
+          </div>
+          <div class="eval-bar">
+            <div class="eval-bar-label"><span class="eval-name">Skip Friendliness</span><span class="eval-score">92</span></div>
+            <div class="eval-track"><div class="eval-fill" style="width:92%; background: rgba(155,58,110,0.5);"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div> <!-- /sidebar -->
+
+  <!-- CANVAS AREA -->
+  <div class="canvas-area" id="canvas-area">
+
+    <!-- ─── D1 PHONE ─── -->
+    <div class="phone-group direction-panel active" id="phone-1">
+      <div class="phone-frame">
+        <div class="phone-inner">
+          <div class="d1-scene">
+            <div class="status-bar dark">
+              <div class="status-time">9:41</div>
+              <div class="status-icons">
+                <div class="status-icon" style="width:14px;height:8px;background:rgba(255,255,255,0.35); clip-path: polygon(0 100%, 33% 66%, 66% 33%, 100% 0%, 100% 100%);"></div>
+                <div class="status-icon" style="width:10px; border-radius:2px;"></div>
+                <div class="status-icon" style="width:16px; height:7px; border-radius:3px; border:1px solid rgba(255,255,255,0.3); background:none; position:relative;">
+                  <div style="position:absolute;left:2px;top:1px;bottom:1px;right:4px;background:rgba(255,255,255,0.5);border-radius:1px;"></div>
+                  <div style="position:absolute;right:0;top:2px;bottom:2px;width:2px;background:rgba(255,255,255,0.25);border-radius:0 1px 1px 0;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="d1-illustration">
+              <div class="d1-illustration-inner">
+                <div class="light-bloom"></div>
+                <!-- CSS figure: woman at well -->
+                <div style="position:absolute;bottom:2px;left:52%;transform:translateX(-30%);">
+                  <!-- body -->
+                  <div style="width:18px;height:52px;background:rgba(70,15,45,0.75);border-radius:3px 3px 0 0;"></div>
+                  <!-- drape -->
+                  <div style="position:absolute;top:10px;left:-4px;width:26px;height:40px;background:rgba(87,20,56,0.4);border-radius:50% 50% 0 0;"></div>
+                </div>
+                <!-- head -->
+                <div style="position:absolute;bottom:53px;left:52%;transform:translateX(-24%);">
+                  <div style="width:13px;height:13px;background:rgba(90,25,58,0.85);border-radius:50%;"></div>
+                  <!-- hair/veil suggestion -->
+                  <div style="position:absolute;top:-3px;left:-3px;width:19px;height:12px;background:rgba(60,10,38,0.5);border-radius:50% 50% 0 0;"></div>
+                </div>
+                <!-- jar -->
+                <div style="position:absolute;bottom:18px;left:52%;margin-left:14px;">
+                  <div style="width:11px;height:16px;background:rgba(140,55,100,0.45);border-radius:2px 2px 5px 5px;"></div>
+                </div>
+                <!-- well -->
+                <div style="position:absolute;bottom:5px;right:30px;">
+                  <div style="width:30px;height:18px;background:rgba(90,30,60,0.45);border-radius:3px 3px 0 0;border-top:1.5px solid rgba(155,58,110,0.25);"></div>
+                </div>
+                <!-- subtle figure 2 (Jesus) further back -->
+                <div style="position:absolute;bottom:2px;left:25%;">
+                  <div style="width:14px;height:44px;background:rgba(50,10,32,0.5);border-radius:3px 3px 0 0;"></div>
+                  <div style="position:absolute;bottom:42px;left:2px;width:10px;height:10px;background:rgba(60,12,36,0.6);border-radius:50%;"></div>
+                </div>
+                <div class="water-shimmer"></div>
+              </div>
+            </div>
+            <!-- Holzer inscription zone -->
+            <div class="holzer-inscription">
+              <div class="scene-progress">
+                <div class="prog-dot active"></div>
+                <div class="prog-dot active"></div>
+                <div class="prog-dot"></div>
+                <div class="prog-dot"></div>
+                <div class="prog-dot"></div>
+              </div>
+              <div class="holzer-text">
+                <span class="word-dim">She came</span> <span class="word-bright">alone at noon.</span><br>
+                <span class="word-dim">The others came</span> <span class="word-bright">in the cool of morning.</span>
+              </div>
+              <div class="scene-action">
+                <div class="continue-hint">tap anywhere</div>
+              </div>
+            </div>
+            <div class="home-indicator dark"></div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">D1 · Dark World · Grief Path</div>
+    </div>
+
+    <!-- ─── D2 PHONE ─── -->
+    <div class="phone-group direction-panel" id="phone-2">
+      <div class="phone-frame">
+        <div class="phone-inner">
+          <div class="d2-scene">
+            <div class="status-bar light">
+              <div class="status-time">9:41</div>
+              <div class="status-icons">
+                <div class="status-icon" style="width:14px;height:8px;background:rgba(0,0,0,0.2); clip-path: polygon(0 100%, 33% 66%, 66% 33%, 100% 0%, 100% 100%);"></div>
+                <div class="status-icon" style="width:10px; background:rgba(0,0,0,0.15); border-radius:2px;"></div>
+                <div class="status-icon" style="width:16px; height:7px; border-radius:3px; border:1px solid rgba(0,0,0,0.2); background:none; position:relative;">
+                  <div style="position:absolute;left:2px;top:1px;bottom:1px;right:4px;background:rgba(0,0,0,0.3);border-radius:1px;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="d2-illustration">
+              <div class="d2-sky"></div>
+              <!-- Warm light scene: two figures at a well, open space -->
+              <div style="position:absolute;bottom:0;left:0;right:0;height:50%;background:linear-gradient(180deg,transparent,rgba(140,85,30,0.6));"></div>
+              <!-- Figure 1 - woman, right side -->
+              <div style="position:absolute;bottom:2px;left:55%;">
+                <div style="width:16px;height:48px;background:rgba(160,90,40,0.65);border-radius:3px 3px 0 0;"></div>
+                <div style="position:absolute;bottom:46px;left:2px;width:12px;height:12px;background:rgba(140,75,30,0.75);border-radius:50%;"></div>
+                <div style="position:absolute;top:5px;left:-3px;width:22px;height:38px;background:rgba(200,140,60,0.3);border-radius:50% 50% 0 0;"></div>
+              </div>
+              <!-- Figure 2 - Jesus, left side -->
+              <div style="position:absolute;bottom:2px;left:30%;">
+                <div style="width:15px;height:52px;background:rgba(120,80,30,0.5);border-radius:3px 3px 0 0;"></div>
+                <div style="position:absolute;bottom:50px;left:2px;width:11px;height:11px;background:rgba(130,85,35,0.6);border-radius:50%;"></div>
+              </div>
+              <!-- Well -->
+              <div style="position:absolute;bottom:5px;left:44%;">
+                <div style="width:22px;height:14px;background:rgba(100,65,20,0.5);border-radius:3px 3px 0 0;border-top:1.5px solid rgba(200,150,50,0.3);"></div>
+              </div>
+              <!-- Ground -->
+              <div style="position:absolute;bottom:0;left:0;right:0;height:8px;background:rgba(100,65,20,0.4);"></div>
+            </div>
+            <div class="d2-text-zone">
+              <div class="d2-scene-text">
+                "Give me a drink," he said.<br>
+                She did not know yet<br>
+                <em style="color: rgba(160,100,20,0.8);">who was asking.</em>
+              </div>
+              <div class="d2-progress">
+                <div class="d2-dot active"></div>
+                <div class="d2-dot active"></div>
+                <div class="d2-dot active"></div>
+                <div class="d2-dot"></div>
+                <div class="d2-dot"></div>
+              </div>
+            </div>
+            <div class="home-indicator light"></div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">D2 · Light World · Searching Path</div>
+    </div>
+
+    <!-- ─── D3 PHONE ─── -->
+    <div class="phone-group direction-panel" id="phone-3">
+      <div class="phone-frame">
+        <div class="phone-inner">
+          <!-- D3 REDESIGN: Five doorways, no question -->
+          <div style="width:100%;height:100%;background:#060406;display:flex;flex-direction:column;position:relative;">
+            <div class="status-bar dark">
+              <div class="status-time">9:41</div>
+              <div class="status-icons">
+                <div class="status-icon" style="width:16px;height:7px;border-radius:3px;border:1px solid rgba(255,255,255,0.2);background:none;position:relative;">
+                  <div style="position:absolute;left:2px;top:1px;bottom:1px;right:4px;background:rgba(255,255,255,0.35);border-radius:1px;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- "Begin." — the only copy on this screen -->
+            <div style="padding:44px 0 18px;text-align:center;flex-shrink:0;">
+              <span style="font-family:var(--font-serif);font-style:italic;font-size:13px;color:rgba(255,255,255,0.2);letter-spacing:0.04em;">Begin.</span>
+            </div>
+
+            <!-- Five doorways -->
+            <div style="display:flex;gap:5px;padding:0 12px;flex:1;align-items:stretch;padding-bottom:28px;">
+
+              <!-- Grief door — wine -->
+              <div style="flex:1;border-radius:100px 100px 0 0;background:radial-gradient(ellipse at 50% 18%,rgba(155,58,110,0.38) 0%,rgba(14,5,10,0.95) 60%);border:1.5px solid rgba(155,58,110,0.42);border-bottom:none;display:flex;flex-direction:column;align-items:center;position:relative;overflow:hidden;cursor:pointer;">
+                <!-- arch crown glow -->
+                <div style="position:absolute;top:0;left:0;right:0;height:40%;background:radial-gradient(ellipse at 50% 0%,rgba(155,58,110,0.32) 0%,transparent 65%);pointer-events:none;"></div>
+                <!-- word label — upper section -->
+                <span style="font-family:var(--font-serif);font-size:10px;font-weight:500;color:rgba(244,194,219,0.85);writing-mode:vertical-rl;text-orientation:mixed;letter-spacing:0.14em;position:relative;z-index:2;margin-top:18px;">Grief</span>
+                <!-- lock rail — horizontal divider -->
+                <div style="position:absolute;left:0;right:0;top:54%;height:1.5px;background:rgba(155,58,110,0.38);z-index:2;"></div>
+                <!-- door knob — right side at lock rail -->
+                <div style="position:absolute;top:calc(54% - 4px);right:5px;width:8px;height:8px;border-radius:50%;background:rgba(155,58,110,0.55);border:1px solid rgba(244,194,219,0.45);box-shadow:0 0 6px rgba(155,58,110,0.4);z-index:3;"></div>
+                <!-- upper panel inset -->
+                <div style="position:absolute;top:22%;left:4px;right:4px;bottom:48%;border:1px solid rgba(155,58,110,0.16);border-radius:1px;"></div>
+                <!-- lower panel inset -->
+                <div style="position:absolute;top:57%;left:4px;right:4px;bottom:6%;border:1px solid rgba(155,58,110,0.16);border-radius:1px;"></div>
+              </div>
+
+              <!-- Searching door — gold -->
+              <div style="flex:1;border-radius:100px 100px 0 0;background:radial-gradient(ellipse at 50% 18%,rgba(251,191,36,0.32) 0%,rgba(10,6,0,0.95) 60%);border:1.5px solid rgba(251,191,36,0.38);border-bottom:none;display:flex;flex-direction:column;align-items:center;position:relative;overflow:hidden;cursor:pointer;">
+                <div style="position:absolute;top:0;left:0;right:0;height:40%;background:radial-gradient(ellipse at 50% 0%,rgba(251,191,36,0.26) 0%,transparent 65%);pointer-events:none;"></div>
+                <span style="font-family:var(--font-serif);font-size:10px;font-weight:500;color:rgba(255,251,235,0.82);writing-mode:vertical-rl;text-orientation:mixed;letter-spacing:0.14em;position:relative;z-index:2;margin-top:18px;">Searching</span>
+                <div style="position:absolute;left:0;right:0;top:54%;height:1.5px;background:rgba(251,191,36,0.32);z-index:2;"></div>
+                <div style="position:absolute;top:calc(54% - 4px);right:5px;width:8px;height:8px;border-radius:50%;background:rgba(251,191,36,0.5);border:1px solid rgba(255,251,235,0.42);box-shadow:0 0 6px rgba(251,191,36,0.35);z-index:3;"></div>
+                <div style="position:absolute;top:22%;left:4px;right:4px;bottom:48%;border:1px solid rgba(251,191,36,0.14);border-radius:1px;"></div>
+                <div style="position:absolute;top:57%;left:4px;right:4px;bottom:6%;border:1px solid rgba(251,191,36,0.14);border-radius:1px;"></div>
+              </div>
+
+              <!-- Doubt door — slate -->
+              <div style="flex:1;border-radius:100px 100px 0 0;background:radial-gradient(ellipse at 50% 18%,rgba(100,116,139,0.3) 0%,rgba(8,10,13,0.95) 60%);border:1.5px solid rgba(100,116,139,0.36);border-bottom:none;display:flex;flex-direction:column;align-items:center;position:relative;overflow:hidden;cursor:pointer;">
+                <div style="position:absolute;top:0;left:0;right:0;height:40%;background:radial-gradient(ellipse at 50% 0%,rgba(100,116,139,0.24) 0%,transparent 65%);pointer-events:none;"></div>
+                <span style="font-family:var(--font-serif);font-size:10px;font-weight:500;color:rgba(226,232,240,0.72);writing-mode:vertical-rl;text-orientation:mixed;letter-spacing:0.14em;position:relative;z-index:2;margin-top:18px;">Doubt</span>
+                <div style="position:absolute;left:0;right:0;top:54%;height:1.5px;background:rgba(100,116,139,0.32);z-index:2;"></div>
+                <div style="position:absolute;top:calc(54% - 4px);right:5px;width:8px;height:8px;border-radius:50%;background:rgba(100,116,139,0.5);border:1px solid rgba(226,232,240,0.35);box-shadow:0 0 6px rgba(100,116,139,0.3);z-index:3;"></div>
+                <div style="position:absolute;top:22%;left:4px;right:4px;bottom:48%;border:1px solid rgba(100,116,139,0.14);border-radius:1px;"></div>
+                <div style="position:absolute;top:57%;left:4px;right:4px;bottom:6%;border:1px solid rgba(100,116,139,0.14);border-radius:1px;"></div>
+              </div>
+
+              <!-- Curiosity door — teal -->
+              <div style="flex:1;border-radius:100px 100px 0 0;background:radial-gradient(ellipse at 50% 18%,rgba(20,184,166,0.3) 0%,rgba(2,14,12,0.95) 60%);border:1.5px solid rgba(20,184,166,0.36);border-bottom:none;display:flex;flex-direction:column;align-items:center;position:relative;overflow:hidden;cursor:pointer;">
+                <div style="position:absolute;top:0;left:0;right:0;height:40%;background:radial-gradient(ellipse at 50% 0%,rgba(20,184,166,0.22) 0%,transparent 65%);pointer-events:none;"></div>
+                <span style="font-family:var(--font-serif);font-size:10px;font-weight:500;color:rgba(204,251,241,0.78);writing-mode:vertical-rl;text-orientation:mixed;letter-spacing:0.14em;position:relative;z-index:2;margin-top:18px;">Curiosity</span>
+                <div style="position:absolute;left:0;right:0;top:54%;height:1.5px;background:rgba(20,184,166,0.32);z-index:2;"></div>
+                <div style="position:absolute;top:calc(54% - 4px);right:5px;width:8px;height:8px;border-radius:50%;background:rgba(20,184,166,0.5);border:1px solid rgba(204,251,241,0.4);box-shadow:0 0 6px rgba(20,184,166,0.32);z-index:3;"></div>
+                <div style="position:absolute;top:22%;left:4px;right:4px;bottom:48%;border:1px solid rgba(20,184,166,0.14);border-radius:1px;"></div>
+                <div style="position:absolute;top:57%;left:4px;right:4px;bottom:6%;border:1px solid rgba(20,184,166,0.14);border-radius:1px;"></div>
+              </div>
+
+              <!-- Anger door — crimson -->
+              <div style="flex:1;border-radius:100px 100px 0 0;background:radial-gradient(ellipse at 50% 18%,rgba(220,38,38,0.3) 0%,rgba(12,2,2,0.95) 60%);border:1.5px solid rgba(220,38,38,0.36);border-bottom:none;display:flex;flex-direction:column;align-items:center;position:relative;overflow:hidden;cursor:pointer;">
+                <div style="position:absolute;top:0;left:0;right:0;height:40%;background:radial-gradient(ellipse at 50% 0%,rgba(220,38,38,0.22) 0%,transparent 65%);pointer-events:none;"></div>
+                <span style="font-family:var(--font-serif);font-size:10px;font-weight:500;color:rgba(254,226,226,0.78);writing-mode:vertical-rl;text-orientation:mixed;letter-spacing:0.14em;position:relative;z-index:2;margin-top:18px;">Anger</span>
+                <div style="position:absolute;left:0;right:0;top:54%;height:1.5px;background:rgba(220,38,38,0.32);z-index:2;"></div>
+                <div style="position:absolute;top:calc(54% - 4px);right:5px;width:8px;height:8px;border-radius:50%;background:rgba(220,38,38,0.5);border:1px solid rgba(254,226,226,0.4);box-shadow:0 0 6px rgba(220,38,38,0.32);z-index:3;"></div>
+                <div style="position:absolute;top:22%;left:4px;right:4px;bottom:48%;border:1px solid rgba(220,38,38,0.14);border-radius:1px;"></div>
+                <div style="position:absolute;top:57%;left:4px;right:4px;bottom:6%;border:1px solid rgba(220,38,38,0.14);border-radius:1px;"></div>
+              </div>
+
+            </div>
+
+            <div class="home-indicator dark"></div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">D3 · Emotional Entry · All Keys</div>
+    </div>
+
+    <!-- ─── D4 PHONE ─── -->
+    <div class="phone-group direction-panel" id="phone-4">
+      <div class="phone-frame">
+        <div class="phone-inner">
+          <div class="d4-scene">
+            <div class="status-bar dark">
+              <div class="status-time">9:41</div>
+              <div class="status-icons">
+                <div class="status-icon" style="width:16px; height:7px; border-radius:3px; border:1px solid rgba(255,255,255,0.2); background:none; position:relative;">
+                  <div style="position:absolute;left:2px;top:1px;bottom:1px;right:4px;background:rgba(255,255,255,0.4);border-radius:1px;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="d4-ambient"></div>
+            <div class="d4-content">
+              <div class="d4-eyebrow">Your story</div>
+              <div class="d4-reflection">
+                You came in carrying grief.<br><br>
+                You met a woman<br>who carried it alone for years.<br><br>
+                <span style="opacity:0.65;">She left her jar at the well.</span>
+              </div>
+              <div class="d4-divider"></div>
+
+              <!-- Receiver's three paths — equal weight, no urgency -->
+              <div style="display:flex;flex-direction:column;gap:8px;width:100%;">
+
+                <!-- Path 1: Curiosity -->
+                <div style="padding:11px 16px;background:rgba(155,58,110,0.12);border:1px solid rgba(155,58,110,0.2);border-radius:8px;">
+                  <div style="font-size:12.5px;color:rgba(244,194,219,0.85);font-family:var(--font-sans);font-weight:500;margin-bottom:2px;">Tell me more</div>
+                  <div style="font-size:10px;color:rgba(244,194,219,0.35);font-family:var(--font-serif);font-style:italic;">Where did this story come from?</div>
+                </div>
+
+                <!-- Path 2: Connect -->
+                <div style="padding:11px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:8px;">
+                  <div style="font-size:12.5px;color:rgba(255,255,255,0.55);font-family:var(--font-sans);font-weight:500;margin-bottom:2px;">Leave a message for someone</div>
+                  <div style="font-size:10px;color:rgba(255,255,255,0.2);font-family:var(--font-serif);font-style:italic;">A real person. No agenda. They'll read it when they can.</div>
+                </div>
+
+                <!-- Path 3: Rest — lowest visual weight intentionally -->
+                <div style="padding:10px 4px;text-align:center;">
+                  <div style="font-size:11.5px;color:rgba(255,255,255,0.2);font-family:var(--font-serif);font-style:italic;letter-spacing:0.02em;">I want to sit with this</div>
+                </div>
+
+              </div>
+            </div>
+            <div class="home-indicator dark"></div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">D4 · Mirror Moment · Post-Narrative</div>
+    </div>
+
+    <!-- ─── D5 PHONE ─── -->
+    <div class="phone-group direction-panel" id="phone-5">
+      <div class="phone-frame">
+        <div class="phone-inner">
+          <div class="d5-scene">
+            <div class="status-bar dark">
+              <div class="status-time">9:41</div>
+              <div class="status-icons">
+                <div class="status-icon" style="width:16px; height:7px; border-radius:3px; border:1px solid rgba(255,255,255,0.2); background:none; position:relative;">
+                  <div style="position:absolute;left:2px;top:1px;bottom:1px;right:4px;background:rgba(255,255,255,0.4);border-radius:1px;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="d5-illustration">
+              <div class="d5-desat">
+                <!-- Desaturated with color bloom emerging at center -->
+                <div class="d5-bloom-glow"></div>
+                <!-- greyscale figures suggestion -->
+                <div style="position:absolute;bottom:0;left:50%;transform:translateX(-30%);">
+                  <div style="width:16px;height:46px;background:rgba(80,70,65,0.6);border-radius:3px 3px 0 0;"></div>
+                  <div style="position:absolute;bottom:44px;left:2px;width:12px;height:12px;background:rgba(90,78,72,0.7);border-radius:50%;"></div>
+                </div>
+                <div style="position:absolute;bottom:0;left:28%;">
+                  <div style="width:13px;height:40px;background:rgba(60,52,48,0.5);border-radius:3px 3px 0 0;"></div>
+                  <div style="position:absolute;bottom:38px;left:1px;width:11px;height:11px;background:rgba(70,60,55,0.6);border-radius:50%;"></div>
+                </div>
+                <!-- color bloom figure - warm highlight on woman -->
+                <div style="position:absolute;bottom:30px;left:50%;transform:translateX(-8%);width:22px;height:30px;background:radial-gradient(ellipse,rgba(251,191,36,0.15) 0%,transparent 70%);border-radius:50%;"></div>
+                <div class="d5-color-stripe"></div>
+              </div>
+            </div>
+            <div class="d5-text-zone">
+              <div class="d5-scene-moment">Scene 3 of 5 · Searching</div>
+              <div class="d5-text">
+                He spoke of water<br>she had never tasted —<br>
+                <em style="opacity:0.75;">water that wouldn't run dry.</em>
+              </div>
+              <div class="d5-color-bars">
+                <div class="d5-bar earned"></div>
+                <div class="d5-bar earned"></div>
+                <div class="d5-bar partial"></div>
+                <div class="d5-bar"></div>
+                <div class="d5-bar"></div>
+              </div>
+              <div style="font-size:10px;color:rgba(251,191,36,0.3);letter-spacing:0.06em;">tap to continue</div>
+            </div>
+            <div class="home-indicator dark"></div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">D5 · GRIS Color Bloom · Scene 3</div>
+    </div>
+
+    <!-- ─── D6 PHONE ─── -->
+    <div class="phone-group direction-panel" id="phone-6">
+      <div class="phone-frame">
+        <div class="phone-inner">
+          <div class="d6-card">
+            <div class="status-bar dark">
+              <div class="status-time">9:41</div>
+              <div class="status-icons">
+                <div class="status-icon" style="width:16px;height:7px;border-radius:3px;border:1px solid rgba(255,255,255,0.25);background:none;position:relative;">
+                  <div style="position:absolute;left:2px;top:1px;bottom:1px;right:4px;background:rgba(255,255,255,0.45);border-radius:1px;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="d6-art-zone">
+              <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 55% 40%,rgba(155,58,110,0.5) 0%,transparent 55%),radial-gradient(ellipse at 20% 70%,rgba(87,23,60,0.45) 0%,transparent 50%),linear-gradient(170deg,#200d18 0%,#12060c 50%,#14080f 100%);"></div>
+              <div style="position:absolute;bottom:20px;left:50%;transform:translateX(-30%);">
+                <div style="width:22px;height:64px;background:rgba(70,15,45,0.8);border-radius:4px 4px 0 0;"></div>
+                <div style="position:absolute;top:6px;left:-6px;width:34px;height:54px;background:rgba(87,20,56,0.4);border-radius:50% 50% 0 0;"></div>
+                <div style="position:absolute;bottom:62px;left:4px;width:14px;height:14px;background:rgba(90,25,58,0.9);border-radius:50%;"></div>
+                <div style="position:absolute;top:-6px;left:-2px;width:20px;height:12px;background:rgba(50,8,30,0.6);border-radius:50% 50% 0 0;"></div>
+              </div>
+              <div style="position:absolute;bottom:20px;right:55px;">
+                <div style="width:16px;height:22px;background:rgba(140,55,100,0.5);border-radius:3px 3px 6px 6px;"></div>
+              </div>
+              <div style="position:absolute;bottom:20px;right:30px;">
+                <div style="width:36px;height:20px;background:rgba(90,30,60,0.5);border-radius:4px 4px 0 0;border-top:2px solid rgba(155,58,110,0.3);"></div>
+                <div style="width:44px;height:5px;background:rgba(155,58,110,0.15);border-radius:50%;position:absolute;bottom:-3px;left:-4px;"></div>
+              </div>
+              <div style="position:absolute;top:10%;right:10%;width:80px;height:80px;background:radial-gradient(circle,rgba(244,194,219,0.12) 0%,transparent 70%);border-radius:50%;"></div>
+              <div class="d6-art-text">
+                <div class="d6-card-verse">"Come see a man who told me<br>everything I ever did."</div>
+              </div>
+            </div>
+            <div class="d6-share-bar">
+              <div class="d6-share-label">
+                <div style="font-size:11px;color:rgba(255,255,255,0.45);">Thinking of someone?</div>
+              </div>
+              <div class="d6-share-btn">Share this</div>
+            </div>
+            <div class="home-indicator dark"></div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">D6 · Scene Card · Bridge</div>
+    </div>
+
+    <!-- ─── D7 PHONE ─── -->
+    <div class="phone-group direction-panel" id="phone-7">
+      <div class="phone-frame">
+        <div class="phone-inner">
+          <div class="d7-scene">
+            <div class="status-bar dark" style="position:absolute;top:30px;">
+              <div class="status-time">9:41</div>
+              <div class="status-icons">
+                <div class="status-icon" style="width:16px; height:7px; border-radius:3px; border:1px solid rgba(255,255,255,0.2); background:none; position:relative;">
+                  <div style="position:absolute;left:2px;top:1px;bottom:1px;right:4px;background:rgba(255,255,255,0.4);border-radius:1px;"></div>
+                </div>
+              </div>
+            </div>
+            <div style="height:50px;"></div>
+            <div class="d7-heading">Who in your life<br>needs to hear this?</div>
+            <div class="d7-sub">Send them something made just for them — not a link, a path.</div>
+
+            <div class="d7-contact-card">
+              <div class="d7-avatar">P</div>
+              <div class="d7-contact-info">
+                <div class="d7-contact-name">Priya</div>
+                <div class="d7-contact-detail">+1 (415) 555-0182</div>
+              </div>
+              <div class="d7-check selected"></div>
+            </div>
+            <div class="d7-contact-card">
+              <div class="d7-avatar">K</div>
+              <div class="d7-contact-info">
+                <div class="d7-contact-name">Kwame</div>
+                <div class="d7-contact-detail">kwame@email.com</div>
+              </div>
+              <div class="d7-check"></div>
+            </div>
+
+            <div class="d7-path-select">
+              <div class="d7-path-label">What path fits them?</div>
+              <div class="d7-path-pills">
+                <div class="d7-pill d7-pill-grief">Grief</div>
+                <div class="d7-pill d7-pill-searching" style="background:rgba(251,191,36,0.12);border-color:rgba(251,191,36,0.35);">Searching</div>
+                <div class="d7-pill d7-pill-doubt">Doubt</div>
+                <div class="d7-pill" style="color:rgba(204,251,241,0.6);border-color:rgba(20,184,166,0.2);background:rgba(20,184,166,0.06);">Curiosity</div>
+              </div>
+            </div>
+
+            <div class="d7-send-btn">Send to Priya →</div>
+            <div class="home-indicator dark"></div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">D7 · Carrier Sharing · Post-Experience</div>
+    </div>
+
+    <!-- ─── D8 PHONE ─── -->
+    <div class="phone-group direction-panel" id="phone-8">
+      <div class="phone-frame">
+        <div class="phone-inner">
+          <div class="d8-scene">
+            <div class="status-bar dark">
+              <div class="status-time">9:41</div>
+              <div class="status-icons">
+                <div class="status-icon" style="width:16px; height:7px; border-radius:3px; border:1px solid rgba(255,255,255,0.2); background:none; position:relative;">
+                  <div style="position:absolute;left:2px;top:1px;bottom:1px;right:4px;background:rgba(255,255,255,0.4);border-radius:1px;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="d8-ambient"></div>
+            <div class="d8-content">
+
+              <!-- Real person indicator — no name -->
+              <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;padding:12px 14px;background:rgba(155,58,110,0.08);border:1px solid rgba(155,58,110,0.15);border-radius:10px;">
+                <div style="width:38px;height:38px;border-radius:50%;background:radial-gradient(ellipse at 40% 35%,rgba(200,140,160,0.5),rgba(100,30,60,0.7));flex-shrink:0;border:1.5px solid rgba(155,58,110,0.25);"></div>
+                <div>
+                  <div style="font-size:12px;font-weight:600;color:rgba(244,194,219,0.8);font-family:var(--font-sans);margin-bottom:2px;">A real person</div>
+                  <div style="font-size:10px;color:rgba(244,194,219,0.35);font-family:var(--font-sans);line-height:1.4;">Usually reads messages within a day</div>
+                </div>
+              </div>
+
+              <div class="d8-heading">Someone will<br>hear your story</div>
+              <div class="d8-sub">Not a bot. Not a form that goes nowhere. A real person will read what you write and reach out if you want them to.<br><br>No agenda. They won't try to convince you of anything.</div>
+              <div class="d8-form">
+                <div class="d8-input">Your name</div>
+                <div class="d8-input">Phone or email</div>
+                <div class="d8-input-message">Anything you want to share... (optional)</div>
+              </div>
+              <!-- Clarify: async message, not live chat -->
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;padding:0 2px;">
+                <div style="width:16px;height:1px;background:rgba(255,255,255,0.08);flex-shrink:0;"></div>
+                <div style="font-size:10px;color:rgba(255,255,255,0.2);font-family:var(--font-sans);letter-spacing:0.03em;line-height:1.5;text-align:center;">This just leaves a message — no live chat, no call. They'll read it when they can.</div>
+                <div style="width:16px;height:1px;background:rgba(255,255,255,0.08);flex-shrink:0;"></div>
+              </div>
+              <div class="d8-send">Leave someone a message</div>
+              <div class="d8-not-yet">not yet — I'm not ready</div>
+            </div>
+            <div class="home-indicator dark"></div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">D8 · Connect Prompt · Both Paths Equal</div>
+    </div>
+
+    <!-- ─── D9 PHONE ─── -->
+    <div class="phone-group direction-panel" id="phone-9">
+      <div class="phone-frame">
+        <div class="phone-inner">
+          <div style="width:100%;height:100%;background:#0c0609;display:flex;flex-direction:column;position:relative;">
+            <div class="status-bar dark">
+              <div class="status-time">9:41</div>
+              <div class="status-icons">
+                <div class="status-icon" style="width:16px;height:7px;border-radius:3px;border:1px solid rgba(255,255,255,0.2);background:none;position:relative;">
+                  <div style="position:absolute;left:2px;top:1px;bottom:1px;right:4px;background:rgba(255,255,255,0.4);border-radius:1px;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Eyebrow -->
+            <div style="padding:48px 22px 14px;flex-shrink:0;">
+              <div style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(155,58,110,0.5);font-family:var(--font-sans);margin-bottom:4px;">Someone who's been there</div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.2);font-family:var(--font-sans);">grief path · same story</div>
+            </div>
+
+            <!-- Video frame -->
+            <div style="margin:0 18px;border-radius:12px;overflow:hidden;flex-shrink:0;position:relative;aspect-ratio:9/13;background:#1a0d14;">
+              <!-- Simulated person portrait -->
+              <div style="position:absolute;inset:0;background:
+                radial-gradient(ellipse at 50% 30%, rgba(200,150,170,0.25) 0%, transparent 45%),
+                radial-gradient(ellipse at 50% 60%, rgba(120,50,80,0.4) 0%, transparent 55%),
+                linear-gradient(180deg, #1e0c14 0%, #120709 60%, #0c0609 100%);">
+              </div>
+              <!-- Face suggestion -->
+              <div style="position:absolute;top:18%;left:50%;transform:translateX(-50%);width:52px;height:52px;border-radius:50%;background:radial-gradient(ellipse at 40% 35%,rgba(220,170,185,0.45),rgba(130,60,85,0.6));"></div>
+              <!-- Shoulders/body -->
+              <div style="position:absolute;top:46%;left:50%;transform:translateX(-50%);width:90px;height:70px;background:radial-gradient(ellipse at 50% 0%,rgba(100,40,60,0.5),transparent 70%);border-radius:50% 50% 0 0;"></div>
+              <!-- Warm ambient light top -->
+              <div style="position:absolute;top:0;left:0;right:0;height:40%;background:radial-gradient(ellipse at 50% 0%,rgba(155,58,110,0.15) 0%,transparent 70%);"></div>
+
+              <!-- Play button -->
+              <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+                <div style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);border:1.5px solid rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);">
+                  <div style="width:0;height:0;border-top:8px solid transparent;border-bottom:8px solid transparent;border-left:12px solid rgba(255,255,255,0.7);margin-left:3px;"></div>
+                </div>
+              </div>
+
+              <!-- Duration -->
+              <div style="position:absolute;bottom:10px;right:12px;font-size:9px;color:rgba(255,255,255,0.35);font-family:var(--font-sans);font-feature-settings:'tnum';">0:18</div>
+
+              <!-- Person label -->
+              <div style="position:absolute;bottom:10px;left:12px;display:flex;align-items:center;gap:7px;">
+                <div style="width:20px;height:20px;border-radius:50%;background:rgba(200,140,160,0.4);border:1px solid rgba(155,58,110,0.3);"></div>
+                <div style="font-size:10px;color:rgba(255,255,255,0.55);font-family:var(--font-sans);font-weight:500;">Aisha</div>
+              </div>
+
+              <!-- Skip -->
+              <div style="position:absolute;top:10px;right:12px;font-size:9px;color:rgba(255,255,255,0.2);font-family:var(--font-sans);letter-spacing:0.06em;">skip</div>
+            </div>
+
+            <!-- Pull quote -->
+            <div style="padding:16px 22px 12px;flex-shrink:0;">
+              <div style="font-family:var(--font-serif);font-style:italic;font-size:12px;line-height:1.65;color:rgba(244,194,219,0.55);">
+                "I didn't think anything could reach me in that season. I was wrong."
+              </div>
+            </div>
+
+            <!-- Three paths — same as D4, now heavier -->
+            <div style="padding:0 18px;display:flex;flex-direction:column;gap:7px;margin-top:auto;padding-bottom:28px;">
+              <div style="padding:10px 14px;background:rgba(155,58,110,0.12);border:1px solid rgba(155,58,110,0.2);border-radius:7px;">
+                <div style="font-size:12px;color:rgba(244,194,219,0.85);font-family:var(--font-sans);font-weight:500;">Tell me about the story</div>
+              </div>
+              <div style="padding:10px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:7px;">
+                <div style="font-size:12px;color:rgba(255,255,255,0.5);font-family:var(--font-sans);font-weight:500;">Leave a message for someone</div>
+              </div>
+              <div style="padding:8px 4px;text-align:center;">
+                <div style="font-size:11px;color:rgba(255,255,255,0.18);font-family:var(--font-serif);font-style:italic;">I want to sit with this</div>
+              </div>
+            </div>
+
+            <div class="home-indicator dark"></div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">D9 · Witness · Post-Mirror</div>
+    </div>
+
+    <!-- COMPARE VIEW (hidden initially) -->
+    <div class="compare-view" id="compare-view">
+      <!-- populated by JS -->
+    </div>
+
+  </div> <!-- /canvas-area -->
+</div> <!-- /main -->
+
+<script>
+let currentDirection = 1;
+let inCompare = false;
+
+function showDirection(n) {
+  inCompare = false;
+  currentDirection = n;
+
+  // Update tabs
+  document.querySelectorAll('.nav-tab').forEach((t, i) => {
+    t.classList.toggle('active', i === n - 1);
+  });
+
+  // Update panels (sidebar)
+  document.querySelectorAll('[id^="panel-"]').forEach(p => {
+    const num = parseInt(p.id.replace('panel-',''));
+    p.classList.toggle('active', num === n);
+    p.style.display = num === n ? 'block' : 'none';
+  });
+
+  // Update phones
+  document.querySelectorAll('[id^="phone-"]').forEach(p => {
+    const num = parseInt(p.id.replace('phone-',''));
+    p.classList.toggle('active', num === n);
+    p.style.display = num === n ? 'flex' : 'none';
+  });
+
+  document.getElementById('compare-view').style.display = 'none';
+
+  // Counter
+  document.getElementById('dir-counter').textContent = `Direction ${n} of 9`;
+}
+
+function showCompare() {
+  inCompare = true;
+  document.querySelectorAll('.nav-tab').forEach((t, i) => {
+    t.classList.toggle('active', i === 8); // compare tab is index 8
+  });
+  document.querySelectorAll('[id^="panel-"]').forEach(p => { p.style.display = 'none'; });
+  document.querySelectorAll('[id^="phone-"]').forEach(p => { p.style.display = 'none'; });
+
+  const cv = document.getElementById('compare-view');
+  cv.style.display = 'flex';
+  cv.innerHTML = '';
+
+  // Clone all phones at small scale
+  const labels = [
+    'D1 · Dark Scene', 'D2 · Light Scene', 'D3 · Entry',
+    'D4 · Mirror', 'D5 · Bloom', 'D6 · Card', 'D7 · Carrier', 'D8 · Connect', 'D9 · Witness'
+  ];
+
+  for (let i = 1; i <= 9; i++) {
+    const phone = document.getElementById(`phone-${i}`);
+    const frame = phone ? phone.querySelector('.phone-frame') : null;
+    if (!frame) continue;
+
+    const wrap = document.createElement('div');
+    wrap.className = 'compare-item';
+    wrap.style.cursor = 'pointer';
+    wrap.onclick = () => showDirection(i);
+
+    const lbl = document.createElement('div');
+    lbl.className = 'compare-tag';
+    lbl.textContent = labels[i-1];
+
+    // Mini frame
+    const miniFrame = document.createElement('div');
+    miniFrame.style.cssText = `
+      width:130px; height:282px; border-radius:20px;
+      overflow:hidden; border:1px solid rgba(255,255,255,0.08);
+      box-shadow:0 8px 32px rgba(0,0,0,0.6);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    `;
+    miniFrame.onmouseenter = () => {
+      miniFrame.style.transform = 'scale(1.04)';
+      miniFrame.style.boxShadow = '0 12px 40px rgba(0,0,0,0.7)';
+    };
+    miniFrame.onmouseleave = () => {
+      miniFrame.style.transform = '';
+      miniFrame.style.boxShadow = '0 8px 32px rgba(0,0,0,0.6)';
+    };
+
+    const clonedInner = frame.querySelector('.phone-inner').cloneNode(true);
+    const scaleWrap = document.createElement('div');
+    scaleWrap.style.cssText = `
+      width:100%; height:100%;
+      transform: scale(${130/280});
+      transform-origin: top left;
+      width: ${280}px;
+      height: ${607}px;
+    `;
+    scaleWrap.appendChild(clonedInner);
+    miniFrame.appendChild(scaleWrap);
+
+    wrap.appendChild(miniFrame);
+    wrap.appendChild(lbl);
+    cv.appendChild(wrap);
+  }
+
+  document.getElementById('dir-counter').textContent = 'All 9 Directions';
+}
+
+function toggleGlossary() {
+  const glossary = document.getElementById('audience-glossary');
+  const arrow = document.getElementById('toggle-arrow');
+  const isOpen = glossary.classList.contains('open');
+  glossary.classList.toggle('open', !isOpen);
+  arrow.classList.toggle('open', !isOpen);
+  document.getElementById('glossary-toggle').querySelector('span').textContent =
+    isOpen ? 'Who are these people?' : 'Hide audience guide';
+}
+
+// Initialize - show all tabs including compare
+document.getElementById('tab-compare').style.display = 'block';
+
+// Init first direction properly
+showDirection(1);
+</script>
+
+</body>
+</html>

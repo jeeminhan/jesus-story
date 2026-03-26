@@ -1,11 +1,13 @@
 import { expect, test } from '@playwright/test';
 
-test('home page redirects to the emotional entry experience', async ({ page }) => {
+test('home page shows the ux design mockup before entering the live app', async ({ page }) => {
   await page.goto('/');
 
+  await expect(page.getByRole('heading', { name: /start with the bmad mockup/i })).toBeVisible();
+  await expect(page.locator('iframe[title="UX design directions"]')).toBeVisible();
+  await page.getByRole('link', { name: /open live app/i }).click();
   await expect(page).toHaveURL('/en');
   await expect(page.getByRole('heading', { name: /choose a door/i })).toBeVisible();
-  await expect(page.getByRole('button', { name: /choose grief/i })).toBeVisible();
 });
 
 test('emotional entry goes straight into the first scene', async ({ page }) => {
