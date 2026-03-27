@@ -33,8 +33,8 @@ export default async function HomePage() {
 
   return (
     <main className="min-h-screen bg-[#0b0b0d] px-4 py-6 text-white sm:px-6 lg:px-10">
-      <div className="mx-auto flex min-h-[calc(100vh-3rem)] w-full max-w-[1500px] flex-col gap-6">
-        <div className="max-w-3xl">
+      <div className="mx-auto flex min-h-[calc(100vh-3rem)] w-full max-w-[1200px] flex-col gap-5">
+        <div className="max-w-2xl">
           <p
             className="text-[0.68rem] uppercase tracking-[0.28em] text-white/40"
             style={{ fontFamily: 'var(--font-ui)' }}
@@ -42,23 +42,22 @@ export default async function HomePage() {
             UX Design Directions
           </p>
           <h1
-            className="mt-3 text-[clamp(2.2rem,6vw,4.8rem)] font-medium leading-[0.94] text-white"
+            className="mt-3 max-w-xl text-[clamp(1.9rem,7vw,3.6rem)] font-medium leading-[0.96] text-white"
             style={{ fontFamily: 'var(--font-narrative)' }}
           >
-            Start with the BMAD mockup, then enter the live app.
+            See the BMAD mockup first.
           </h1>
           <p
-            className="mt-4 max-w-2xl text-base leading-7 text-white/62 sm:text-lg"
+            className="mt-4 max-w-xl text-base leading-7 text-white/62 sm:text-lg"
             style={{ fontFamily: 'var(--font-narrative)' }}
           >
-            This first screen shows the design-direction artifact we planned against. When you are ready, open the
-            working experience below it.
+            Then enter the working app when you&apos;re ready.
           </p>
         </div>
 
-        <div className="grid flex-1 gap-5 lg:grid-cols-[minmax(0,1fr)_320px]">
+        <div className="grid flex-1 items-start gap-5 lg:grid-cols-[minmax(320px,430px)_minmax(0,420px)] lg:justify-center">
           <section
-            className="overflow-hidden rounded-[32px] border bg-black/30 shadow-[0_30px_90px_rgba(0,0,0,0.35)]"
+            className="mx-auto w-full max-w-[430px] overflow-hidden rounded-[32px] border bg-black/30 shadow-[0_30px_90px_rgba(0,0,0,0.35)]"
             style={{ borderColor: 'rgba(255,255,255,0.08)' }}
           >
             <div
@@ -78,15 +77,13 @@ export default async function HomePage() {
                 Open full mockup
               </a>
             </div>
-            <iframe
-              title="UX design directions"
-              src="/ux-design-directions.html"
-              className="h-[72vh] w-full bg-[#0c0c0f]"
-            />
+            <div className="aspect-[10/16] w-full bg-[#0c0c0f]">
+              <iframe title="UX design directions" src="/ux-design-directions.html" className="h-full w-full" />
+            </div>
           </section>
 
           <aside
-            className="flex flex-col justify-between rounded-[32px] border p-5 sm:p-6"
+            className="mx-auto flex w-full max-w-[430px] flex-col justify-between rounded-[32px] border p-5 sm:p-6"
             style={{
               borderColor: 'rgba(255,255,255,0.08)',
               background:
@@ -104,14 +101,13 @@ export default async function HomePage() {
                 className="mt-3 text-2xl leading-tight text-white sm:text-[2rem]"
                 style={{ fontFamily: 'var(--font-narrative)' }}
               >
-                Enter the actual app.
+                Enter the live app.
               </h2>
               <p
                 className="mt-4 text-sm leading-7 text-white/58 sm:text-base"
                 style={{ fontFamily: 'var(--font-narrative)' }}
               >
-                This keeps the design artifact visible at entry, but the live story, mirror, witness, and connect
-                flow still start in your preferred language.
+                The story, mirror, witness, and connect flow will still start in your preferred language.
               </p>
             </div>
 

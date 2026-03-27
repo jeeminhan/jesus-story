@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test';
 test('home page shows the ux design mockup before entering the live app', async ({ page }) => {
   await page.goto('/');
 
-  await expect(page.getByRole('heading', { name: /start with the bmad mockup/i })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /see the bmad mockup first/i })).toBeVisible();
   await expect(page.locator('iframe[title="UX design directions"]')).toBeVisible();
   await page.getByRole('link', { name: /open live app/i }).click();
   await expect(page).toHaveURL('/en');
