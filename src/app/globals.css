@@ -87,6 +87,21 @@ body {
     overflow: hidden;
     transform: translateZ(0);
   }
+
+  body:has(#phone-frame > .root-entry-shell) {
+    display: block;
+    background-color: #0b0b0d;
+  }
+
+  #phone-frame:has(> .root-entry-shell) {
+    width: 100%;
+    min-height: 100vh;
+    max-width: none;
+    border-radius: 0;
+    box-shadow: none;
+    overflow: visible;
+    background-color: #0b0b0d;
+  }
 }
 
 .prose-story {

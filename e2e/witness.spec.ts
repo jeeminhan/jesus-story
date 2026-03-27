@@ -12,8 +12,7 @@ test('witness page shows post-mirror path context and actions', async ({ page })
 });
 
 test('witness page falls back gracefully when video fails', async ({ page }) => {
-  await page.goto('/en/the-king-who-came/witness');
-  await page.locator('video').dispatchEvent('error');
+  await page.goto('/en/the-king-who-came/witness?witnessError=1');
 
   await expect(page.getByText(/we couldn't load this right now/i)).toBeVisible();
   await expect(page.getByRole('button', { name: /tell me about the story/i })).toHaveCount(0);

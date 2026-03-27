@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import type { WitnessVideo } from '@/lib/types';
 
@@ -12,6 +12,7 @@ interface WitnessVideoPlayerProps {
 
 export function WitnessVideoPlayer({ video, lang, arcSlug }: WitnessVideoPlayerProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isInitialLoading, setIsInitialLoading] = useState(true);
   const [isBuffering, setIsBuffering] = useState(false);
@@ -26,6 +27,7 @@ export function WitnessVideoPlayer({ video, lang, arcSlug }: WitnessVideoPlayerP
   const homePath = `/${lang}`;
   const eyebrowLabel = `${video.emotional_key} path · same story`;
   const hasFinishedState = isComplete || hasLoadError;
+  const forceLoadError = searchParams.get('witnessError') === '1';
   const pullQuote =
     video.emotional_key === 'grief'
       ? "I didn't think anything could reach me in that season. I was wrong."
@@ -38,6 +40,15 @@ export function WitnessVideoPlayer({ video, lang, arcSlug }: WitnessVideoPlayerP
             : 'I kept looking for something real. This met me first.';
 
   useEffect(() => {
+    if (forceLoadError) {
+      setIsInitialLoading(false);
+      setIsBuffering(false);
+      setNeedsTapToPlay(false);
+      setHasLoadError(true);
+      setIsPlaying(false);
+      return;
+    }
+
     async function attemptAutoplay() {
       const videoElement = videoRef.current;
       if (!videoElement) {
@@ -55,7 +66,7 @@ export function WitnessVideoPlayer({ video, lang, arcSlug }: WitnessVideoPlayerP
     }
 
     void attemptAutoplay();
-  }, [video.id]);
+  }, [forceLoadError, video.id]);
 
   async function togglePlayback() {
     const videoElement = videoRef.current;

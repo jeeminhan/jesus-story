@@ -32,7 +32,7 @@ export default async function HomePage() {
   const preferredLang = resolvePreferredLang(languageHeader, activeLangs);
 
   return (
-    <main className="min-h-screen bg-[#0b0b0d] px-4 py-6 text-white sm:px-6 lg:px-10">
+    <main className="root-entry-shell min-h-screen bg-[#0b0b0d] px-4 py-6 text-white sm:px-6 lg:px-10">
       <div className="mx-auto flex min-h-[calc(100vh-3rem)] w-full max-w-[1200px] flex-col gap-5">
         <div className="max-w-2xl">
           <p
