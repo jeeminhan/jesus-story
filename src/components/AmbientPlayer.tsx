@@ -125,6 +125,46 @@ export function AmbientPlayer({ emotionalKey }: AmbientPlayerProps) {
   }, [emotionalKey]);
 
   useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio || muted || !audio.src || !audio.paused) {
+      return;
+    }
+
+    let removed = false;
+
+    const attemptGestureResume = () => {
+      if (removed) {
+        return;
+      }
+
+      void audio.play().then(() => {
+        clearFadeInterval();
+        fadeIntervalRef.current = fadeVolume(audio, audio.volume, TARGET_VOLUME, 500);
+        removeListeners();
+      }).catch(() => {});
+    };
+
+    const removeListeners = () => {
+      if (removed) {
+        return;
+      }
+
+      removed = true;
+      document.removeEventListener('pointerdown', attemptGestureResume);
+      document.removeEventListener('touchstart', attemptGestureResume);
+      document.removeEventListener('click', attemptGestureResume);
+      document.removeEventListener('keydown', attemptGestureResume);
+    };
+
+    document.addEventListener('pointerdown', attemptGestureResume, { passive: true });
+    document.addEventListener('touchstart', attemptGestureResume, { passive: true });
+    document.addEventListener('click', attemptGestureResume, { passive: true });
+    document.addEventListener('keydown', attemptGestureResume);
+
+    return removeListeners;
+  }, [emotionalKey, muted]);
+
+  useEffect(() => {
     window.localStorage.setItem(STORAGE_KEY, String(muted));
 
     if (previousMutedRef.current === muted) {
