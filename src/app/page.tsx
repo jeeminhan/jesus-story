@@ -55,30 +55,54 @@ export default async function HomePage() {
           </p>
         </div>
 
-        <div className="grid flex-1 items-start gap-5 lg:grid-cols-[minmax(320px,430px)_minmax(0,420px)] lg:justify-center">
+        <div className="grid flex-1 items-stretch gap-5 lg:grid-cols-[minmax(320px,430px)_minmax(320px,430px)] lg:justify-center">
           <section
-            className="mx-auto w-full max-w-[430px] overflow-hidden rounded-[32px] border bg-black/30 shadow-[0_30px_90px_rgba(0,0,0,0.35)]"
-            style={{ borderColor: 'rgba(255,255,255,0.08)' }}
+            className="mx-auto flex w-full max-w-[430px] flex-col justify-between rounded-[32px] border p-5 sm:p-6"
+            style={{
+              borderColor: 'rgba(255,255,255,0.08)',
+              background:
+                'linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.018) 100%)',
+            }}
           >
-            <div
-              className="flex items-center justify-between border-b px-4 py-3 sm:px-5"
-              style={{ borderColor: 'rgba(255,255,255,0.08)' }}
-            >
-              <p className="text-sm text-white/72" style={{ fontFamily: 'var(--font-ui)' }}>
-                BMAD mockup preview
+            <div>
+              <p
+                className="text-[0.68rem] uppercase tracking-[0.2em] text-white/40"
+                style={{ fontFamily: 'var(--font-ui)' }}
+              >
+                Design document
               </p>
+              <h2
+                className="mt-3 text-2xl leading-tight text-white sm:text-[2rem]"
+                style={{ fontFamily: 'var(--font-narrative)' }}
+              >
+                Open the BMAD mockup.
+              </h2>
+              <p
+                className="mt-4 text-sm leading-7 text-white/58 sm:text-base"
+                style={{ fontFamily: 'var(--font-narrative)' }}
+              >
+                See the full design-direction artifact directly instead of a squeezed preview.
+              </p>
+            </div>
+
+            <div className="mt-8 flex flex-col gap-3">
               <a
                 href="/ux-design-directions.html"
                 target="_blank"
                 rel="noreferrer"
-                className="text-xs uppercase tracking-[0.18em] text-white/44 transition-opacity hover:opacity-80"
-                style={{ fontFamily: 'var(--font-ui)' }}
+                className="inline-flex min-h-[56px] items-center justify-center rounded-full border px-6 text-base transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
+                style={{
+                  color: 'var(--text-primary)',
+                  borderColor: 'rgba(255,255,255,0.1)',
+                  backgroundColor: 'rgba(255,255,255,0.06)',
+                  fontFamily: 'var(--font-narrative)',
+                }}
               >
-                Open full mockup
+                Open BMAD mockup
               </a>
-            </div>
-            <div className="aspect-[10/16] w-full bg-[#0c0c0f]">
-              <iframe title="UX design directions" src="/ux-design-directions.html" className="h-full w-full" />
+              <p className="text-xs leading-6 text-white/40" style={{ fontFamily: 'var(--font-ui)' }}>
+                Opens the full design-direction document in a new tab.
+              </p>
             </div>
           </section>
 
