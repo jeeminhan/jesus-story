@@ -16,6 +16,10 @@ interface ArtCardProps {
   startSceneId: string;
   sceneSlug?: string | null;
   lightWorld?: boolean;
+  recipientName?: string | null;
+  senderName?: string | null;
+  bridgeText?: string | null;
+  personalNote?: string | null;
   onEnter?: () => void;
 }
 
@@ -27,6 +31,10 @@ export function ArtCard({
   startSceneId,
   sceneSlug,
   lightWorld,
+  recipientName,
+  senderName,
+  bridgeText,
+  personalNote,
   onEnter,
 }: ArtCardProps) {
   const router = useRouter();
@@ -116,6 +124,34 @@ export function ArtCard({
       />
 
       <div className="pointer-events-none absolute bottom-[12%] left-[5%] right-[5%] z-30">
+        {recipientName || senderName ? (
+          <div className="mb-3 flex justify-center">
+            <span
+              className="rounded-full border px-3 py-1.5 text-[0.6rem] font-medium uppercase tracking-[0.2em]"
+              style={
+                {
+                  color: 'var(--text-secondary)',
+                  borderColor: 'rgba(255,255,255,0.08)',
+                  backgroundColor: 'rgba(7,6,6,0.18)',
+                  backdropFilter: 'blur(12px)',
+                } as CSSProperties
+              }
+            >
+              {recipientName ? `For ${recipientName}` : 'A story for you'}
+              {senderName ? ` • from ${senderName}` : ''}
+            </span>
+          </div>
+        ) : null}
+
+        {bridgeText ? (
+          <p
+            className="mx-auto mb-3 max-w-lg text-center text-sm leading-7 sm:text-[0.98rem]"
+            style={{ fontFamily: 'var(--font-narrative)', color: 'var(--text-secondary)' }}
+          >
+            {bridgeText}
+          </p>
+        ) : null}
+
         <blockquote
           className="mx-auto max-w-lg rounded-[30px] border px-5 py-4 text-[1.15rem] italic leading-[1.72] shadow-[0_24px_60px_rgba(0,0,0,0.22)] sm:px-6 sm:text-[1.28rem]"
           style={{
@@ -128,6 +164,30 @@ export function ArtCard({
         >
           {quote}
         </blockquote>
+
+        {personalNote ? (
+          <div
+            className="mx-auto mt-3 max-w-lg rounded-[24px] border px-4 py-3"
+            style={{
+              borderColor: 'rgba(255,255,255,0.08)',
+              backgroundColor: 'rgba(7,6,6,0.18)',
+              backdropFilter: 'blur(12px)',
+            }}
+          >
+            <p
+              className="text-[0.62rem] uppercase tracking-[0.18em]"
+              style={{ color: 'var(--text-secondary)', fontFamily: 'var(--font-ui)' }}
+            >
+              Note
+            </p>
+            <p
+              className="mt-2 text-sm leading-7"
+              style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-narrative)' }}
+            >
+              {personalNote}
+            </p>
+          </div>
+        ) : null}
       </div>
 
       <div className="pointer-events-none absolute bottom-6 left-0 right-0 z-40 flex justify-center">
