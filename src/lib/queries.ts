@@ -1,11 +1,13 @@
 import { createServerSupabaseClient } from './supabase';
 import {
   getMockArcBySlug,
+  getMockCoordinatorMessages,
   getMockSceneById,
   getMockScenesForArc,
   getMockStartScene,
   getMockPublishedArcs,
   mockLanguages,
+  mockCoordinatorMessages,
   mockWitnessVideos,
 } from './mock-data';
 import type { EmotionalKey } from './constants';
@@ -13,6 +15,7 @@ import type {
   ArcWithTranslation,
   ChoiceWithLabel,
   CommunityConnectionInsert,
+  CoordinatorMessageSummary,
   Language,
   SceneWithContent,
   WitnessVideo,
@@ -434,10 +437,27 @@ type ConnectMessageByToken = {
   coordinator_reply: string | null;
   lang: string;
   emotional_key: EmotionalKey | null;
+  arc_slug: string | null;
+  arc_title: string | null;
+  sender_name: string | null;
+  path_summary: string | null;
+  created_at: string;
 };
 
 function isUuidLike(value: string) {
   return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);
+}
+
+function readArcSlug(value: unknown) {
+  if (Array.isArray(value)) {
+    return typeof value[0]?.slug === 'string' ? value[0].slug : null;
+  }
+
+  if (value && typeof value === 'object' && 'slug' in value && typeof (value as { slug?: unknown }).slug === 'string') {
+    return (value as { slug: string }).slug;
+  }
+
+  return null;
 }
 
 export async function getConnectMessageByToken(token: string): Promise<ConnectMessageByToken | null> {
@@ -447,16 +467,22 @@ export async function getConnectMessageByToken(token: string): Promise<ConnectMe
   }
 
   if (!hasSupabaseConfig()) {
-    if (normalizedToken !== 'mock-reply-token') {
+    const message = mockCoordinatorMessages.find((entry) => entry.reply_token === normalizedToken);
+    if (!message) {
       return null;
     }
 
     return {
-      id: 'msg-1',
-      message: 'Mock message',
-      coordinator_reply: null,
-      lang: 'en',
-      emotional_key: 'searching',
+      id: message.id,
+      message: message.message,
+      coordinator_reply: message.coordinator_reply,
+      lang: message.lang,
+      emotional_key: message.emotional_key,
+      arc_slug: message.arc_slug,
+      arc_title: message.arc_title,
+      sender_name: message.sender_name,
+      path_summary: message.path_summary,
+      created_at: message.created_at,
     };
   }
 
@@ -467,7 +493,7 @@ export async function getConnectMessageByToken(token: string): Promise<ConnectMe
   const supabase = await createServerSupabaseClient();
   const { data, error } = await supabase
     .from('connect_messages')
-    .select('id, message, coordinator_reply, lang, emotional_key')
+    .select('id, message, coordinator_reply, lang, emotional_key, created_at, arcs(slug)')
     .eq('reply_token', normalizedToken)
     .single();
 
@@ -481,5 +507,41 @@ export async function getConnectMessageByToken(token: string): Promise<ConnectMe
     coordinator_reply: data.coordinator_reply ?? null,
     lang: data.lang ?? 'en',
     emotional_key: data.emotional_key ?? null,
+    arc_slug: readArcSlug(data.arcs),
+    arc_title: null,
+    sender_name: null,
+    path_summary: null,
+    created_at: data.created_at ?? new Date(0).toISOString(),
   };
+}
+
+export async function getCoordinatorMessages(): Promise<CoordinatorMessageSummary[]> {
+  if (!hasSupabaseConfig()) {
+    return getMockCoordinatorMessages();
+  }
+
+  const supabase = await createServerSupabaseClient();
+  const { data, error } = await supabase
+    .from('connect_messages')
+    .select('id, reply_token, lang, emotional_key, message, coordinator_reply, created_at, arcs(slug)')
+    .order('created_at', { ascending: false })
+    .limit(24);
+
+  if (error) {
+    throw error;
+  }
+
+  return ((data as Array<any> | null) ?? []).map((row) => ({
+    id: row.id,
+    reply_token: row.reply_token,
+    lang: row.lang ?? 'en',
+    emotional_key: row.emotional_key ?? null,
+    message: row.message ?? '',
+    coordinator_reply: row.coordinator_reply ?? null,
+    created_at: row.created_at ?? new Date(0).toISOString(),
+    arc_slug: readArcSlug(row.arcs),
+    arc_title: null,
+    sender_name: null,
+    path_summary: null,
+  }));
 }

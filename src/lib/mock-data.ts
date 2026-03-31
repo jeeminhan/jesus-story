@@ -1,4 +1,10 @@
-import type { ArcWithTranslation, Language, SceneWithContent, WitnessVideo } from './types';
+import type {
+  ArcWithTranslation,
+  CoordinatorMessageSummary,
+  Language,
+  SceneWithContent,
+  WitnessVideo,
+} from './types';
 
 export const mockLanguages: Language[] = [
   { id: 'lang-en', code: 'en', name: 'English', native_name: 'English', is_active: true },
@@ -59,9 +65,55 @@ export const mockArcs: ArcWithTranslation[] = [
 
 export const mockArc = mockArcs.find((arc) => arc.slug === 'the-king-who-came') ?? mockArcs[0];
 
+export const mockCoordinatorMessages: CoordinatorMessageSummary[] = [
+  {
+    id: 'msg-1',
+    reply_token: 'mock-reply-token',
+    lang: 'en',
+    emotional_key: 'searching',
+    message:
+      'I thought this would feel distant, but the invitation scene felt like someone was speaking directly into my questions.',
+    coordinator_reply: null,
+    created_at: '2026-03-27T18:15:00.000Z',
+    arc_slug: 'the-king-who-came',
+    arc_title: 'The King Who Came',
+    sender_name: 'Priya',
+    path_summary: 'Searching path • The Waiting → The Invitation',
+  },
+  {
+    id: 'msg-2',
+    reply_token: 'mock-doubt-reply-token',
+    lang: 'en',
+    emotional_key: 'doubt',
+    message:
+      'The locked room scene felt honest. I am not ready to say I believe, but I do want to keep asking the real questions.',
+    coordinator_reply:
+      'Thank you for saying that plainly. You do not need to rush past your questions here. If you want, I can send one more story that meets doubt with the same patience.',
+    created_at: '2026-03-27T16:40:00.000Z',
+    arc_slug: 'the-night-he-answered',
+    arc_title: 'The Night He Answered',
+    sender_name: 'Kwame',
+    path_summary: 'Doubt path • The Locked Room → My Lord, My God',
+  },
+  {
+    id: 'msg-3',
+    reply_token: 'mock-grief-reply-token',
+    lang: 'ko',
+    emotional_key: 'grief',
+    message:
+      'I do not have words for all of this yet. I just needed somewhere that did not rush me past the ache.',
+    coordinator_reply: null,
+    created_at: '2026-03-26T21:05:00.000Z',
+    arc_slug: 'when-he-wept',
+    arc_title: 'When He Wept',
+    sender_name: 'Hannah',
+    path_summary: 'Grief path • The Empty Room → At the Tomb',
+  },
+];
+
 export const mockConnectMessage = {
-  id: 'msg-1',
-  reply_token: 'mock-reply-token',
+  id: mockCoordinatorMessages[0].id,
+  reply_token: mockCoordinatorMessages[0].reply_token,
 };
 
 const mockScenesList: SceneWithContent[] = [
@@ -730,6 +782,10 @@ export function getMockScenesForArc(arcSlug: string) {
 
 export function getMockSceneById(sceneId: string) {
   return mockScenes[sceneId] ?? null;
+}
+
+export function getMockCoordinatorMessages() {
+  return [...mockCoordinatorMessages].sort((a, b) => b.created_at.localeCompare(a.created_at));
 }
 
 export const mockWitnessVideos: WitnessVideo[] = [

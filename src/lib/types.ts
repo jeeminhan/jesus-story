@@ -66,3 +66,17 @@ export interface WitnessVideo {
   caption_url: string | null;
   speaker_name: string | null;
 }
+
+export interface CoordinatorMessageSummary {
+  id: string;
+  reply_token: string;
+  lang: string;
+  emotional_key: EmotionalKey | null;
+  message: string;
+  coordinator_reply: string | null;
+  created_at: string;
+  arc_slug: string | null;
+  arc_title: string | null;
+  sender_name: string | null;
+  path_summary: string | null;
+}
