@@ -6,7 +6,15 @@ import { isValidLang } from '@/lib/constants';
 import { getArcBySlug, getScene, getSceneProgress, getStartScene, getWitnessVideo } from '@/lib/queries';
 
 type StoryPageParams = Promise<{ lang: string; arc: string }>;
-type StorySearchParams = Promise<{ scene?: string; card?: string }>;
+type StorySearchParams = Promise<{
+  scene?: string;
+  card?: string;
+  sender?: string;
+  recipient?: string;
+  burden?: string;
+  context?: string;
+  note?: string;
+}>;
 
 function humanizeStoryFigure(arcSlug: string) {
   return arcSlug
@@ -20,6 +28,21 @@ function humanizeStoryFigure(arcSlug: string) {
       return `${part.charAt(0).toUpperCase()}${part.slice(1)}`;
     })
     .join(' ');
+}
+
+function normalizeCardField(value: string | undefined) {
+  const normalized = value?.trim();
+  return normalized ? normalized.slice(0, 180) : null;
+}
+
+function buildBridgeText(burden: string | null, context: string | null) {
+  const fragments = [burden, context].filter(Boolean);
+  if (!fragments.length) {
+    return null;
+  }
+
+  const bridge = fragments.join(' ');
+  return bridge.length > 180 ? `${bridge.slice(0, 177).trimEnd()}...` : bridge;
 }
 
 export async function generateMetadata({
@@ -61,7 +84,7 @@ export default async function StoryPage({
   searchParams: StorySearchParams;
 }) {
   const { lang, arc: arcSlug } = await params;
-  const { scene: sceneId, card } = await searchParams;
+  const { scene: sceneId, card, sender, recipient, burden, context, note } = await searchParams;
 
   if (!isValidLang(lang)) {
     notFound();
@@ -87,6 +110,10 @@ export default async function StoryPage({
         startSceneId={entryScene.id}
         sceneSlug={entryScene.slug}
         lightWorld={entryScene.light_world}
+        senderName={normalizeCardField(sender)}
+        recipientName={normalizeCardField(recipient)}
+        bridgeText={buildBridgeText(normalizeCardField(burden), normalizeCardField(context))}
+        personalNote={normalizeCardField(note)}
       />
     );
   }

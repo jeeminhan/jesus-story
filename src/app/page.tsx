@@ -6,14 +6,23 @@ const experiencePillars = [
   {
     title: 'Starts with emotion',
     body: 'The entry question is human, not churchy: what are you carrying right now? Each answer routes into a different Jesus story path.',
+    accent: 'rgba(129,140,248,0.15)',
+    accentBorder: 'rgba(129,140,248,0.2)',
+    labelColor: 'text-indigo-400/70',
   },
   {
     title: 'Feels like art',
     body: 'The experience is built around painterly scenes, emotional color shifts, ambient pacing, and text that arrives like it is being spoken.',
+    accent: 'rgba(196,166,106,0.12)',
+    accentBorder: 'rgba(196,166,106,0.2)',
+    labelColor: 'text-amber-400/70',
   },
   {
     title: 'Continues with people',
     body: 'The story does not end with a cold form. It moves into reflection, witness, and connection with real people who walked similar paths.',
+    accent: 'rgba(134,239,172,0.1)',
+    accentBorder: 'rgba(134,239,172,0.18)',
+    labelColor: 'text-emerald-400/70',
   },
 ];
 
@@ -21,14 +30,20 @@ const projectRoles = [
   {
     title: 'The Receiver',
     body: 'Someone with no church background arrives through a card made for them and steps directly into the story.',
+    accent: 'rgba(251,191,36,0.1)',
+    accentBorder: 'rgba(251,191,36,0.18)',
   },
   {
     title: 'The Carrier',
     body: 'A friend who has been moved by the experience shares a personalized card instead of sending a generic invitation.',
+    accent: 'rgba(129,140,248,0.08)',
+    accentBorder: 'rgba(129,140,248,0.15)',
   },
   {
     title: 'The Community',
     body: 'Real people become the next scene through witness videos and human follow-up, so the story continues past the app.',
+    accent: 'rgba(134,239,172,0.08)',
+    accentBorder: 'rgba(134,239,172,0.15)',
   },
 ];
 
@@ -85,18 +100,18 @@ export default async function HomePage() {
           </p>
         </div>
 
-        <div className="grid flex-1 items-stretch gap-5 lg:grid-cols-[minmax(320px,430px)_minmax(320px,430px)] lg:justify-center">
+        <div className="grid flex-1 items-stretch gap-5 lg:grid-cols-[minmax(320px,430px)_minmax(320px,430px)_minmax(320px,430px)] lg:justify-center">
           <section
             className="mx-auto flex w-full max-w-[430px] flex-col justify-between rounded-[32px] border p-5 sm:p-6"
             style={{
-              borderColor: 'rgba(255,255,255,0.08)',
+              borderColor: 'rgba(56,189,248,0.12)',
               background:
-                'linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.018) 100%)',
+                'linear-gradient(180deg, rgba(56,189,248,0.04) 0%, rgba(255,255,255,0.018) 100%)',
             }}
           >
             <div>
               <p
-                className="text-[0.68rem] uppercase tracking-[0.2em] text-white/40"
+                className="text-[0.68rem] uppercase tracking-[0.2em] text-sky-400/50"
                 style={{ fontFamily: 'var(--font-ui)' }}
               >
                 Design document
@@ -139,14 +154,14 @@ export default async function HomePage() {
           <aside
             className="mx-auto flex w-full max-w-[430px] flex-col justify-between rounded-[32px] border p-5 sm:p-6"
             style={{
-              borderColor: 'rgba(255,255,255,0.08)',
+              borderColor: 'rgba(52,211,153,0.12)',
               background:
-                'linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.025) 100%)',
+                'linear-gradient(180deg, rgba(52,211,153,0.04) 0%, rgba(255,255,255,0.018) 100%)',
             }}
           >
             <div>
               <p
-                className="text-[0.68rem] uppercase tracking-[0.2em] text-white/40"
+                className="text-[0.68rem] uppercase tracking-[0.2em] text-emerald-400/50"
                 style={{ fontFamily: 'var(--font-ui)' }}
               >
                 Live experience
@@ -186,6 +201,55 @@ export default async function HomePage() {
               </p>
             </div>
           </aside>
+
+          {/* New AI-powered story experience */}
+          <aside
+            className="mx-auto flex w-full max-w-[430px] flex-col justify-between rounded-[32px] border p-5 sm:p-6"
+            style={{
+              borderColor: 'rgba(196,166,106,0.15)',
+              background:
+                'linear-gradient(180deg, rgba(196,166,106,0.06) 0%, rgba(255,255,255,0.02) 100%)',
+            }}
+          >
+            <div>
+              <p
+                className="text-[0.68rem] uppercase tracking-[0.2em] text-amber-400/50"
+                style={{ fontFamily: 'var(--font-ui)' }}
+              >
+                New
+              </p>
+              <h2
+                className="mt-3 text-2xl leading-tight text-white sm:text-[2rem]"
+                style={{ fontFamily: 'var(--font-narrative)' }}
+              >
+                AI-personalized story.
+              </h2>
+              <p
+                className="mt-4 text-sm leading-7 text-white/58 sm:text-base"
+                style={{ fontFamily: 'var(--font-narrative)' }}
+              >
+                Share what you&apos;re carrying and the story of Jesus is retold through the lens of your experience. Each scene is generated in real-time.
+              </p>
+            </div>
+
+            <div className="mt-8 flex flex-col gap-3">
+              <Link
+                href="/new"
+                className="inline-flex min-h-[56px] items-center justify-center rounded-full border px-6 text-base transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
+                style={{
+                  color: 'var(--text-primary)',
+                  borderColor: 'rgba(196,166,106,0.2)',
+                  backgroundColor: 'rgba(196,166,106,0.08)',
+                  fontFamily: 'var(--font-narrative)',
+                }}
+              >
+                Try the new experience
+              </Link>
+              <p className="text-xs leading-6 text-white/40" style={{ fontFamily: 'var(--font-ui)' }}>
+                5 story arcs, multilingual, with guardrails and scripture fidelity.
+              </p>
+            </div>
+          </aside>
         </div>
 
         <section className="grid gap-5 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
@@ -198,7 +262,7 @@ export default async function HomePage() {
             }}
           >
             <p
-              className="text-[0.68rem] uppercase tracking-[0.2em] text-white/40"
+              className="text-[0.68rem] uppercase tracking-[0.2em] text-violet-400/60"
               style={{ fontFamily: 'var(--font-ui)' }}
             >
               What this project is
@@ -235,12 +299,12 @@ export default async function HomePage() {
                   key={pillar.title}
                   className="rounded-[24px] border p-4"
                   style={{
-                    borderColor: 'rgba(255,255,255,0.08)',
-                    backgroundColor: 'rgba(255,255,255,0.02)',
+                    borderColor: pillar.accentBorder,
+                    backgroundColor: pillar.accent,
                   }}
                 >
                   <h3
-                    className="text-base text-white"
+                    className={`text-base ${pillar.labelColor}`}
                     style={{ fontFamily: 'var(--font-narrative)' }}
                   >
                     {pillar.title}
@@ -265,7 +329,7 @@ export default async function HomePage() {
             }}
           >
             <p
-              className="text-[0.68rem] uppercase tracking-[0.2em] text-white/40"
+              className="text-[0.68rem] uppercase tracking-[0.2em] text-amber-400/60"
               style={{ fontFamily: 'var(--font-ui)' }}
             >
               How it works
@@ -291,8 +355,8 @@ export default async function HomePage() {
                   key={role.title}
                   className="rounded-[22px] border px-4 py-3 text-sm leading-6 text-white/58"
                   style={{
-                    borderColor: 'rgba(255,255,255,0.08)',
-                    backgroundColor: 'rgba(255,255,255,0.02)',
+                    borderColor: role.accentBorder,
+                    backgroundColor: role.accent,
                     fontFamily: 'var(--font-ui)',
                   }}
                 >
