@@ -1,0 +1,192 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 300">
+  <defs>
+    <style>
+      @keyframes marthaLean {
+        0%, 100% { transform: rotate(0deg); }
+        30% { transform: rotate(3deg); }
+        70% { transform: rotate(1deg); }
+      }
+      @keyframes jesusBreathe {
+        0%, 100% { transform: scaleY(1); }
+        50% { transform: scaleY(1.015); }
+      }
+      @keyframes tensionPulse {
+        0%, 100% { opacity: 0.03; }
+        50% { opacity: 0.08; }
+      }
+      @keyframes wordsDrift {
+        0% { opacity: 0; transform: translateX(0); }
+        15% { opacity: 0.45; }
+        100% { opacity: 0; transform: translateX(-35px) translateY(-10px); }
+      }
+    </style>
+  </defs>
+
+  <rect width="360" height="300" fill="#0D0A0E"/>
+
+  <!-- Stars -->
+  <circle cx="45" cy="20" r="0.7" fill="#D4C4A8" opacity="0.3"/>
+  <circle cx="130" cy="30" r="0.5" fill="#D4C4A8" opacity="0.25"/>
+  <circle cx="280" cy="18" r="0.8" fill="#D4C4A8" opacity="0.28"/>
+  <circle cx="340" cy="40" r="0.6" fill="#D4C4A8" opacity="0.2"/>
+  <circle cx="200" cy="12" r="0.5" fill="#D4C4A8" opacity="0.22"/>
+
+  <!-- Distant hills -->
+  <path d="M0 140 Q90 125 180 135 Q270 120 360 132" fill="none" stroke="#D4C4A8" stroke-width="0.5" opacity="0.12"/>
+
+  <!-- Courtyard wall -->
+  <path d="M30 240 L30 125 Q30 120 35 120 L325 120 Q330 120 330 125 L330 240" fill="none" stroke="#D4C4A8" stroke-width="0.8" opacity="0.3"/>
+  <!-- Wall stone texture -->
+  <line x1="30" y1="145" x2="330" y2="145" stroke="#D4C4A8" stroke-width="0.2" opacity="0.08"/>
+  <line x1="30" y1="170" x2="330" y2="170" stroke="#D4C4A8" stroke-width="0.2" opacity="0.08"/>
+  <line x1="30" y1="195" x2="330" y2="195" stroke="#D4C4A8" stroke-width="0.2" opacity="0.08"/>
+  <line x1="30" y1="220" x2="330" y2="220" stroke="#D4C4A8" stroke-width="0.2" opacity="0.08"/>
+  <line x1="80" y1="120" x2="80" y2="145" stroke="#D4C4A8" stroke-width="0.12" opacity="0.06"/>
+  <line x1="130" y1="120" x2="130" y2="145" stroke="#D4C4A8" stroke-width="0.12" opacity="0.06"/>
+  <line x1="180" y1="120" x2="180" y2="145" stroke="#D4C4A8" stroke-width="0.12" opacity="0.06"/>
+  <line x1="230" y1="120" x2="230" y2="145" stroke="#D4C4A8" stroke-width="0.12" opacity="0.06"/>
+  <line x1="280" y1="120" x2="280" y2="145" stroke="#D4C4A8" stroke-width="0.12" opacity="0.06"/>
+  <line x1="105" y1="145" x2="105" y2="170" stroke="#D4C4A8" stroke-width="0.12" opacity="0.06"/>
+  <line x1="155" y1="145" x2="155" y2="170" stroke="#D4C4A8" stroke-width="0.12" opacity="0.06"/>
+  <line x1="205" y1="145" x2="205" y2="170" stroke="#D4C4A8" stroke-width="0.12" opacity="0.06"/>
+  <line x1="255" y1="145" x2="255" y2="170" stroke="#D4C4A8" stroke-width="0.12" opacity="0.06"/>
+  <line x1="305" y1="145" x2="305" y2="170" stroke="#D4C4A8" stroke-width="0.12" opacity="0.06"/>
+
+  <!-- Archway in background wall -->
+  <path d="M160 240 L160 155 Q180 135 200 155 L200 240" fill="none" stroke="#D4C4A8" stroke-width="0.5" opacity="0.2"/>
+
+  <!-- Oil lamp -->
+  <circle cx="75" cy="150" r="6" fill="#C4A66A" opacity="0.06"/>
+  <circle cx="75" cy="150" r="2.5" fill="#C4A66A" opacity="0.12"/>
+  <line x1="75" y1="145" x2="75" y2="148" stroke="#C4A66A" stroke-width="0.5" opacity="0.25"/>
+
+  <!-- Ground -->
+  <line x1="0" y1="240" x2="360" y2="240" stroke="#D4C4A8" stroke-width="0.8" opacity="0.35"/>
+  <!-- Floor tiles -->
+  <line x1="60" y1="240" x2="60" y2="244" stroke="#D4C4A8" stroke-width="0.25" opacity="0.08"/>
+  <line x1="120" y1="240" x2="120" y2="244" stroke="#D4C4A8" stroke-width="0.25" opacity="0.08"/>
+  <line x1="180" y1="240" x2="180" y2="244" stroke="#D4C4A8" stroke-width="0.25" opacity="0.08"/>
+  <line x1="240" y1="240" x2="240" y2="244" stroke="#D4C4A8" stroke-width="0.25" opacity="0.08"/>
+  <line x1="300" y1="240" x2="300" y2="244" stroke="#D4C4A8" stroke-width="0.25" opacity="0.08"/>
+  <!-- Stones/debris -->
+  <ellipse cx="90" cy="243" rx="2" ry="0.8" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.1"/>
+  <ellipse cx="280" cy="243" rx="1.5" ry="0.7" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.1"/>
+
+  <!-- Tension circle between them -->
+  <circle cx="180" cy="205" r="55" fill="#C4A66A" opacity="0.03">
+    <animate attributeName="opacity" values="0.03;0.08;0.03" dur="3.5s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="55;68;55" dur="3.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="180" cy="205" r="35" fill="#C4A66A" opacity="0.04">
+    <animate attributeName="opacity" values="0.04;0.09;0.04" dur="3.5s" repeatCount="indefinite" begin="0.8s"/>
+    <animate attributeName="r" values="35;42;35" dur="3.5s" repeatCount="indefinite" begin="0.8s"/>
+  </circle>
+
+  <!-- MARTHA (left, confronting) -->
+  <g style="transform-box: fill-box; transform-origin: 50% 100%; animation: marthaLean 3.5s ease-in-out infinite;">
+    <!-- Head -->
+    <circle cx="110" cy="177" r="13" fill="#0D0A0E" stroke="#D4C4A8" stroke-width="1.2"/>
+    <!-- Veil -->
+    <path d="M98 173 Q110 163 122 173" fill="none" stroke="#D4C4A8" stroke-width="0.8"/>
+    <path d="M98 173 Q95 187 97 197" fill="none" stroke="#D4C4A8" stroke-width="0.6" opacity="0.45"/>
+    <path d="M122 173 Q125 187 123 197" fill="none" stroke="#D4C4A8" stroke-width="0.6" opacity="0.45"/>
+    <!-- Eyes (open, intense) -->
+    <circle cx="115" cy="176" r="1.3" fill="#D4C4A8"/>
+    <circle cx="108" cy="176" r="1" fill="#D4C4A8" opacity="0.55"/>
+    <!-- Eyebrows furrowed -->
+    <path d="M105 173 Q108 171 111 173" fill="none" stroke="#D4C4A8" stroke-width="0.5"/>
+    <path d="M113 172 Q116 170 119 173" fill="none" stroke="#D4C4A8" stroke-width="0.5"/>
+    <!-- Nose -->
+    <line x1="112" y1="177" x2="114" y2="181" stroke="#D4C4A8" stroke-width="0.5"/>
+    <!-- Mouth (open, speaking with anguish) -->
+    <path d="M108 184 Q112 188 116 184" fill="none" stroke="#D4C4A8" stroke-width="0.6"/>
+    <path d="M110 185 Q112 186 114 185" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.4"/>
+
+    <!-- Neck -->
+    <line x1="110" y1="190" x2="112" y2="196" stroke="#D4C4A8" stroke-width="1.2"/>
+    <!-- Body leaning forward -->
+    <path d="M112 196 Q118 212 115 238" fill="none" stroke="#D4C4A8" stroke-width="1.2"/>
+    <!-- Robe -->
+    <path d="M105 198 Q98 218 95 238" fill="none" stroke="#D4C4A8" stroke-width="0.6" opacity="0.35"/>
+    <path d="M118 198 Q125 218 128 238" fill="none" stroke="#D4C4A8" stroke-width="0.6" opacity="0.35"/>
+    <path d="M102 207 Q112 210 122 207" fill="none" stroke="#D4C4A8" stroke-width="0.35" opacity="0.2"/>
+    <path d="M100 222 Q112 225 124 222" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.15"/>
+
+    <!-- Arm extended gesture -->
+    <path d="M114 200 Q135 194 150 197" fill="none" stroke="#D4C4A8" stroke-width="1"/>
+    <!-- Open hand (spread fingers) -->
+    <line x1="150" y1="197" x2="154" y2="193" stroke="#D4C4A8" stroke-width="0.5"/>
+    <line x1="150" y1="197" x2="155" y2="196" stroke="#D4C4A8" stroke-width="0.5"/>
+    <line x1="150" y1="197" x2="155" y2="199" stroke="#D4C4A8" stroke-width="0.5"/>
+    <line x1="150" y1="197" x2="153" y2="201" stroke="#D4C4A8" stroke-width="0.4"/>
+    <!-- Other arm -->
+    <path d="M110 200 Q100 210 96 217" fill="none" stroke="#D4C4A8" stroke-width="0.8"/>
+    <line x1="96" y1="217" x2="93" y2="216" stroke="#D4C4A8" stroke-width="0.4"/>
+    <line x1="96" y1="217" x2="94" y2="219" stroke="#D4C4A8" stroke-width="0.4"/>
+
+    <!-- Legs -->
+    <line x1="114" y1="238" x2="108" y2="240" stroke="#D4C4A8" stroke-width="1"/>
+    <line x1="116" y1="238" x2="122" y2="240" stroke="#D4C4A8" stroke-width="1"/>
+    <line x1="108" y1="240" x2="103" y2="240" stroke="#D4C4A8" stroke-width="0.7"/>
+    <line x1="122" y1="240" x2="127" y2="240" stroke="#D4C4A8" stroke-width="0.7"/>
+  </g>
+
+  <!-- Words drifting -->
+  <text x="130" y="162" fill="#D4C4A8" font-family="serif" font-size="7" font-style="italic" opacity="0" style="animation: wordsDrift 5s ease-out infinite;">
+    if you had been here...
+  </text>
+  <text x="138" y="153" fill="#D4C4A8" font-family="serif" font-size="6" font-style="italic" opacity="0" style="animation: wordsDrift 5s ease-out infinite 2.5s;">
+    my brother would not have died
+  </text>
+
+  <!-- JESUS (right, receiving, still) -->
+  <g style="transform-box: fill-box; transform-origin: 50% 100%; animation: jesusBreathe 5s ease-in-out infinite;">
+    <!-- Head -->
+    <circle cx="250" cy="177" r="14" fill="#0D0A0E" stroke="#D4C4A8" stroke-width="1.2"/>
+    <!-- Hair/covering -->
+    <path d="M237 173 Q250 162 263 173" fill="none" stroke="#D4C4A8" stroke-width="0.8"/>
+    <path d="M237 173 Q233 187 235 200" fill="none" stroke="#D4C4A8" stroke-width="0.6" opacity="0.45"/>
+    <path d="M263 173 Q267 187 265 200" fill="none" stroke="#D4C4A8" stroke-width="0.6" opacity="0.45"/>
+    <!-- Eyes (compassionate, looking at Martha) -->
+    <circle cx="244" cy="176" r="1.2" fill="#D4C4A8"/>
+    <!-- Soft eyebrows -->
+    <path d="M241 173 Q244 172 247 174" fill="none" stroke="#D4C4A8" stroke-width="0.4"/>
+    <!-- Nose -->
+    <line x1="247" y1="177" x2="246" y2="181" stroke="#D4C4A8" stroke-width="0.5"/>
+    <!-- Mouth (closed, solemn) -->
+    <line x1="244" y1="184" x2="251" y2="184" stroke="#D4C4A8" stroke-width="0.4" opacity="0.45"/>
+    <!-- Beard -->
+    <path d="M242 184 Q248 192 254 184" fill="none" stroke="#D4C4A8" stroke-width="0.5" opacity="0.35"/>
+
+    <!-- Neck -->
+    <line x1="250" y1="191" x2="250" y2="197" stroke="#D4C4A8" stroke-width="1.2"/>
+    <!-- Body upright -->
+    <path d="M250 197 Q251 218 250 238" fill="none" stroke="#D4C4A8" stroke-width="1.2"/>
+    <!-- Robe -->
+    <path d="M242 199 Q236 220 234 238" fill="none" stroke="#D4C4A8" stroke-width="0.6" opacity="0.35"/>
+    <path d="M258 199 Q264 220 266 238" fill="none" stroke="#D4C4A8" stroke-width="0.6" opacity="0.35"/>
+    <path d="M240 212 Q250 215 260 212" fill="none" stroke="#D4C4A8" stroke-width="0.35" opacity="0.2"/>
+    <path d="M238 227 Q250 230 262 227" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.15"/>
+
+    <!-- Arms slightly open, receiving -->
+    <path d="M248 200 Q238 212 232 222" fill="none" stroke="#D4C4A8" stroke-width="1"/>
+    <line x1="232" y1="222" x2="229" y2="221" stroke="#D4C4A8" stroke-width="0.5"/>
+    <line x1="232" y1="222" x2="230" y2="224" stroke="#D4C4A8" stroke-width="0.5"/>
+    <path d="M252 200 Q262 212 268 222" fill="none" stroke="#D4C4A8" stroke-width="1"/>
+    <line x1="268" y1="222" x2="271" y2="221" stroke="#D4C4A8" stroke-width="0.5"/>
+    <line x1="268" y1="222" x2="270" y2="224" stroke="#D4C4A8" stroke-width="0.5"/>
+
+    <!-- Legs -->
+    <line x1="249" y1="238" x2="243" y2="240" stroke="#D4C4A8" stroke-width="1"/>
+    <line x1="251" y1="238" x2="257" y2="240" stroke="#D4C4A8" stroke-width="1"/>
+    <line x1="243" y1="240" x2="239" y2="240" stroke="#D4C4A8" stroke-width="0.7"/>
+    <line x1="257" y1="240" x2="261" y2="240" stroke="#D4C4A8" stroke-width="0.7"/>
+  </g>
+
+  <!-- Shadows -->
+  <ellipse cx="110" cy="241" rx="18" ry="2" fill="#D4C4A8" opacity="0.04"/>
+  <ellipse cx="250" cy="241" rx="18" ry="2" fill="#D4C4A8" opacity="0.04"/>
+
+  <!-- Text -->
+  <text x="180" y="275" text-anchor="middle" fill="#D4C4A8" font-family="serif" font-size="11" opacity="0.5" letter-spacing="3">MARTHA'S CONFRONTATION</text>
+</svg>

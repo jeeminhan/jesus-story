@@ -106,6 +106,38 @@ See [Component Inventory](./component-inventory.md) for full list.
 
 ---
 
+## AI Layer
+
+See [Conversational Entry Design](./plans/2026-03-30-conversational-entry-design.md) for the full design document.
+
+The app uses AI at two stages: entry and storytelling.
+
+### Stage 1: Conversational Entry (`/api/entry`)
+The home page is a free-text input ("What are you carrying right now?"). AI detects language, classifies emotion, selects the best story, and streams a personalized bridge sentence.
+
+### Stage 2: Story Generation (`/api/story`)
+Stories are defined as **skeletons** — ordered beats with guardrails and tone guidance. For each beat, AI generates lyrical prose contextualized to the user's input and language. No pre-written translations. Illustrations are static assets tied to beats.
+
+```
+Browser
+  └── Conversational Entry (free-text input)
+        └── /api/entry (Route Handler)
+              └── AI SDK generateText → classify language + emotion
+              └── AI SDK streamText → bridge sentence
+        └── /story/[slug] (Scene Reader)
+              └── /api/story (Route Handler, per beat)
+                    └── AI SDK streamText → contextualized prose + choice labels
+                    └── Beat skeleton (guardrails, tone, visual context)
+```
+
+### AI Boundary
+- AI generates prose from fixed beat skeletons — it cannot skip, reorder, or invent beats
+- Guardrails enforce theological safety (MUST/MUST NOT constraints in system prompt)
+- AI never interprets scripture, makes theological claims, or uses churchy vocabulary
+- Illustrations are static; AI is told what they depict so prose matches visuals
+
+---
+
 ## Deployment Architecture
 
 No CI/CD pipeline is currently configured. The app is a standard Next.js project deployable to any Node.js host (Vercel, Railway, etc.).

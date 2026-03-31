@@ -1,17 +1,19 @@
 import { expect, test } from '@playwright/test';
 
-test('home page shows the ux design mockup before entering the live app', async ({ page }) => {
+test('home page restores the original overview and links to the current prototype', async ({ page }) => {
   await page.goto('/');
 
   await expect(page.getByRole('heading', { name: /see the mockup first/i })).toBeVisible();
-  await expect(page.getByRole('link', { name: /open mockup/i })).toBeVisible();
-  await expect(page.getByText(/living, ai-powered gospel experience/i)).toBeVisible();
-  await expect(page.getByText(/scene n\+1/i)).toBeVisible();
-  const liveAppLink = page.getByRole('link', { name: /open live app/i });
-  await expect(liveAppLink).toHaveAttribute('href', '/en');
-  await page.goto('/en');
-  await expect(page).toHaveURL('/en');
-  await expect(page.getByRole('heading', { name: /choose a door/i })).toBeVisible();
+  await expect(page.getByRole('link', { name: /open mockup/i })).toHaveAttribute('href', '/ux-design-directions.html');
+  await expect(page.getByRole('link', { name: /open live app/i })).toHaveAttribute('href', '/en');
+  await expect(page.getByRole('link', { name: /open current prototype/i })).toHaveAttribute('href', '/prototype');
+});
+
+test('prototype page remains available from its own route', async ({ page }) => {
+  await page.goto('/prototype');
+
+  await expect(page.getByRole('heading', { name: /build the door before asking anyone to walk through it/i })).toBeVisible();
+  await expect(page.getByRole('link', { name: /open coordinator desk/i })).toHaveAttribute('href', '/coordinator');
 });
 
 test('emotional entry goes straight into the first scene', async ({ page }) => {

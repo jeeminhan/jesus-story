@@ -39,6 +39,7 @@ _Generated: 2026-03-20 | Scan: Quick | Mode: Initial_
 | [README](../README.md) | Quick-start guide |
 | [Storybook Design Plan](./plans/2026-03-02-gospel-storybook-design.md) | Design planning document |
 | [Storybook Implementation Plan](./plans/2026-03-02-gospel-storybook-implementation.md) | Implementation planning document |
+| [Conversational AI Entry](./plans/2026-03-30-conversational-entry-design.md) | AI-powered conversational entry, runtime translation, bridge sentence design |
 
 ---
 

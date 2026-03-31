@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 300">
+  <defs>
+    <style>
+      @keyframes voiceRipple1 {
+        0% { r: 20; opacity: 0.2; }
+        100% { r: 80; opacity: 0; }
+      }
+      @keyframes voiceRipple2 {
+        0% { r: 15; opacity: 0.25; }
+        100% { r: 70; opacity: 0; }
+      }
+      @keyframes voiceRipple3 {
+        0% { r: 10; opacity: 0.3; }
+        100% { r: 60; opacity: 0; }
+      }
+      @keyframes commandPose {
+        0%, 100% { transform: scaleY(1); }
+        50% { transform: scaleY(1.02); }
+      }
+      @keyframes drawWord {
+        0% { stroke-dashoffset: 1; opacity: 0.6; }
+        60% { stroke-dashoffset: 0; opacity: 0.5; }
+        100% { stroke-dashoffset: 0; opacity: 0; }
+      }
+    </style>
+  </defs>
+
+  <rect width="360" height="300" fill="#0D0A0E"/>
+
+  <!-- Stars -->
+  <circle cx="15" cy="20" r="0.7" fill="#D4C4A8" opacity="0.25"/>
+  <circle cx="60" cy="35" r="0.5" fill="#D4C4A8" opacity="0.22"/>
+  <circle cx="130" cy="18" r="0.6" fill="#D4C4A8" opacity="0.2"/>
+  <circle cx="340" cy="30" r="0.8" fill="#D4C4A8" opacity="0.28"/>
+  <circle cx="290" cy="15" r="0.5" fill="#D4C4A8" opacity="0.18"/>
+
+  <!-- Rocky cliff / tomb area (right side) -->
+  <path d="M180 70 Q210 55 250 50 Q290 48 320 60 Q350 75 360 95 L360 240 L180 240Z" fill="#0D0A0E" stroke="#D4C4A8" stroke-width="0.8" opacity="0.35"/>
+  <!-- Rock texture -->
+  <path d="M195 85 Q215 78 230 83" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.12"/>
+  <path d="M250 58 Q270 55 290 62" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.1"/>
+  <path d="M310 70 Q330 78 350 88" fill="none" stroke="#D4C4A8" stroke-width="0.25" opacity="0.08"/>
+  <path d="M190 110 Q210 105 225 110" fill="none" stroke="#D4C4A8" stroke-width="0.2" opacity="0.07"/>
+  <path d="M240 60 L245 80 L242 95" fill="none" stroke="#D4C4A8" stroke-width="0.25" opacity="0.1"/>
+  <path d="M300 65 L305 85" fill="none" stroke="#D4C4A8" stroke-width="0.2" opacity="0.08"/>
+  <path d="M200 130 Q215 125 228 130" fill="none" stroke="#D4C4A8" stroke-width="0.2" opacity="0.06"/>
+
+  <!-- TOMB ENTRANCE (dark void) -->
+  <path d="M240 110 Q240 90 265 85 Q290 80 300 90 Q310 100 310 115 Q310 140 300 155 L240 155 Q230 140 230 125 Q230 118 240 110Z" fill="#0D0A0E" stroke="#D4C4A8" stroke-width="0.8" opacity="0.4"/>
+  <ellipse cx="270" cy="125" rx="28" ry="24" fill="#0D0A0E" opacity="0.95"/>
+
+  <!-- Stone rolled aside -->
+  <circle cx="320" cy="148" r="22" fill="#0D0A0E" stroke="#D4C4A8" stroke-width="1" opacity="0.4"/>
+  <path d="M308 140 Q318 135 328 140" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.12"/>
+  <path d="M310 148 Q320 145 330 148" fill="none" stroke="#D4C4A8" stroke-width="0.25" opacity="0.1"/>
+  <path d="M312 155 Q322 152 332 155" fill="none" stroke="#D4C4A8" stroke-width="0.25" opacity="0.1"/>
+
+  <!-- VOICE RIPPLES going into the tomb -->
+  <circle cx="160" cy="140" r="20" fill="none" stroke="#C4A66A" stroke-width="0.8" opacity="0">
+    <animate attributeName="r" values="20;80;80" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.2;0;0" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="160" cy="140" r="15" fill="none" stroke="#C4A66A" stroke-width="0.6" opacity="0">
+    <animate attributeName="r" values="15;70;70" dur="3s" repeatCount="indefinite" begin="0.6s"/>
+    <animate attributeName="opacity" values="0.25;0;0" dur="3s" repeatCount="indefinite" begin="0.6s"/>
+  </circle>
+  <circle cx="160" cy="140" r="10" fill="none" stroke="#C4A66A" stroke-width="0.5" opacity="0">
+    <animate attributeName="r" values="10;60;60" dur="3s" repeatCount="indefinite" begin="1.2s"/>
+    <animate attributeName="opacity" values="0.3;0;0" dur="3s" repeatCount="indefinite" begin="1.2s"/>
+  </circle>
+  <circle cx="160" cy="140" r="8" fill="none" stroke="#C4A66A" stroke-width="0.4" opacity="0">
+    <animate attributeName="r" values="8;50;50" dur="3s" repeatCount="indefinite" begin="1.8s"/>
+    <animate attributeName="opacity" values="0.2;0;0" dur="3s" repeatCount="indefinite" begin="1.8s"/>
+  </circle>
+
+  <!-- Ground -->
+  <line x1="0" y1="240" x2="180" y2="240" stroke="#D4C4A8" stroke-width="0.8" opacity="0.3"/>
+  <path d="M180 160 Q160 190 120 220 Q80 240 0 240" fill="none" stroke="#D4C4A8" stroke-width="0.5" opacity="0.2"/>
+  <!-- Rubble -->
+  <ellipse cx="160" cy="165" rx="3" ry="1.5" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.12"/>
+  <ellipse cx="200" cy="162" rx="2" ry="1" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.1"/>
+  <circle cx="225" cy="160" r="1.5" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.1"/>
+  <!-- Path texture -->
+  <line x1="30" y1="242" x2="38" y2="242" stroke="#D4C4A8" stroke-width="0.3" opacity="0.1"/>
+  <line x1="70" y1="243" x2="78" y2="243" stroke="#D4C4A8" stroke-width="0.3" opacity="0.1"/>
+  <line x1="120" y1="237" x2="128" y2="237" stroke="#D4C4A8" stroke-width="0.3" opacity="0.08"/>
+  <ellipse cx="50" cy="242" rx="2" ry="0.8" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.08"/>
+
+  <!-- JESUS (commanding, arm raised toward tomb) -->
+  <g style="transform-box: fill-box; transform-origin: 50% 100%; animation: commandPose 4s ease-in-out infinite;">
+    <!-- Glow around figure -->
+    <circle cx="90" cy="200" r="35" fill="#C4A66A" opacity="0.03"/>
+
+    <!-- Head (lifted, speaking) -->
+    <circle cx="90" cy="180" r="14" fill="#0D0A0E" stroke="#D4C4A8" stroke-width="1.3"/>
+    <!-- Hair/covering -->
+    <path d="M77 176 Q90 164 103 176" fill="none" stroke="#D4C4A8" stroke-width="0.9"/>
+    <path d="M77 176 Q73 190 75 202" fill="none" stroke="#D4C4A8" stroke-width="0.6" opacity="0.45"/>
+    <path d="M103 176 Q107 190 105 202" fill="none" stroke="#D4C4A8" stroke-width="0.6" opacity="0.45"/>
+    <!-- Eye (focused, intense) -->
+    <circle cx="95" cy="179" r="1.3" fill="#D4C4A8"/>
+    <!-- Brow (resolved) -->
+    <path d="M92 176 Q95 175 98 177" fill="none" stroke="#D4C4A8" stroke-width="0.5"/>
+    <!-- Nose -->
+    <line x1="93" y1="180" x2="94" y2="184" stroke="#D4C4A8" stroke-width="0.5"/>
+    <!-- Mouth OPEN (calling out) -->
+    <path d="M89 187 Q93 191 97 187" fill="none" stroke="#D4C4A8" stroke-width="0.7"/>
+    <path d="M90 188 Q93 189 96 188" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.4"/>
+    <!-- Beard -->
+    <path d="M86 187 Q91 195 98 187" fill="none" stroke="#D4C4A8" stroke-width="0.5" opacity="0.35"/>
+
+    <!-- Neck -->
+    <line x1="90" y1="194" x2="90" y2="200" stroke="#D4C4A8" stroke-width="1.3"/>
+    <!-- Body (upright, commanding) -->
+    <path d="M90 200 Q91 220 90 238" fill="none" stroke="#D4C4A8" stroke-width="1.3"/>
+    <!-- Robe -->
+    <path d="M82 202 Q76 222 74 240" fill="none" stroke="#D4C4A8" stroke-width="0.6" opacity="0.38"/>
+    <path d="M98 202 Q104 222 106 240" fill="none" stroke="#D4C4A8" stroke-width="0.6" opacity="0.38"/>
+    <path d="M80 215 Q90 218 100 215" fill="none" stroke="#D4C4A8" stroke-width="0.35" opacity="0.2"/>
+
+    <!-- RIGHT ARM RAISED toward tomb (the command gesture) -->
+    <path d="M92 203 Q115 185 135 178" fill="none" stroke="#D4C4A8" stroke-width="1.2"/>
+    <!-- Hand extended, palm open -->
+    <line x1="135" y1="178" x2="140" y2="175" stroke="#D4C4A8" stroke-width="0.6"/>
+    <line x1="135" y1="178" x2="141" y2="177" stroke="#D4C4A8" stroke-width="0.6"/>
+    <line x1="135" y1="178" x2="140" y2="180" stroke="#D4C4A8" stroke-width="0.6"/>
+    <line x1="135" y1="178" x2="138" y2="182" stroke="#D4C4A8" stroke-width="0.5"/>
+
+    <!-- Left arm at side -->
+    <path d="M88 203 Q78 215 74 225" fill="none" stroke="#D4C4A8" stroke-width="1"/>
+    <line x1="74" y1="225" x2="71" y2="224" stroke="#D4C4A8" stroke-width="0.5"/>
+    <line x1="74" y1="225" x2="72" y2="227" stroke="#D4C4A8" stroke-width="0.5"/>
+
+    <!-- Legs -->
+    <line x1="89" y1="238" x2="83" y2="240" stroke="#D4C4A8" stroke-width="1"/>
+    <line x1="91" y1="238" x2="97" y2="240" stroke="#D4C4A8" stroke-width="1"/>
+    <line x1="83" y1="240" x2="79" y2="240" stroke="#D4C4A8" stroke-width="0.7"/>
+    <line x1="97" y1="240" x2="101" y2="240" stroke="#D4C4A8" stroke-width="0.7"/>
+  </g>
+
+  <!-- Draw-on text "LAZARUS, COME OUT!" -->
+  <text x="90" y="165" fill="none" stroke="#C4A66A" stroke-width="0.5" font-family="serif" font-size="8" font-style="italic" letter-spacing="2"
+        pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" opacity="0.5"
+        style="animation: drawWord 4s ease-out infinite;">
+    Lazarus, come out!
+  </text>
+
+  <!-- Shadow -->
+  <ellipse cx="90" cy="241" rx="18" ry="2" fill="#D4C4A8" opacity="0.04"/>
+
+  <!-- Text -->
+  <text x="180" y="275" text-anchor="middle" fill="#D4C4A8" font-family="serif" font-size="11" opacity="0.5" letter-spacing="3">THE CALL</text>
+</svg>

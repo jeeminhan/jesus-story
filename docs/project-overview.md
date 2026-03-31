@@ -58,6 +58,10 @@ The app is built as a **Next.js 15 App Router monolith** backed by **Supabase** 
 3. **Scene Reader** — read scenes, listen to optional audio narration, and choose branching paths
 4. **Community Connection** — submit name/email/city to connect with a local community after finishing an arc
 
+### Planned: Conversational AI Entry
+
+Replaces features 1 and 2 above with a single conversational input. The user types freely in any language. AI detects language, classifies emotion, selects the best story arc, and writes one personalized bridge sentence before the story begins. Story content is AI-translated on the fly for languages outside the core 6, with results cached. See [Conversational Entry Design](./plans/2026-03-30-conversational-entry-design.md).
+
 ---
 
 ## Repository Structure

@@ -1,0 +1,129 @@
+<svg viewBox="0 0 360 480" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <style>
+    @keyframes wave-shift-1 {
+      0%   { transform: translateX(0px);  opacity: 0.55; }
+      50%  { transform: translateX(-7px); opacity: 0.7;  }
+      100% { transform: translateX(0px);  opacity: 0.55; }
+    }
+    @keyframes wave-shift-2 {
+      0%   { transform: translateX(0px); opacity: 0.5; }
+      50%  { transform: translateX(8px); opacity: 0.65; }
+      100% { transform: translateX(0px); opacity: 0.5; }
+    }
+    @keyframes wave-shift-3 {
+      0%   { transform: translateX(0px);  opacity: 0.5; }
+      50%  { transform: translateX(-6px); opacity: 0.62; }
+      100% { transform: translateX(0px);  opacity: 0.5; }
+    }
+    @keyframes spray {
+      0%, 100% { opacity: 0.3; transform: translateY(0); }
+      40%      { opacity: 0.5; transform: translateY(-4px); }
+    }
+    @keyframes arm-raise {
+      0%   { transform: rotate(0deg);  opacity: 0; }
+      15%  { opacity: 1; }
+      60%  { transform: rotate(-8deg); }
+      100% { transform: rotate(0deg);  opacity: 1; }
+    }
+    @keyframes figure-still {
+      from { opacity: 0; transform: translateY(4px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes calm-reveal {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes huddled-reveal {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Waves animate — staggered, left side only */
+    #wave-1 { animation: wave-shift-1 2.8s ease-in-out infinite; }
+    #wave-2 { animation: wave-shift-2 2.4s ease-in-out 0.3s infinite; }
+    #wave-3 { animation: wave-shift-3 3.1s ease-in-out 0.6s infinite; }
+    #wave-4 { animation: wave-shift-1 2.6s ease-in-out 0.9s infinite; }
+    #wave-5 { animation: wave-shift-2 2.9s ease-in-out 0.2s infinite; }
+    #wave-6 { animation: wave-shift-3 3.3s ease-in-out 0.5s infinite; }
+    #spray-1 { animation: spray 2.2s ease-in-out 0.1s infinite; }
+    #spray-2 { animation: spray 2.5s ease-in-out 0.8s infinite; }
+    #spray-3 { animation: spray 2.1s ease-in-out 1.3s infinite; }
+
+    /* Calm lines are still — they don't animate */
+    #calm-lines { animation: calm-reveal 1.5s ease-out 0.5s both; }
+
+    /* Standing figure — arrives with authority, then holds still */
+    #standing-figure {
+      animation: figure-still 1.2s ease-out 0.3s both;
+    }
+    #raised-arm {
+      transform-box: fill-box;
+      transform-origin: 190px 334px;
+      animation: arm-raise 2s ease-out 1s both;
+    }
+
+    /* Huddled figures reveal with the scene */
+    #huddled { animation: huddled-reveal 1.8s ease-out 0.2s both; }
+  </style>
+
+  <rect width="360" height="480" fill="#0D0A0E"/>
+
+  <!-- LEFT: chaotic waves -->
+  <path id="wave-1" d="M0 248 C14 236 28 252 42 240 C56 228 68 248 80 238"  stroke="#D4C4A8" stroke-width="1.3"/>
+  <path id="wave-2" d="M0 268 C16 252 30 270 46 256 C60 244 74 264 88 252"  stroke="#D4C4A8" stroke-width="1.3"/>
+  <path id="wave-3" d="M0 290 C18 272 34 294 52 278 C66 265 78 285 90 272"  stroke="#D4C4A8" stroke-width="1.4"/>
+  <path id="wave-4" d="M0 314 C22 294 38 318 58 302 C74 288 84 310 94 298"  stroke="#D4C4A8" stroke-width="1.4"/>
+  <path id="wave-5" d="M0 340 C24 318 42 344 64 326 C78 314 86 338 98 326"  stroke="#D4C4A8" stroke-width="1.3"/>
+  <path id="wave-6" d="M0 366 C26 346 44 370 66 354 C80 342 90 362 100 350" stroke="#D4C4A8" stroke-width="1.2"/>
+
+  <!-- Spray / crash marks -->
+  <path id="spray-1" d="M24 230 C22 222 28 218 32 224" stroke="#D4C4A8" stroke-width="0.8"/>
+  <path id="spray-2" d="M56 238 C52 228 60 222 64 230" stroke="#D4C4A8" stroke-width="0.8"/>
+  <path id="spray-3" d="M18 308 C14 298 22 292 26 300" stroke="#D4C4A8" stroke-width="0.8"/>
+
+  <!-- RIGHT: calm flat lines (still, no animation) -->
+  <g id="calm-lines" stroke="#D4C4A8">
+    <line x1="272" y1="250" x2="360" y2="250" stroke-width="1"   opacity="0.3"/>
+    <line x1="266" y1="265" x2="360" y2="265" stroke-width="1"   opacity="0.28"/>
+    <line x1="270" y1="280" x2="360" y2="280" stroke-width="1"   opacity="0.26"/>
+    <line x1="268" y1="296" x2="360" y2="296" stroke-width="0.9" opacity="0.24"/>
+    <line x1="272" y1="312" x2="360" y2="312" stroke-width="0.9" opacity="0.22"/>
+    <line x1="270" y1="328" x2="360" y2="328" stroke-width="0.8" opacity="0.20"/>
+    <line x1="272" y1="344" x2="360" y2="344" stroke-width="0.8" opacity="0.18"/>
+    <line x1="272" y1="360" x2="360" y2="360" stroke-width="0.7" opacity="0.15"/>
+  </g>
+
+  <!-- Boat hull -->
+  <path d="M100 360 C110 376 130 384 180 386 C230 388 250 378 260 362" stroke="#D4C4A8" stroke-width="2" fill="#100C0F"/>
+  <path d="M100 360 L260 360" stroke="#D4C4A8" stroke-width="1.5"/>
+  <path d="M108 348 C120 344 150 342 180 342 C210 342 240 344 252 348" stroke="#D4C4A8" stroke-width="1.2" opacity="0.6"/>
+
+  <!-- Huddled crew at stern -->
+  <g id="huddled">
+    <circle cx="130" cy="332" r="8" stroke="#D4C4A8" stroke-width="1.2" fill="#0D0A0E"/>
+    <path d="M130 340 C126 348 124 354 124 360" stroke="#D4C4A8" stroke-width="1.2"/>
+    <path d="M124 354 C118 352 114 154 112 358" stroke="#D4C4A8" stroke-width="1" opacity="0.7"/>
+    <circle cx="150" cy="330" r="8" stroke="#D4C4A8" stroke-width="1.2" fill="#0D0A0E"/>
+    <path d="M150 338 C148 346 148 354 148 360" stroke="#D4C4A8" stroke-width="1.2"/>
+    <path d="M144 350 C138 350 134 352 132 356" stroke="#D4C4A8" stroke-width="1" opacity="0.7"/>
+  </g>
+
+  <!-- Standing figure — body is still -->
+  <g id="standing-figure">
+    <circle cx="190" cy="308" r="13" stroke="#D4C4A8" stroke-width="1.5" fill="#0D0A0E"/>
+    <line x1="190" y1="321" x2="190" y2="356" stroke="#D4C4A8" stroke-width="1.8"/>
+    <!-- Left arm — extended, commanding -->
+    <path d="M190 334 C178 336 168 334 158 338" stroke="#D4C4A8" stroke-width="1.4"/>
+    <!-- Legs -->
+    <path d="M190 356 C186 366 184 374 184 382" stroke="#D4C4A8" stroke-width="1.3"/>
+    <path d="M190 356 C194 366 196 374 196 382" stroke="#D4C4A8" stroke-width="1.3"/>
+  </g>
+
+  <!-- Raised arm — animates separately -->
+  <g id="raised-arm">
+    <path d="M190 334 C196 322 200 308 202 294 C204 282 204 270 202 260" stroke="#D4C4A8" stroke-width="1.5"/>
+    <line x1="202" y1="260" x2="197" y2="252" stroke="#D4C4A8" stroke-width="1" opacity="0.8"/>
+    <line x1="202" y1="260" x2="205" y2="252" stroke="#D4C4A8" stroke-width="1" opacity="0.8"/>
+    <line x1="202" y1="260" x2="210" y2="257" stroke="#D4C4A8" stroke-width="1" opacity="0.8"/>
+  </g>
+</svg>

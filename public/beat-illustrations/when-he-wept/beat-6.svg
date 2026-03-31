@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 300">
+  <defs>
+    <style>
+      @keyframes stoneTexturePulse {
+        0%, 100% { opacity: 0.15; }
+        50% { opacity: 0.25; }
+      }
+      @keyframes jesusStand {
+        0%, 100% { transform: scaleY(1); }
+        50% { transform: scaleY(1.012); }
+      }
+      @keyframes tombDark {
+        0%, 100% { opacity: 0.85; }
+        50% { opacity: 0.92; }
+      }
+      @keyframes faintGlow {
+        0%, 100% { opacity: 0.04; }
+        50% { opacity: 0.09; }
+      }
+    </style>
+  </defs>
+
+  <rect width="360" height="300" fill="#0D0A0E"/>
+
+  <!-- Stars -->
+  <circle cx="20" cy="18" r="0.7" fill="#D4C4A8" opacity="0.3"/>
+  <circle cx="80" cy="30" r="0.5" fill="#D4C4A8" opacity="0.25"/>
+  <circle cx="150" cy="15" r="0.8" fill="#D4C4A8" opacity="0.2"/>
+  <circle cx="320" cy="25" r="0.6" fill="#D4C4A8" opacity="0.28"/>
+  <circle cx="250" cy="20" r="0.4" fill="#D4C4A8" opacity="0.22"/>
+  <circle cx="340" cy="45" r="0.5" fill="#D4C4A8" opacity="0.18"/>
+
+  <!-- Rocky hillside / cliff face around tomb -->
+  <path d="M140 80 Q160 60 200 55 Q250 50 280 65 Q320 80 340 100 L340 240 L140 240Z" fill="#0D0A0E" stroke="#D4C4A8" stroke-width="0.8" opacity="0.4"/>
+  <!-- Rock texture lines -->
+  <path d="M155 90 Q170 85 185 88" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.15"/>
+  <path d="M200 65 Q220 62 240 68" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.12"/>
+  <path d="M260 72 Q280 78 295 85" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.12"/>
+  <path d="M145 110 Q165 105 175 112" fill="none" stroke="#D4C4A8" stroke-width="0.25" opacity="0.1"/>
+  <path d="M300 95 Q320 100 335 108" fill="none" stroke="#D4C4A8" stroke-width="0.25" opacity="0.1"/>
+  <path d="M160 130 Q175 127 190 132" fill="none" stroke="#D4C4A8" stroke-width="0.2" opacity="0.08"/>
+  <path d="M280 110 Q300 115 315 120" fill="none" stroke="#D4C4A8" stroke-width="0.2" opacity="0.08"/>
+  <path d="M150 155 Q170 150 180 157" fill="none" stroke="#D4C4A8" stroke-width="0.2" opacity="0.08"/>
+  <path d="M310 130 Q325 138 338 145" fill="none" stroke="#D4C4A8" stroke-width="0.2" opacity="0.08"/>
+  <!-- Cracks in rock -->
+  <path d="M210 60 L215 80 L212 95" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.12"/>
+  <path d="M270 70 L275 90 L272 105" fill="none" stroke="#D4C4A8" stroke-width="0.25" opacity="0.1"/>
+  <path d="M180 95 L178 115" fill="none" stroke="#D4C4A8" stroke-width="0.2" opacity="0.08"/>
+
+  <!-- TOMB ENTRANCE (dark cave mouth) -->
+  <path d="M200 120 Q200 100 230 95 Q260 90 270 100 Q280 110 280 130 Q280 155 270 170 L200 170 Q190 155 190 140 Q190 130 200 120Z" fill="#0D0A0E" stroke="#D4C4A8" stroke-width="1" opacity="0.5"/>
+  <!-- Inner darkness -->
+  <ellipse cx="238" cy="140" rx="32" ry="28" fill="#0D0A0E" opacity="0.9" style="animation: tombDark 6s ease-in-out infinite;"/>
+
+  <!-- THE STONE (heavy, circular, rolled partially aside) -->
+  <circle cx="195" cy="155" r="28" fill="#0D0A0E" stroke="#D4C4A8" stroke-width="1.2" opacity="0.5"/>
+  <!-- Stone texture -->
+  <path d="M180 145 Q190 140 200 145" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.15"/>
+  <path d="M175 155 Q185 150 195 155" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.12"/>
+  <path d="M185 165 Q195 160 205 165" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.12"/>
+  <path d="M178 150 Q188 148 198 152" fill="none" stroke="#D4C4A8" stroke-width="0.2" opacity="0.1"/>
+  <path d="M182 160 Q192 157 202 160" fill="none" stroke="#D4C4A8" stroke-width="0.2" opacity="0.1"/>
+  <!-- Stone weight shadow -->
+  <ellipse cx="195" cy="175" rx="25" ry="4" fill="#D4C4A8" opacity="0.04"/>
+
+  <!-- Ground at tomb -->
+  <line x1="140" y1="175" x2="340" y2="175" stroke="#D4C4A8" stroke-width="0.5" opacity="0.2"/>
+  <path d="M140 175 L0 240" fill="none" stroke="#D4C4A8" stroke-width="0.5" opacity="0.15"/>
+
+  <!-- Lower ground -->
+  <line x1="0" y1="240" x2="360" y2="240" stroke="#D4C4A8" stroke-width="0.8" opacity="0.3"/>
+  <!-- Stones/rubble near tomb -->
+  <ellipse cx="220" cy="177" rx="3" ry="1.5" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.15"/>
+  <ellipse cx="250" cy="178" rx="2" ry="1" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.12"/>
+  <circle cx="265" cy="177" r="1.5" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.12"/>
+  <ellipse cx="175" cy="178" rx="2.5" ry="1" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.1"/>
+  <!-- Path down from tomb -->
+  <path d="M160 175 Q120 200 80 230 Q50 240 20 240" fill="none" stroke="#D4C4A8" stroke-width="0.4" opacity="0.15"/>
+  <path d="M165 178 Q125 204 85 233 Q55 242 25 243" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.1"/>
+
+  <!-- Small bush near tomb -->
+  <path d="M310 170 Q315 160 320 170" fill="none" stroke="#D4C4A8" stroke-width="0.4" opacity="0.18"/>
+  <path d="M315 170 Q318 158 322 170" fill="none" stroke="#D4C4A8" stroke-width="0.4" opacity="0.15"/>
+  <path d="M308 170 Q312 162 316 170" fill="none" stroke="#D4C4A8" stroke-width="0.4" opacity="0.15"/>
+
+  <!-- JESUS standing before the tomb -->
+  <g style="transform-box: fill-box; transform-origin: 50% 100%; animation: jesusStand 5s ease-in-out infinite;">
+    <!-- Faint glow around him -->
+    <circle cx="100" cy="210" r="30" fill="#C4A66A" opacity="0.03" style="animation: faintGlow 4s ease-in-out infinite;"/>
+
+    <!-- Head -->
+    <circle cx="100" cy="192" r="14" fill="#0D0A0E" stroke="#D4C4A8" stroke-width="1.2"/>
+    <!-- Hair/covering -->
+    <path d="M87 188 Q100 176 113 188" fill="none" stroke="#D4C4A8" stroke-width="0.8"/>
+    <path d="M87 188 Q83 202 85 212" fill="none" stroke="#D4C4A8" stroke-width="0.6" opacity="0.45"/>
+    <path d="M113 188 Q117 202 115 212" fill="none" stroke="#D4C4A8" stroke-width="0.6" opacity="0.45"/>
+    <!-- Eyes (open, looking at tomb) -->
+    <circle cx="105" cy="191" r="1.2" fill="#D4C4A8" opacity="0.7"/>
+    <!-- Brow (determined) -->
+    <path d="M102 188 Q105 187 108 189" fill="none" stroke="#D4C4A8" stroke-width="0.4"/>
+    <!-- Nose -->
+    <line x1="103" y1="192" x2="104" y2="196" stroke="#D4C4A8" stroke-width="0.5"/>
+    <!-- Mouth -->
+    <line x1="100" y1="199" x2="106" y2="199" stroke="#D4C4A8" stroke-width="0.4" opacity="0.45"/>
+    <!-- Beard -->
+    <path d="M96 199 Q101 207 108 199" fill="none" stroke="#D4C4A8" stroke-width="0.5" opacity="0.35"/>
+
+    <!-- Neck -->
+    <line x1="100" y1="206" x2="100" y2="212" stroke="#D4C4A8" stroke-width="1.2"/>
+    <!-- Body upright, facing tomb -->
+    <path d="M100 212 Q101 228 100 238" fill="none" stroke="#D4C4A8" stroke-width="1.2"/>
+    <!-- Robe -->
+    <path d="M92 214 Q86 228 84 240" fill="none" stroke="#D4C4A8" stroke-width="0.6" opacity="0.38"/>
+    <path d="M108 214 Q114 228 116 240" fill="none" stroke="#D4C4A8" stroke-width="0.6" opacity="0.38"/>
+    <path d="M90 222 Q100 225 110 222" fill="none" stroke="#D4C4A8" stroke-width="0.35" opacity="0.2"/>
+    <path d="M88 234 Q100 237 112 234" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.15"/>
+
+    <!-- Arms at sides, slightly forward -->
+    <path d="M98 215 Q88 224 84 230" fill="none" stroke="#D4C4A8" stroke-width="1"/>
+    <line x1="84" y1="230" x2="81" y2="229" stroke="#D4C4A8" stroke-width="0.5"/>
+    <line x1="84" y1="230" x2="82" y2="232" stroke="#D4C4A8" stroke-width="0.5"/>
+    <path d="M102 215 Q112 224 116 230" fill="none" stroke="#D4C4A8" stroke-width="1"/>
+    <line x1="116" y1="230" x2="119" y2="229" stroke="#D4C4A8" stroke-width="0.5"/>
+    <line x1="116" y1="230" x2="118" y2="232" stroke="#D4C4A8" stroke-width="0.5"/>
+
+    <!-- Legs -->
+    <line x1="99" y1="238" x2="93" y2="240" stroke="#D4C4A8" stroke-width="1"/>
+    <line x1="101" y1="238" x2="107" y2="240" stroke="#D4C4A8" stroke-width="1"/>
+    <line x1="93" y1="240" x2="89" y2="240" stroke="#D4C4A8" stroke-width="0.7"/>
+    <line x1="107" y1="240" x2="111" y2="240" stroke="#D4C4A8" stroke-width="0.7"/>
+  </g>
+
+  <!-- Shadow -->
+  <ellipse cx="100" cy="241" rx="18" ry="2" fill="#D4C4A8" opacity="0.04"/>
+
+  <!-- Text -->
+  <text x="180" y="275" text-anchor="middle" fill="#D4C4A8" font-family="serif" font-size="11" opacity="0.5" letter-spacing="3">AT THE TOMB</text>
+</svg>

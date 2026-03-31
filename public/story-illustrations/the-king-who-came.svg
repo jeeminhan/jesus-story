@@ -1,0 +1,97 @@
+<svg viewBox="0 0 360 480" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <style>
+    @keyframes star-pulse {
+      0%, 100% { transform: scale(1);    opacity: 0.7; }
+      50%      { transform: scale(1.12); opacity: 1;   }
+    }
+    @keyframes ray-breathe {
+      0%, 100% { opacity: 0.9; stroke-width: 1.2; }
+      50%      { opacity: 0.5; stroke-width: 0.8; }
+    }
+    @keyframes ray-alt {
+      0%, 100% { opacity: 0.7; }
+      50%      { opacity: 0.3; }
+    }
+    @keyframes glow-pulse {
+      0%, 100% { opacity: 0.04; r: 48; }
+      50%      { opacity: 0.09; r: 58; }
+    }
+    @keyframes glow-inner {
+      0%, 100% { opacity: 0.06; r: 24; }
+      50%      { opacity: 0.12; r: 30; }
+    }
+    @keyframes star-ray-descend {
+      0%   { opacity: 0;    stroke-dashoffset: 1; }
+      40%  { opacity: 0.12; }
+      100% { opacity: 0.12; stroke-dashoffset: 0; }
+    }
+    @keyframes child-glow {
+      0%, 100% { opacity: 0.06; }
+      50%      { opacity: 0.14; }
+    }
+    #star-shape {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: star-pulse 4s ease-in-out infinite;
+    }
+    #glow-outer { animation: glow-pulse 4s ease-in-out infinite; }
+    #glow-inner { animation: glow-inner 4s ease-in-out 0.5s infinite; }
+
+    .ray-main { animation: ray-breathe 4s ease-in-out infinite; }
+    .ray-main:nth-child(2) { animation-delay: 0.5s; }
+    .ray-main:nth-child(3) { animation-delay: 1s; }
+    .ray-main:nth-child(4) { animation-delay: 1.5s; }
+    .ray-diag { animation: ray-alt 4s ease-in-out infinite; }
+    .ray-diag:nth-child(2) { animation-delay: 0.8s; }
+    .ray-diag:nth-child(3) { animation-delay: 1.6s; }
+    .ray-diag:nth-child(4) { animation-delay: 2.4s; }
+
+    #star-ray-down {
+      pathLength: 1;
+      stroke-dasharray: 1;
+      animation: star-ray-descend 3s ease-out 0.8s forwards;
+    }
+    #child-glow { animation: child-glow 5s ease-in-out 2s infinite; }
+  </style>
+
+  <rect width="360" height="480" fill="#0D0A0E"/>
+
+  <!-- Star glow halos -->
+  <circle id="glow-outer" cx="180" cy="108" r="48" fill="#C4A66A"/>
+  <circle id="glow-inner" cx="180" cy="108" r="24" fill="#C4A66A"/>
+
+  <!-- Star rays — cardinal -->
+  <g stroke="#C4A66A" stroke-linecap="round">
+    <line class="ray-main" x1="180" y1="68"  x2="180" y2="52"  stroke-width="1.2"/>
+    <line class="ray-main" x1="180" y1="148" x2="180" y2="164" stroke-width="1.2"/>
+    <line class="ray-main" x1="140" y1="108" x2="124" y2="108" stroke-width="1.2"/>
+    <line class="ray-main" x1="220" y1="108" x2="236" y2="108" stroke-width="1.2"/>
+    <!-- Diagonal rays -->
+    <line class="ray-diag" x1="152" y1="80"  x2="141" y2="69"  stroke-width="0.9"/>
+    <line class="ray-diag" x1="208" y1="80"  x2="219" y2="69"  stroke-width="0.9"/>
+    <line class="ray-diag" x1="152" y1="136" x2="141" y2="147" stroke-width="0.9"/>
+    <line class="ray-diag" x1="208" y1="136" x2="219" y2="147" stroke-width="0.9"/>
+  </g>
+
+  <!-- Star center shape -->
+  <path id="star-shape" d="M180 86 L184 100 L196 96 L188 108 L196 120 L184 116 L180 130 L176 116 L164 120 L172 108 L164 96 L176 100Z" stroke="#C4A66A" stroke-width="1.2" fill="#C4A66A" opacity="0.7"/>
+
+  <!-- Descending ray from star to manger -->
+  <line id="star-ray-down" x1="180" y1="164" x2="180" y2="376" stroke="#C4A66A" stroke-width="0.6"/>
+
+  <!-- Manger trough -->
+  <path d="M116 380 L102 430 L258 430 L244 380Z" stroke="#D4C4A8" stroke-width="1.5" fill="#100C0F"/>
+  <path d="M124 382 L114 422 L246 422 L236 382Z" stroke="#D4C4A8" stroke-width="0.8" fill="#0D0A0E" opacity="0.5"/>
+
+  <!-- Hay strokes -->
+  <line x1="136" y1="390" x2="150" y2="384" stroke="#D4C4A8" stroke-width="0.8" opacity="0.35"/>
+  <line x1="155" y1="392" x2="168" y2="386" stroke="#D4C4A8" stroke-width="0.8" opacity="0.35"/>
+  <line x1="190" y1="392" x2="204" y2="386" stroke="#D4C4A8" stroke-width="0.8" opacity="0.35"/>
+  <line x1="210" y1="390" x2="222" y2="384" stroke="#D4C4A8" stroke-width="0.8" opacity="0.35"/>
+
+  <!-- The child -->
+  <circle id="child-glow" cx="180" cy="406" r="30" fill="#C4A66A"/>
+  <ellipse cx="180" cy="406" rx="38" ry="14" fill="#110D10" stroke="#D4C4A8" stroke-width="1.3"/>
+  <path d="M150 406 C158 398 170 396 180 397 C190 396 202 398 210 406" stroke="#D4C4A8" stroke-width="0.8" opacity="0.4"/>
+  <circle cx="155" cy="405" r="7" fill="#110D10" stroke="#D4C4A8" stroke-width="1"/>
+</svg>

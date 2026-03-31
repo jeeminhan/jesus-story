@@ -1,0 +1,171 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 300">
+  <defs>
+    <style>
+      @keyframes mournerSway {
+        0%, 100% { transform: rotate(0deg); }
+        50% { transform: rotate(-2.5deg); }
+      }
+      @keyframes mournerSway2 {
+        0%, 100% { transform: rotate(0deg); }
+        50% { transform: rotate(2deg); }
+      }
+      @keyframes tearFall {
+        0% { transform: translateY(0); opacity: 0.6; }
+        100% { transform: translateY(14px); opacity: 0; }
+      }
+      @keyframes candleFlicker {
+        0%, 100% { opacity: 0.25; }
+        30% { opacity: 0.4; }
+        70% { opacity: 0.2; }
+      }
+    </style>
+  </defs>
+
+  <rect width="360" height="300" fill="#0D0A0E"/>
+
+  <!-- Stars -->
+  <circle cx="320" cy="40" r="0.7" fill="#D4C4A8" opacity="0.25"/>
+  <circle cx="60" cy="30" r="0.5" fill="#D4C4A8" opacity="0.3"/>
+  <circle cx="180" cy="25" r="0.6" fill="#D4C4A8" opacity="0.28"/>
+  <circle cx="250" cy="35" r="0.8" fill="#D4C4A8" opacity="0.2"/>
+  <circle cx="15" cy="50" r="0.4" fill="#D4C4A8" opacity="0.22"/>
+
+  <!-- House structure -->
+  <rect x="60" y="100" width="240" height="140" fill="#0D0A0E" stroke="#D4C4A8" stroke-width="1" opacity="0.5"/>
+  <!-- Stone block texture (horizontal) -->
+  <line x1="60" y1="120" x2="300" y2="120" stroke="#D4C4A8" stroke-width="0.3" opacity="0.12"/>
+  <line x1="60" y1="140" x2="300" y2="140" stroke="#D4C4A8" stroke-width="0.3" opacity="0.12"/>
+  <line x1="60" y1="160" x2="300" y2="160" stroke="#D4C4A8" stroke-width="0.3" opacity="0.12"/>
+  <line x1="60" y1="180" x2="300" y2="180" stroke="#D4C4A8" stroke-width="0.3" opacity="0.12"/>
+  <line x1="60" y1="200" x2="300" y2="200" stroke="#D4C4A8" stroke-width="0.3" opacity="0.12"/>
+  <line x1="60" y1="220" x2="300" y2="220" stroke="#D4C4A8" stroke-width="0.3" opacity="0.12"/>
+  <!-- Vertical joints offset -->
+  <line x1="100" y1="100" x2="100" y2="120" stroke="#D4C4A8" stroke-width="0.15" opacity="0.08"/>
+  <line x1="140" y1="100" x2="140" y2="120" stroke="#D4C4A8" stroke-width="0.15" opacity="0.08"/>
+  <line x1="200" y1="100" x2="200" y2="120" stroke="#D4C4A8" stroke-width="0.15" opacity="0.08"/>
+  <line x1="260" y1="100" x2="260" y2="120" stroke="#D4C4A8" stroke-width="0.15" opacity="0.08"/>
+  <line x1="120" y1="120" x2="120" y2="140" stroke="#D4C4A8" stroke-width="0.15" opacity="0.08"/>
+  <line x1="180" y1="120" x2="180" y2="140" stroke="#D4C4A8" stroke-width="0.15" opacity="0.08"/>
+  <line x1="240" y1="120" x2="240" y2="140" stroke="#D4C4A8" stroke-width="0.15" opacity="0.08"/>
+
+  <!-- Roof -->
+  <path d="M50 100 L180 60 L310 100" fill="none" stroke="#D4C4A8" stroke-width="1" opacity="0.45"/>
+  <path d="M55 100 L180 63 L305 100" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.15"/>
+
+  <!-- Doorway arch -->
+  <path d="M155 240 L155 165 Q180 145 205 165 L205 240" fill="none" stroke="#D4C4A8" stroke-width="1" opacity="0.45"/>
+  <!-- Arch keystone detail -->
+  <rect x="176" y="146" width="8" height="6" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.15"/>
+
+  <!-- Window left -->
+  <rect x="80" y="125" width="22" height="28" fill="none" stroke="#D4C4A8" stroke-width="0.6" opacity="0.3"/>
+  <line x1="91" y1="125" x2="91" y2="153" stroke="#D4C4A8" stroke-width="0.3" opacity="0.2"/>
+  <line x1="80" y1="139" x2="102" y2="139" stroke="#D4C4A8" stroke-width="0.3" opacity="0.2"/>
+
+  <!-- Window right -->
+  <rect x="255" y="125" width="22" height="28" fill="none" stroke="#D4C4A8" stroke-width="0.6" opacity="0.3"/>
+  <line x1="266" y1="125" x2="266" y2="153" stroke="#D4C4A8" stroke-width="0.3" opacity="0.2"/>
+  <line x1="255" y1="139" x2="277" y2="139" stroke="#D4C4A8" stroke-width="0.3" opacity="0.2"/>
+
+  <!-- Candle glow in doorway -->
+  <circle cx="180" cy="192" r="18" fill="#C4A66A" opacity="0.05" style="animation: candleFlicker 3s ease-in-out infinite;"/>
+  <circle cx="180" cy="192" r="9" fill="#C4A66A" opacity="0.08" style="animation: candleFlicker 2.5s ease-in-out infinite 0.5s;"/>
+  <circle cx="180" cy="191" r="2.5" fill="#C4A66A" opacity="0.25" style="animation: candleFlicker 2s ease-in-out infinite;"/>
+  <line x1="180" y1="194" x2="180" y2="206" stroke="#D4C4A8" stroke-width="0.5" opacity="0.25"/>
+
+  <!-- Ground -->
+  <line x1="0" y1="240" x2="360" y2="240" stroke="#D4C4A8" stroke-width="0.8" opacity="0.35"/>
+  <line x1="20" y1="243" x2="27" y2="243" stroke="#D4C4A8" stroke-width="0.3" opacity="0.12"/>
+  <line x1="330" y1="243" x2="338" y2="243" stroke="#D4C4A8" stroke-width="0.3" opacity="0.12"/>
+  <ellipse cx="40" cy="243" rx="2.5" ry="1" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.12"/>
+  <ellipse cx="320" cy="243" rx="2" ry="1" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.12"/>
+  <!-- Steps at doorway -->
+  <line x1="150" y1="243" x2="210" y2="243" stroke="#D4C4A8" stroke-width="0.4" opacity="0.2"/>
+  <line x1="147" y1="246" x2="213" y2="246" stroke="#D4C4A8" stroke-width="0.4" opacity="0.15"/>
+
+  <!-- JESUS approaching from left -->
+  <g>
+    <circle cx="42" cy="197" r="13" fill="#0D0A0E" stroke="#D4C4A8" stroke-width="1.2"/>
+    <path d="M30 193 Q42 182 54 193" fill="none" stroke="#D4C4A8" stroke-width="0.8"/>
+    <path d="M30 193 Q27 207 29 213" fill="none" stroke="#D4C4A8" stroke-width="0.6" opacity="0.45"/>
+    <path d="M54 193 Q57 207 55 213" fill="none" stroke="#D4C4A8" stroke-width="0.6" opacity="0.45"/>
+    <circle cx="47" cy="196" r="1.1" fill="#D4C4A8" opacity="0.7"/>
+    <line x1="45" y1="198" x2="46" y2="201" stroke="#D4C4A8" stroke-width="0.5"/>
+    <line x1="40" y1="203" x2="46" y2="203" stroke="#D4C4A8" stroke-width="0.4" opacity="0.45"/>
+    <path d="M38 203 Q42 211 48 203" fill="none" stroke="#D4C4A8" stroke-width="0.5" opacity="0.35"/>
+    <line x1="42" y1="210" x2="42" y2="216" stroke="#D4C4A8" stroke-width="1.2"/>
+    <path d="M42 216 Q44 228 42 238" fill="none" stroke="#D4C4A8" stroke-width="1.2"/>
+    <path d="M35 218 Q31 230 29 240" fill="none" stroke="#D4C4A8" stroke-width="0.6" opacity="0.4"/>
+    <path d="M49 218 Q53 230 55 240" fill="none" stroke="#D4C4A8" stroke-width="0.6" opacity="0.4"/>
+    <path d="M41 219 Q32 226 28 232" fill="none" stroke="#D4C4A8" stroke-width="1"/>
+    <path d="M43 219 Q52 226 56 232" fill="none" stroke="#D4C4A8" stroke-width="1"/>
+    <line x1="41" y1="238" x2="36" y2="240" stroke="#D4C4A8" stroke-width="1"/>
+    <line x1="43" y1="238" x2="48" y2="240" stroke="#D4C4A8" stroke-width="1"/>
+    <line x1="36" y1="240" x2="32" y2="240" stroke="#D4C4A8" stroke-width="0.7"/>
+    <line x1="48" y1="240" x2="52" y2="240" stroke="#D4C4A8" stroke-width="0.7"/>
+  </g>
+
+  <!-- MOURNER 1 (in doorway) -->
+  <g style="transform-box: fill-box; transform-origin: 50% 100%; animation: mournerSway 3.2s ease-in-out infinite;">
+    <circle cx="175" cy="200" r="8" fill="#0D0A0E" stroke="#D4C4A8" stroke-width="0.8" opacity="0.55"/>
+    <path d="M168 197 Q175 190 182 197" fill="none" stroke="#D4C4A8" stroke-width="0.5" opacity="0.4"/>
+    <path d="M173 202 Q175 204 177 202" fill="none" stroke="#D4C4A8" stroke-width="0.4" opacity="0.35"/>
+    <line x1="175" y1="208" x2="175" y2="232" stroke="#D4C4A8" stroke-width="0.8" opacity="0.45"/>
+    <path d="M170 212 Q166 220 164 230" fill="none" stroke="#D4C4A8" stroke-width="0.5" opacity="0.3"/>
+    <path d="M180 212 Q184 220 186 230" fill="none" stroke="#D4C4A8" stroke-width="0.5" opacity="0.3"/>
+    <path d="M174 214 Q168 220 166 224" fill="none" stroke="#D4C4A8" stroke-width="0.6" opacity="0.4"/>
+    <path d="M176 214 Q182 220 184 224" fill="none" stroke="#D4C4A8" stroke-width="0.6" opacity="0.4"/>
+    <circle cx="178" cy="204" r="0.8" fill="#D4C4A8" opacity="0" style="animation: tearFall 2.8s ease-in infinite;"/>
+  </g>
+
+  <!-- MOURNER 2 (right of door) -->
+  <g style="transform-box: fill-box; transform-origin: 50% 100%; animation: mournerSway2 3.6s ease-in-out infinite;">
+    <circle cx="222" cy="202" r="9" fill="#0D0A0E" stroke="#D4C4A8" stroke-width="0.8" opacity="0.5"/>
+    <path d="M214 199 Q222 192 230 199" fill="none" stroke="#D4C4A8" stroke-width="0.5" opacity="0.35"/>
+    <path d="M219 204 Q222 206 225 204" fill="none" stroke="#D4C4A8" stroke-width="0.4" opacity="0.3"/>
+    <line x1="222" y1="211" x2="222" y2="236" stroke="#D4C4A8" stroke-width="0.8" opacity="0.45"/>
+    <path d="M217 215 Q212 224 210 234" fill="none" stroke="#D4C4A8" stroke-width="0.5" opacity="0.28"/>
+    <path d="M227 215 Q232 224 234 234" fill="none" stroke="#D4C4A8" stroke-width="0.5" opacity="0.28"/>
+    <path d="M220 217 Q214 222 212 227" fill="none" stroke="#D4C4A8" stroke-width="0.6" opacity="0.4"/>
+    <path d="M224 217 Q230 222 232 227" fill="none" stroke="#D4C4A8" stroke-width="0.6" opacity="0.4"/>
+  </g>
+
+  <!-- MOURNER 3 (left of door, hunched) -->
+  <g style="transform-box: fill-box; transform-origin: 50% 100%; animation: mournerSway 4s ease-in-out infinite 0.5s;">
+    <circle cx="128" cy="207" r="8" fill="#0D0A0E" stroke="#D4C4A8" stroke-width="0.8" opacity="0.45"/>
+    <path d="M121 204 Q128 198 135 204" fill="none" stroke="#D4C4A8" stroke-width="0.5" opacity="0.3"/>
+    <path d="M126 209 Q128 211 130 209" fill="none" stroke="#D4C4A8" stroke-width="0.4" opacity="0.25"/>
+    <line x1="128" y1="215" x2="128" y2="236" stroke="#D4C4A8" stroke-width="0.8" opacity="0.4"/>
+    <path d="M123 218 Q118 226 116 236" fill="none" stroke="#D4C4A8" stroke-width="0.5" opacity="0.22"/>
+    <path d="M126 220 Q122 225 120 229" fill="none" stroke="#D4C4A8" stroke-width="0.6" opacity="0.35"/>
+    <path d="M130 220 Q134 225 136 229" fill="none" stroke="#D4C4A8" stroke-width="0.6" opacity="0.35"/>
+    <circle cx="131" cy="211" r="0.7" fill="#D4C4A8" opacity="0" style="animation: tearFall 3.2s ease-in infinite 1s;"/>
+  </g>
+
+  <!-- MOURNER 4 (far right) -->
+  <g style="transform-box: fill-box; transform-origin: 50% 100%; animation: mournerSway2 3.4s ease-in-out infinite 0.8s;">
+    <circle cx="270" cy="210" r="7" fill="#0D0A0E" stroke="#D4C4A8" stroke-width="0.6" opacity="0.35"/>
+    <line x1="270" y1="217" x2="270" y2="237" stroke="#D4C4A8" stroke-width="0.7" opacity="0.3"/>
+    <path d="M266 220 Q263 226 262 232" fill="none" stroke="#D4C4A8" stroke-width="0.5" opacity="0.22"/>
+    <path d="M274 220 Q277 226 278 232" fill="none" stroke="#D4C4A8" stroke-width="0.5" opacity="0.22"/>
+    <path d="M268 221 Q264 226 262 229" fill="none" stroke="#D4C4A8" stroke-width="0.5" opacity="0.25"/>
+    <path d="M272 221 Q276 226 278 229" fill="none" stroke="#D4C4A8" stroke-width="0.5" opacity="0.25"/>
+  </g>
+
+  <!-- MOURNER 5 (background, smaller) -->
+  <g style="transform-box: fill-box; transform-origin: 50% 100%; animation: mournerSway 3.8s ease-in-out infinite 1.2s;">
+    <circle cx="98" cy="212" r="6" fill="#0D0A0E" stroke="#D4C4A8" stroke-width="0.5" opacity="0.3"/>
+    <line x1="98" y1="218" x2="98" y2="236" stroke="#D4C4A8" stroke-width="0.6" opacity="0.25"/>
+    <path d="M95 221 Q92 227 91 232" fill="none" stroke="#D4C4A8" stroke-width="0.4" opacity="0.18"/>
+    <path d="M101 221 Q104 227 105 232" fill="none" stroke="#D4C4A8" stroke-width="0.4" opacity="0.18"/>
+  </g>
+
+  <!-- MOURNER 6 (tiny, background) -->
+  <g style="transform-box: fill-box; transform-origin: 50% 100%; animation: mournerSway2 4.2s ease-in-out infinite 1.5s;">
+    <circle cx="245" cy="214" r="5" fill="#0D0A0E" stroke="#D4C4A8" stroke-width="0.4" opacity="0.25"/>
+    <line x1="245" y1="219" x2="245" y2="236" stroke="#D4C4A8" stroke-width="0.5" opacity="0.2"/>
+  </g>
+
+  <!-- Text -->
+  <text x="180" y="275" text-anchor="middle" fill="#D4C4A8" font-family="serif" font-size="11" opacity="0.5" letter-spacing="3">ARRIVAL TOO LATE</text>
+</svg>

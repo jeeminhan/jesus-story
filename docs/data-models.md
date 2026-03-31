@@ -157,6 +157,76 @@ Form submissions from readers who want to connect with a local community.
 
 ---
 
+### `stories` (Skeleton Model)
+
+Story skeletons for AI-generated contextualized narratives. See [Conversational Entry Design](./plans/2026-03-30-conversational-entry-design.md).
+
+| Column          | Type        | Constraints             | Description                              |
+|-----------------|-------------|-------------------------|------------------------------------------|
+| `id`            | uuid        | PK                      | Primary key                              |
+| `slug`          | text        | UNIQUE, NOT NULL        | URL-safe identifier                      |
+| `emotional_key` | text        | NOT NULL                | Emotion this story maps to               |
+| `gospel_source` | text        | NOT NULL                | Scripture reference (e.g. "John 11:1-44")|
+| `title`         | text        | NOT NULL                | English canonical title                  |
+| `tagline`       | text        | NOT NULL                | Short description                        |
+| `guardrails`    | text        | NOT NULL                | MUST/MUST NOT constraints for AI         |
+| `tone_guidance` | text        | NOT NULL                | How to adjust tone per emotion           |
+| `is_published`  | boolean     | NOT NULL, default false | Controls visibility                      |
+| `created_at`    | timestamptz | NOT NULL, default now() | Creation timestamp                       |
+
+---
+
+### `story_beats`
+
+Ordered plot points within a story. AI generates prose for each beat.
+
+| Column             | Type        | Constraints                           | Description                                |
+|--------------------|-------------|---------------------------------------|--------------------------------------------|
+| `id`               | uuid        | PK                                    | Primary key                                |
+| `story_id`         | uuid        | FK → stories(id) ON DELETE CASCADE    | Parent story                               |
+| `order`            | int         | NOT NULL                              | Beat sequence number                       |
+| `beat_summary`     | text        | NOT NULL                              | Short plot point ("Jesus weeps")           |
+| `beat_detail`      | text        | NOT NULL                              | Fuller context for AI prompt               |
+| `illustration_url` | text        | NULLABLE                              | Static illustration asset path             |
+| `illustration_alt` | text        | NULLABLE                              | Accessibility description                  |
+| `visual_context`   | text        | NULLABLE                              | Description for AI prompt alignment        |
+| `is_start`         | boolean     | NOT NULL, default false               | Entry beat of the story                    |
+| `is_end`           | boolean     | NOT NULL, default false               | Terminal beat                              |
+| `created_at`       | timestamptz | NOT NULL, default now()               | Creation timestamp                         |
+
+**Unique:** `(story_id, order)`
+
+---
+
+### `beat_choices`
+
+Directed edges in the beat graph. AI generates choice labels from hints.
+
+| Column         | Type | Constraints                              | Description                          |
+|----------------|------|------------------------------------------|--------------------------------------|
+| `id`           | uuid | PK                                       | Primary key                          |
+| `beat_id`      | uuid | FK → story_beats(id) ON DELETE CASCADE   | Source beat                          |
+| `next_beat_id` | uuid | FK → story_beats(id)                     | Destination beat                     |
+| `choice_hint`  | text | NOT NULL                                 | Hint for AI to generate label        |
+| `order`        | int  | NOT NULL, default 0                      | Display order                        |
+
+---
+
+### `entry_logs`
+
+Logs conversational entry submissions for analytics.
+
+| Column         | Type        | Constraints             | Description                    |
+|----------------|-------------|-------------------------|--------------------------------|
+| `id`           | uuid        | PK                      | Primary key                    |
+| `user_input`   | text        | NOT NULL                | Raw text the user typed        |
+| `detected_lang`| text        | NOT NULL                | Detected language code         |
+| `emotional_key`| text        | NOT NULL                | Classified emotion             |
+| `arc_slug`     | text        | NOT NULL                | Selected story slug            |
+| `created_at`   | timestamptz | NOT NULL, default now() | Submission timestamp           |
+
+---
+
 ## TypeScript Types
 
 Defined in `src/lib/types.ts`:

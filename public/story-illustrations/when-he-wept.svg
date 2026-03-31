@@ -1,0 +1,56 @@
+<svg viewBox="0 0 360 480" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <style>
+    @keyframes grief-sway {
+      0%, 100% { transform: rotate(0deg); }
+      30%       { transform: rotate(-1.8deg); }
+      70%       { transform: rotate(1.1deg); }
+    }
+    @keyframes tear-fall {
+      0%        { opacity: 0;    transform: translateY(0px); }
+      12%       { opacity: 0.65; transform: translateY(0px); }
+      65%       { opacity: 0.5;  transform: translateY(9px); }
+      85%, 100% { opacity: 0;    transform: translateY(16px); }
+    }
+    @keyframes tear-fall-2 {
+      0%, 22%   { opacity: 0;    transform: translateY(0px); }
+      36%       { opacity: 0.42; transform: translateY(0px); }
+      72%       { opacity: 0.32; transform: translateY(11px); }
+      90%, 100% { opacity: 0;    transform: translateY(18px); }
+    }
+    @keyframes stone-breathe {
+      0%, 100% { opacity: 1; }
+      50%      { opacity: 0.88; }
+    }
+    #grief-figure {
+      transform-box: fill-box;
+      transform-origin: 50% 0%;
+      animation: grief-sway 9s ease-in-out infinite;
+    }
+    #tear-1 { animation: tear-fall   5.5s ease-in 0.6s  infinite; }
+    #tear-2 { animation: tear-fall-2 5.5s ease-in 2.1s  infinite; }
+    #stone  { animation: stone-breathe 12s ease-in-out infinite; }
+  </style>
+
+  <rect width="360" height="480" fill="#0D0A0E"/>
+
+  <!-- Ground -->
+  <line x1="20" y1="392" x2="340" y2="392" stroke="#D4C4A8" stroke-width="0.8" opacity="0.2"/>
+
+  <!-- Sealed tomb stone -->
+  <g id="stone">
+    <circle cx="268" cy="328" r="150" fill="#100C0F" stroke="#D4C4A8" stroke-width="1.5"/>
+    <line x1="268" y1="182" x2="268" y2="392" stroke="#D4C4A8" stroke-width="0.8" opacity="0.3"/>
+  </g>
+
+  <!-- Grieving figure -->
+  <g id="grief-figure">
+    <circle cx="102" cy="260" r="17" stroke="#D4C4A8" stroke-width="1.5" fill="#0D0A0E"/>
+    <path d="M102 277 C 100 296 95 318 88 348 C 86 362 86 376 88 392" stroke="#D4C4A8" stroke-width="2"/>
+    <path d="M97 288 C 84 296 70 308 58 326 C 54 338 56 360 60 376"   stroke="#D4C4A8" stroke-width="1.5"/>
+    <path d="M108 288 C 118 298 124 314 122 334 C 120 352 114 368 110 382" stroke="#D4C4A8" stroke-width="1.5"/>
+  </g>
+
+  <!-- Tears -->
+  <path id="tear-1" d="M93 272 C92 276 91 281 92 284 C93 287 96 285 96 282 C96 278 95 273 93 272Z"  stroke="#D4C4A8" stroke-width="0.8"/>
+  <path id="tear-2" d="M101 275 C100 279 99 284 100 287 C101 290 104 288 104 285 C104 281 103 276 101 275Z" stroke="#D4C4A8" stroke-width="0.8"/>
+</svg>

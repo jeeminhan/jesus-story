@@ -1,0 +1,102 @@
+<svg viewBox="0 0 360 480" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <style>
+    @keyframes path-draw {
+      from { stroke-dashoffset: 1; opacity: 0.2; }
+      to   { stroke-dashoffset: 0; opacity: 0.35; }
+    }
+    @keyframes path-draw-fade {
+      from { stroke-dashoffset: 1; opacity: 0.1; }
+      to   { stroke-dashoffset: 0; opacity: 0.15; }
+    }
+    @keyframes figure-reveal {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes arm-beckon {
+      0%, 100% { transform: rotate(0deg); }
+      40%      { transform: rotate(-6deg); }
+      70%      { transform: rotate(3deg); }
+    }
+    @keyframes walkers-approach {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes hand-open {
+      0%, 100% { transform: scale(1); opacity: 0.7; }
+      45%      { transform: scale(1.15); opacity: 1; }
+    }
+
+    #path-left  { pathLength: 1; stroke-dasharray: 1; animation: path-draw 2.5s ease-out forwards; }
+    #path-right { pathLength: 1; stroke-dasharray: 1; animation: path-draw 2.5s ease-out 0.3s forwards; opacity: 0.2; }
+    #path-fade-l { pathLength: 1; stroke-dasharray: 1; animation: path-draw-fade 2.5s ease-out 0.5s forwards; opacity: 0.1; }
+    #path-fade-r { pathLength: 1; stroke-dasharray: 1; animation: path-draw-fade 2.5s ease-out 0.7s forwards; opacity: 0.1; }
+
+    #standing-figure {
+      animation: figure-reveal 1.2s ease-out 1.5s both;
+    }
+    #left-arm {
+      transform-box: fill-box;
+      transform-origin: 100% 50%;
+      animation: arm-beckon 5s ease-in-out 2.5s infinite;
+    }
+    #open-hand {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: hand-open 5s ease-in-out 2.5s infinite;
+    }
+    #walkers {
+      animation: walkers-approach 1.4s ease-out 2s both;
+    }
+  </style>
+
+  <rect width="360" height="480" fill="#0D0A0E"/>
+
+  <!-- The converging path lines -->
+  <path id="path-left"  d="M60 460 C100 420 128 370 148 310 C162 268 168 240 172 210" stroke="#D4C4A8" stroke-width="1.2"/>
+  <path id="path-right" d="M300 460 C260 420 232 370 212 310 C198 268 192 240 188 210" stroke="#D4C4A8" stroke-width="1.2"/>
+  <path id="path-fade-l" d="M172 210 C175 196 178 186 180 180" stroke="#D4C4A8" stroke-width="0.8"/>
+  <path id="path-fade-r" d="M188 210 C185 196 182 186 180 180" stroke="#D4C4A8" stroke-width="0.8"/>
+
+  <!-- Standing figure -->
+  <g id="standing-figure">
+    <circle cx="180" cy="220" r="14" stroke="#D4C4A8" stroke-width="1.5" fill="#0D0A0E"/>
+    <line x1="180" y1="234" x2="180" y2="286" stroke="#D4C4A8" stroke-width="1.8"/>
+
+    <!-- Beckoning left arm -->
+    <g id="left-arm">
+      <path d="M180 250 C165 248 150 242 136 248" stroke="#D4C4A8" stroke-width="1.5"/>
+    </g>
+
+    <!-- Open hand at end of arm -->
+    <g id="open-hand">
+      <line x1="136" y1="248" x2="130" y2="242" stroke="#D4C4A8" stroke-width="1" opacity="0.7"/>
+      <line x1="136" y1="248" x2="128" y2="249" stroke="#D4C4A8" stroke-width="1" opacity="0.7"/>
+      <line x1="136" y1="248" x2="130" y2="254" stroke="#D4C4A8" stroke-width="1" opacity="0.7"/>
+    </g>
+
+    <!-- Right arm pointing onward -->
+    <path d="M180 250 C194 248 208 242 220 238" stroke="#D4C4A8" stroke-width="1.5"/>
+
+    <!-- Legs -->
+    <path d="M180 286 C174 310 170 336 168 360" stroke="#D4C4A8" stroke-width="1.4"/>
+    <path d="M180 286 C186 310 190 336 192 360" stroke="#D4C4A8" stroke-width="1.4"/>
+  </g>
+
+  <!-- Two approaching walkers -->
+  <g id="walkers">
+    <!-- Walker 1 -->
+    <circle cx="152" cy="366" r="8"  stroke="#D4C4A8" stroke-width="1.2" fill="#0D0A0E"/>
+    <line x1="152" y1="374" x2="152" y2="404" stroke="#D4C4A8" stroke-width="1.2"/>
+    <path d="M152 384 C146 382 141 384 137 388" stroke="#D4C4A8" stroke-width="1" opacity="0.8"/>
+    <path d="M152 384 C158 382 163 384 167 388" stroke="#D4C4A8" stroke-width="1" opacity="0.8"/>
+    <path d="M152 404 C148 416 146 428 145 438" stroke="#D4C4A8" stroke-width="1" opacity="0.7"/>
+    <path d="M152 404 C156 416 158 428 159 438" stroke="#D4C4A8" stroke-width="1" opacity="0.7"/>
+    <!-- Walker 2 -->
+    <circle cx="208" cy="372" r="8"  stroke="#D4C4A8" stroke-width="1.2" fill="#0D0A0E"/>
+    <line x1="208" y1="380" x2="208" y2="408" stroke="#D4C4A8" stroke-width="1.2"/>
+    <path d="M208 390 C202 388 197 390 193 394" stroke="#D4C4A8" stroke-width="1" opacity="0.8"/>
+    <path d="M208 390 C214 388 219 390 223 394" stroke="#D4C4A8" stroke-width="1" opacity="0.8"/>
+    <path d="M208 408 C204 420 202 432 201 442" stroke="#D4C4A8" stroke-width="1" opacity="0.7"/>
+    <path d="M208 408 C212 420 214 432 215 442" stroke="#D4C4A8" stroke-width="1" opacity="0.7"/>
+  </g>
+</svg>

@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 300">
+  <defs>
+    <style>
+      @keyframes tearDrop1 {
+        0% { transform: translateY(0); opacity: 0.7; }
+        100% { transform: translateY(20px); opacity: 0; }
+      }
+      @keyframes tearDrop2 {
+        0% { transform: translateY(0); opacity: 0.6; }
+        100% { transform: translateY(22px); opacity: 0; }
+      }
+      @keyframes shoulderTremble {
+        0%, 100% { transform: translateY(0); }
+        20% { transform: translateY(0.8px); }
+        40% { transform: translateY(-0.4px); }
+        60% { transform: translateY(0.6px); }
+        80% { transform: translateY(-0.3px); }
+      }
+      @keyframes griefWave {
+        0%, 100% { opacity: 0.02; }
+        50% { opacity: 0.06; }
+      }
+      @keyframes tearSplash {
+        0% { r: 0; opacity: 0.15; }
+        100% { r: 5; opacity: 0; }
+      }
+    </style>
+  </defs>
+
+  <rect width="360" height="300" fill="#0D0A0E"/>
+
+  <!-- Barely visible stars - the world grows quiet -->
+  <circle cx="50" cy="30" r="0.5" fill="#D4C4A8" opacity="0.12"/>
+  <circle cx="140" cy="20" r="0.4" fill="#D4C4A8" opacity="0.1"/>
+  <circle cx="250" cy="28" r="0.6" fill="#D4C4A8" opacity="0.08"/>
+  <circle cx="310" cy="40" r="0.4" fill="#D4C4A8" opacity="0.1"/>
+  <circle cx="85" cy="50" r="0.3" fill="#D4C4A8" opacity="0.08"/>
+
+  <!-- Sparse ground -->
+  <line x1="0" y1="240" x2="360" y2="240" stroke="#D4C4A8" stroke-width="0.5" opacity="0.2"/>
+  <ellipse cx="100" cy="243" rx="2" ry="0.8" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.08"/>
+  <ellipse cx="260" cy="243" rx="2.5" ry="1" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.08"/>
+  <line x1="50" y1="242" x2="56" y2="242" stroke="#D4C4A8" stroke-width="0.3" opacity="0.08"/>
+  <line x1="300" y1="242" x2="308" y2="242" stroke="#D4C4A8" stroke-width="0.3" opacity="0.08"/>
+
+  <!-- Grief emanation (concentric, slow pulsing) -->
+  <circle cx="180" cy="205" r="90" fill="#C4A66A" opacity="0.02" style="animation: griefWave 6s ease-in-out infinite;"/>
+  <circle cx="180" cy="205" r="65" fill="#C4A66A" opacity="0.025" style="animation: griefWave 5s ease-in-out infinite 1s;"/>
+  <circle cx="180" cy="205" r="45" fill="#C4A66A" opacity="0.03" style="animation: griefWave 4.5s ease-in-out infinite 0.5s;"/>
+  <circle cx="180" cy="205" r="28" fill="#C4A66A" opacity="0.04" style="animation: griefWave 4s ease-in-out infinite 1.5s;"/>
+
+  <!-- Distant ghost silhouettes of onlookers -->
+  <circle cx="40" cy="220" r="5" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.08"/>
+  <line x1="40" y1="225" x2="40" y2="240" stroke="#D4C4A8" stroke-width="0.3" opacity="0.06"/>
+  <circle cx="58" cy="222" r="4.5" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.07"/>
+  <line x1="58" y1="226" x2="58" y2="240" stroke="#D4C4A8" stroke-width="0.3" opacity="0.06"/>
+  <circle cx="72" cy="221" r="4" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.06"/>
+  <line x1="72" y1="225" x2="72" y2="240" stroke="#D4C4A8" stroke-width="0.3" opacity="0.05"/>
+  <circle cx="288" cy="220" r="5" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.08"/>
+  <line x1="288" y1="225" x2="288" y2="240" stroke="#D4C4A8" stroke-width="0.3" opacity="0.06"/>
+  <circle cx="306" cy="222" r="4.5" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.07"/>
+  <line x1="306" y1="226" x2="306" y2="240" stroke="#D4C4A8" stroke-width="0.3" opacity="0.06"/>
+  <circle cx="322" cy="221" r="4" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.06"/>
+  <line x1="322" y1="225" x2="322" y2="240" stroke="#D4C4A8" stroke-width="0.3" opacity="0.05"/>
+
+  <!-- JESUS (center, head deeply bowed, weeping) -->
+  <g style="transform-box: fill-box; transform-origin: 50% 100%; animation: shoulderTremble 2.5s ease-in-out infinite;">
+    <!-- Head bowed far down -->
+    <circle cx="180" cy="174" r="15" fill="#0D0A0E" stroke="#D4C4A8" stroke-width="1.3"/>
+    <!-- Hair/head covering draped heavy -->
+    <path d="M166 169 Q180 156 194 169" fill="none" stroke="#D4C4A8" stroke-width="0.9"/>
+    <path d="M166 169 Q161 187 164 202" fill="none" stroke="#D4C4A8" stroke-width="0.7" opacity="0.5"/>
+    <path d="M194 169 Q199 187 196 202" fill="none" stroke="#D4C4A8" stroke-width="0.7" opacity="0.5"/>
+    <!-- Drape detail -->
+    <path d="M163 180 Q160 192 162 200" fill="none" stroke="#D4C4A8" stroke-width="0.4" opacity="0.3"/>
+    <path d="M197 180 Q200 192 198 200" fill="none" stroke="#D4C4A8" stroke-width="0.4" opacity="0.3"/>
+
+    <!-- Eyes tightly shut -->
+    <path d="M174 174 Q176 177 178 174" fill="none" stroke="#D4C4A8" stroke-width="0.7"/>
+    <path d="M182 174 Q184 177 186 174" fill="none" stroke="#D4C4A8" stroke-width="0.7"/>
+    <!-- Furrowed brow -->
+    <path d="M173 171 Q176 170 179 172" fill="none" stroke="#D4C4A8" stroke-width="0.4" opacity="0.5"/>
+    <path d="M181 172 Q184 170 187 171" fill="none" stroke="#D4C4A8" stroke-width="0.4" opacity="0.5"/>
+    <!-- Nose -->
+    <line x1="180" y1="175" x2="180" y2="179" stroke="#D4C4A8" stroke-width="0.5"/>
+    <!-- Mouth pressed tight in grief -->
+    <path d="M176 183 Q180 185 184 183" fill="none" stroke="#D4C4A8" stroke-width="0.5" opacity="0.55"/>
+    <!-- Beard -->
+    <path d="M173 183 Q180 193 187 183" fill="none" stroke="#D4C4A8" stroke-width="0.5" opacity="0.35"/>
+
+    <!-- TEAR TRACKS -->
+    <line x1="176" y1="176" x2="175" y2="182" stroke="#D4C4A8" stroke-width="0.4" opacity="0.4"/>
+    <line x1="184" y1="176" x2="185" y2="182" stroke="#D4C4A8" stroke-width="0.4" opacity="0.4"/>
+
+    <!-- FALLING TEARS (the heart of the scene) -->
+    <circle cx="175" cy="184" r="1.3" fill="#D4C4A8" opacity="0" style="animation: tearDrop1 3s ease-in infinite;"/>
+    <circle cx="185" cy="183" r="1.1" fill="#D4C4A8" opacity="0" style="animation: tearDrop2 3.5s ease-in infinite 1.5s;"/>
+    <circle cx="176" cy="185" r="0.9" fill="#D4C4A8" opacity="0" style="animation: tearDrop1 4s ease-in infinite 2.2s;"/>
+    <circle cx="184" cy="184" r="1" fill="#D4C4A8" opacity="0" style="animation: tearDrop2 3.2s ease-in infinite 0.8s;"/>
+    <circle cx="174" cy="183" r="0.7" fill="#D4C4A8" opacity="0" style="animation: tearDrop1 4.5s ease-in infinite 3s;"/>
+
+    <!-- Neck bowed -->
+    <path d="M180 189 Q182 194 180 199" fill="none" stroke="#D4C4A8" stroke-width="1.3"/>
+    <!-- Body hunched, shoulders drawn in -->
+    <path d="M180 199 Q182 218 180 238" fill="none" stroke="#D4C4A8" stroke-width="1.3"/>
+    <!-- Robe -->
+    <path d="M172 201 Q165 220 162 238" fill="none" stroke="#D4C4A8" stroke-width="0.7" opacity="0.4"/>
+    <path d="M188 201 Q195 220 198 238" fill="none" stroke="#D4C4A8" stroke-width="0.7" opacity="0.4"/>
+    <path d="M168 212 Q180 216 192 212" fill="none" stroke="#D4C4A8" stroke-width="0.35" opacity="0.2"/>
+    <path d="M166 227 Q180 230 194 227" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0.15"/>
+
+    <!-- Arms wrapped over chest in grief -->
+    <path d="M178 202 Q168 208 162 212" fill="none" stroke="#D4C4A8" stroke-width="1"/>
+    <path d="M162 212 Q168 216 175 214" fill="none" stroke="#D4C4A8" stroke-width="0.8"/>
+    <path d="M182 202 Q192 208 198 212" fill="none" stroke="#D4C4A8" stroke-width="1"/>
+    <path d="M198 212 Q192 216 185 214" fill="none" stroke="#D4C4A8" stroke-width="0.8"/>
+    <!-- Fingers clasping -->
+    <line x1="175" y1="214" x2="178" y2="212" stroke="#D4C4A8" stroke-width="0.4"/>
+    <line x1="185" y1="214" x2="182" y2="212" stroke="#D4C4A8" stroke-width="0.4"/>
+
+    <!-- Legs -->
+    <line x1="179" y1="238" x2="173" y2="240" stroke="#D4C4A8" stroke-width="1"/>
+    <line x1="181" y1="238" x2="187" y2="240" stroke="#D4C4A8" stroke-width="1"/>
+    <line x1="173" y1="240" x2="169" y2="240" stroke="#D4C4A8" stroke-width="0.7"/>
+    <line x1="187" y1="240" x2="191" y2="240" stroke="#D4C4A8" stroke-width="0.7"/>
+  </g>
+
+  <!-- Shadow -->
+  <ellipse cx="180" cy="241" rx="22" ry="2.5" fill="#D4C4A8" opacity="0.04"/>
+
+  <!-- Tear splashes on ground -->
+  <circle cx="178" cy="240" r="0" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0">
+    <animate attributeName="r" values="0;5;5" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.15;0;0" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="182" cy="240" r="0" fill="none" stroke="#D4C4A8" stroke-width="0.3" opacity="0">
+    <animate attributeName="r" values="0;4;4" dur="3.5s" repeatCount="indefinite" begin="1.5s"/>
+    <animate attributeName="opacity" values="0.12;0;0" dur="3.5s" repeatCount="indefinite" begin="1.5s"/>
+  </circle>
+  <circle cx="176" cy="240" r="0" fill="none" stroke="#D4C4A8" stroke-width="0.2" opacity="0">
+    <animate attributeName="r" values="0;3;3" dur="4s" repeatCount="indefinite" begin="2.2s"/>
+    <animate attributeName="opacity" values="0.1;0;0" dur="4s" repeatCount="indefinite" begin="2.2s"/>
+  </circle>
+
+  <!-- Text -->
+  <text x="180" y="275" text-anchor="middle" fill="#D4C4A8" font-family="serif" font-size="11" opacity="0.5" letter-spacing="3">JESUS WEPT</text>
+</svg>
