@@ -7,3 +7,5 @@ out
 /playwright-report
 .gstack/
 *.tsbuildinfo
+.vercel
+.env*.local
