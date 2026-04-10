@@ -85,15 +85,16 @@ export function ConversationalEntry() {
   return (
     <main
       className="relative min-h-screen overflow-hidden px-6 py-10 sm:px-8"
-      style={{
-        background:
-          'radial-gradient(circle at top, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 28%), linear-gradient(180deg, #09080a 0%, #0d0a05 100%)',
-      }}
+      style={{ background: '#0b0b0d' }}
     >
       <style>{`
         @keyframes entry-btn-in {
           from { opacity: 0; transform: translateY(6px); }
           to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes cursor-blink {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0; }
         }
       `}</style>
 
@@ -102,32 +103,49 @@ export function ConversationalEntry() {
         <AmbientPlayer emotionalKey={musicKey} />
       </div>
 
-      {/* Ambient glow */}
-      <div className="pointer-events-none absolute inset-0 opacity-40">
-        <div className="absolute left-[10%] top-20 h-40 w-40 rounded-full bg-white/5 blur-3xl" />
-        <div className="absolute bottom-10 right-[8%] h-44 w-44 rounded-full bg-amber-300/5 blur-3xl" />
+      {/* Ambient glow — subtle, warm, matching landing page */}
+      <div className="pointer-events-none absolute inset-0">
+        <div
+          className="absolute left-1/2 top-[15%] -translate-x-1/2"
+          style={{
+            width: '500px',
+            height: '500px',
+            background: 'radial-gradient(circle, rgba(196,166,106,0.03) 0%, transparent 70%)',
+            borderRadius: '50%',
+          }}
+        />
       </div>
 
       <div className="relative mx-auto flex min-h-[calc(100vh-5rem)] w-full max-w-2xl flex-col justify-center">
         {/* Prompt phase */}
         {(phase === 'prompt' || phase === 'loading') && (
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-8">
             <div>
               <p
-                className="text-[0.68rem] uppercase tracking-[0.28em] text-white/38"
-                style={{ fontFamily: 'var(--font-ui)' }}
+                className="text-[0.6rem] uppercase tracking-[0.35em]"
+                style={{
+                  fontFamily: 'var(--font-ui)',
+                  color: 'rgba(255,255,255,0.3)',
+                  fontWeight: 500,
+                }}
               >
                 Begin
               </p>
               <h1
-                className="mt-3 text-[clamp(2rem,6vw,3.8rem)] font-medium leading-[0.95] text-[var(--text-primary)]"
-                style={{ fontFamily: 'var(--font-narrative)' }}
+                className="mt-5 text-[clamp(2rem,6vw,3.6rem)] font-medium leading-[1.06] tracking-tight"
+                style={{
+                  fontFamily: 'var(--font-narrative)',
+                  color: 'var(--text-primary)',
+                }}
               >
                 What are you carrying right now?
               </h1>
               <p
-                className="mt-4 max-w-lg text-base leading-7 text-white/50"
-                style={{ fontFamily: 'var(--font-narrative)' }}
+                className="mt-5 max-w-md text-[1.02rem] leading-[1.8]"
+                style={{
+                  fontFamily: 'var(--font-narrative)',
+                  color: 'rgba(255,255,255,0.4)',
+                }}
               >
                 Any language. Any length. Even one word is enough.
               </p>
@@ -146,33 +164,52 @@ export function ConversationalEntry() {
               placeholder=""
               rows={3}
               autoFocus
-              className="w-full resize-none rounded-2xl border bg-transparent px-5 py-4 text-base leading-7 text-white/90 placeholder:text-white/20 focus:outline-none focus:ring-1 disabled:opacity-50"
+              className="w-full resize-none text-[1.02rem] leading-[1.8] focus:outline-none disabled:opacity-50"
               style={{
-                borderColor: 'rgba(255,255,255,0.1)',
                 fontFamily: 'var(--font-narrative)',
+                color: 'rgba(255,255,255,0.85)',
+                background: 'transparent',
+                border: '1px solid rgba(255,255,255,0.08)',
+                borderRadius: '16px',
+                padding: '16px 20px',
               }}
             />
 
-            <div className="flex flex-wrap items-center gap-4">
+            <div className="flex flex-wrap items-center gap-5">
               {phase === 'loading' && (
-                <span className="flex items-center gap-2 text-base text-white/50" style={{ fontFamily: 'var(--font-narrative)' }}>
-                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white/80" />
+                <span
+                  className="flex items-center gap-2.5 text-[0.85rem]"
+                  style={{
+                    fontFamily: 'var(--font-narrative)',
+                    color: 'rgba(255,255,255,0.4)',
+                  }}
+                >
+                  <span
+                    className="h-3.5 w-3.5 animate-spin rounded-full"
+                    style={{ border: '1.5px solid rgba(255,255,255,0.15)', borderTopColor: 'rgba(196,166,106,0.6)' }}
+                  />
                   Listening...
                 </span>
               )}
 
               <Link
                 href="/demo"
-                className="text-sm text-white/30 transition-colors hover:text-white/60"
-                style={{ fontFamily: 'var(--font-ui)' }}
+                className="text-[0.75rem] transition-colors hover:text-white/50"
+                style={{
+                  fontFamily: 'var(--font-ui)',
+                  color: 'rgba(255,255,255,0.2)',
+                }}
               >
-                Try a demo →
+                Try a demo &rarr;
               </Link>
 
               {error && (
                 <p
-                  className="text-sm text-red-400/80"
-                  style={{ fontFamily: 'var(--font-ui)' }}
+                  className="text-[0.78rem]"
+                  style={{
+                    fontFamily: 'var(--font-ui)',
+                    color: 'rgba(248,113,113,0.7)',
+                  }}
                 >
                   {error}
                 </p>
@@ -183,23 +220,35 @@ export function ConversationalEntry() {
 
         {/* Bridge phase — streaming + done */}
         {(phase === 'streaming' || phase === 'done') && (
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-10">
             {/* Echo what they typed */}
             <p
-              className="text-sm leading-6 text-white/35"
-              style={{ fontFamily: 'var(--font-ui)' }}
+              className="text-[0.78rem] leading-relaxed"
+              style={{
+                fontFamily: 'var(--font-ui)',
+                color: 'rgba(255,255,255,0.25)',
+              }}
             >
               &ldquo;{input}&rdquo;
             </p>
 
             {/* Bridge sentence streaming in */}
             <p
-              className="max-w-xl text-[clamp(1.3rem,4vw,2rem)] font-medium leading-[1.3] text-white/90"
-              style={{ fontFamily: 'var(--font-narrative)' }}
+              className="max-w-xl text-[clamp(1.3rem,4vw,2rem)] font-medium leading-[1.35]"
+              style={{
+                fontFamily: 'var(--font-narrative)',
+                color: 'rgba(255,255,255,0.85)',
+              }}
             >
               {bridgeText}
               {phase === 'streaming' && (
-                <span className="ml-0.5 inline-block h-5 w-0.5 animate-pulse bg-white/60" />
+                <span
+                  className="ml-0.5 inline-block h-5 w-[2px] align-middle"
+                  style={{
+                    background: 'rgba(196,166,106,0.6)',
+                    animation: 'cursor-blink 1s ease-in-out infinite',
+                  }}
+                />
               )}
             </p>
 
@@ -208,11 +257,11 @@ export function ConversationalEntry() {
               <button
                 type="button"
                 onClick={handleContinue}
-                className="group mt-4 inline-flex w-fit items-center gap-2 rounded-full border px-6 py-3 text-base transition-all duration-300 hover:-translate-y-0.5 hover:border-white/25 hover:shadow-[0_0_24px_rgba(196,166,106,0.1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
+                className="group mt-2 inline-flex w-fit items-center gap-2.5 rounded-full px-7 py-3.5 text-[0.9rem] transition-all duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
                 style={{
-                  color: 'var(--text-primary)',
-                  borderColor: 'rgba(255,255,255,0.15)',
-                  backgroundColor: 'rgba(255,255,255,0.06)',
+                  color: '#e8d5b0',
+                  border: '1px solid rgba(196,166,106,0.25)',
+                  backgroundColor: 'rgba(196,166,106,0.1)',
                   fontFamily: 'var(--font-narrative)',
                   animation: 'entry-btn-in 0.6s ease-out both',
                 }}

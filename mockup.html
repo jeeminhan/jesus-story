@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gospel Story — One story. Every language. Shaped by what you carry.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Tokens ── */
+:root {
+  --font-narrative: 'Lora', Georgia, serif;
+  --font-ui: 'Inter', system-ui, sans-serif;
+  --bg: #0b0b0d;
+  --surface: #131318;
+  --surface-raised: #1a1a22;
+  --accent-gold: #c4a66a;
+  --accent-gold-dim: rgba(196,166,106,0.15);
+  --accent-grief: #8b2d42;
+  --accent-doubt: #4a6fa5;
+  --accent-searching: #c4832a;
+  --accent-curiosity: #2a7a6a;
+  --accent-anger: #b52020;
+  --text-primary: #f5ede0;
+  --text-secondary: rgba(255,255,255,0.5);
+  --text-dim: rgba(255,255,255,0.3);
+  --text-ghost: rgba(255,255,255,0.12);
+  --border: rgba(255,255,255,0.08);
+  --border-hover: rgba(255,255,255,0.18);
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-ui);
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── Layout ── */
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+section { padding: 100px 0; position: relative; }
+
+.divider {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.divider-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+}
+
+/* ── Typography ── */
+.label {
+  font-family: var(--font-ui);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.35em;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+h1, h2, h3 { font-family: var(--font-narrative); font-weight: 500; }
+h1 { font-size: clamp(2.4rem, 6vw, 4rem); line-height: 1.06; letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.4rem, 3.5vw, 2.2rem); line-height: 1.18; }
+h3 { font-size: 1rem; line-height: 1.4; }
+.body-text {
+  font-family: var(--font-ui);
+  font-size: 0.92rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  max-width: 540px;
+}
+.narrative-text {
+  font-family: var(--font-narrative);
+  font-size: 1.02rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 28px;
+  border-radius: 999px;
+  font-family: var(--font-narrative);
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-primary {
+  background: var(--accent-gold-dim);
+  border: 1px solid rgba(196,166,106,0.25);
+  color: #e8d5b0;
+}
+.btn-primary:hover { border-color: rgba(196,166,106,0.45); box-shadow: 0 0 30px rgba(196,166,106,0.1); }
+.btn-ghost {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+.btn-ghost:hover { border-color: var(--border-hover); }
+
+/* ── Phone Mockup ── */
+.phone {
+  width: 280px;
+  min-height: 520px;
+  background: var(--surface);
+  border-radius: 36px;
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
+  overflow: hidden;
+  flex-shrink: 0;
+  position: relative;
+}
+.phone-notch {
+  width: 120px;
+  height: 28px;
+  background: var(--bg);
+  border-radius: 0 0 16px 16px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+.phone-content {
+  padding: 20px 20px 28px;
+}
+.phone-sm {
+  width: 220px;
+  min-height: 400px;
+  border-radius: 28px;
+}
+.phone-sm .phone-notch { width: 90px; height: 22px; border-radius: 0 0 12px 12px; }
+.phone-sm .phone-content { padding: 14px 14px 20px; }
+
+/* ── Hero ── */
+.hero {
+  padding-top: 80px;
+  padding-bottom: 80px;
+  position: relative;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(196,166,106,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 60px;
+}
+.hero-text { flex: 1; max-width: 540px; }
+.hero-text h1 span { color: rgba(255,255,255,0.4); }
+.hero-phones {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 40px; }
+
+/* ── Mockup internals ── */
+.mock-label {
+  font-family: var(--font-ui);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: rgba(255,255,255,0.25);
+}
+.mock-heading {
+  font-family: var(--font-narrative);
+  font-weight: 500;
+  line-height: 1.1;
+  color: var(--text-primary);
+}
+.mock-textarea {
+  width: 100%;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: transparent;
+  border-radius: 14px;
+  padding: 12px 14px;
+  font-family: var(--font-narrative);
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.6;
+  resize: none;
+}
+.mock-prose {
+  font-family: var(--font-narrative);
+  font-size: 0.72rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.75);
+}
+.mock-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.05);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-family: var(--font-narrative);
+  font-size: 0.7rem;
+  color: var(--text-primary);
+}
+.mock-choice {
+  border: 1px solid rgba(255,255,255,0.08);
+  background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.02) 100%);
+  border-radius: 14px;
+  padding: 10px 14px;
+  font-family: var(--font-narrative);
+  font-size: 0.68rem;
+  color: var(--text-primary);
+}
+
+/* ── Language strip ── */
+.lang-strip {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  -webkit-overflow-scrolling: touch;
+}
+.lang-strip::-webkit-scrollbar { display: none; }
+.lang-phone-label {
+  font-family: var(--font-ui);
+  font-size: 0.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  text-align: center;
+  margin-top: 12px;
+}
+
+/* ── Arc cards ── */
+.arc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+.arc-card {
+  border-radius: var(--radius-md);
+  padding: 24px;
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+.arc-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 3px;
+}
+.arc-card .arc-emotion {
+  font-family: var(--font-ui);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 600;
+}
+.arc-card .arc-title {
+  font-family: var(--font-narrative);
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 8px;
+  color: var(--text-primary);
+}
+.arc-card .arc-source {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  margin-top: 4px;
+}
+.arc-card .arc-tagline {
+  font-family: var(--font-narrative);
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin-top: 10px;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* Arc colors */
+.arc-grief { background: rgba(139,45,66,0.06); }
+.arc-grief::before { background: var(--accent-grief); }
+.arc-grief .arc-emotion { color: var(--accent-grief); }
+
+.arc-doubt { background: rgba(74,111,165,0.06); }
+.arc-doubt::before { background: var(--accent-doubt); }
+.arc-doubt .arc-emotion { color: var(--accent-doubt); }
+
+.arc-searching { background: rgba(196,131,42,0.06); }
+.arc-searching::before { background: var(--accent-searching); }
+.arc-searching .arc-emotion { color: var(--accent-searching); }
+
+.arc-curiosity { background: rgba(42,122,106,0.06); }
+.arc-curiosity::before { background: var(--accent-curiosity); }
+.arc-curiosity .arc-emotion { color: var(--accent-curiosity); }
+
+.arc-anger { background: rgba(181,32,32,0.06); }
+.arc-anger::before { background: var(--accent-anger); }
+.arc-anger .arc-emotion { color: var(--accent-anger); }
+
+/* ── Flow diagram ── */
+.flow {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  overflow-x: auto;
+  padding-bottom: 12px;
+}
+.flow-step {
+  flex-shrink: 0;
+  width: 180px;
+  text-align: center;
+}
+.flow-node {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+  font-size: 1.2rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.flow-step h4 {
+  font-family: var(--font-narrative);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+.flow-step p {
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  line-height: 1.5;
+  padding: 0 8px;
+}
+.flow-arrow {
+  flex-shrink: 0;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 16px;
+  color: var(--text-ghost);
+  font-size: 1.2rem;
+}
+
+/* ── Feature bento ── */
+.bento {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.bento-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 28px;
+}
+.bento-card .bento-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  margin-bottom: 16px;
+  background: rgba(196,166,106,0.08);
+  border: 1px solid rgba(196,166,106,0.12);
+}
+.bento-card h3 {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 8px;
+}
+.bento-card p {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+.bento-wide { grid-column: span 2; }
+
+/* ── Code blocks ── */
+.code-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 0.78rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.6);
+  overflow-x: auto;
+  white-space: pre;
+}
+.code-block .comment { color: rgba(255,255,255,0.2); }
+.code-block .cmd { color: var(--accent-gold); }
+.code-block .flag { color: var(--accent-curiosity); }
+
+/* ── API reference ── */
+.api-grid { display: flex; flex-direction: column; gap: 8px; }
+.api-row {
+  display: grid;
+  grid-template-columns: 70px 200px 1fr;
+  gap: 16px;
+  align-items: baseline;
+  padding: 14px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+.api-method {
+  font-family: 'SF Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  text-align: center;
+}
+.api-post { background: rgba(74,111,165,0.15); color: var(--accent-doubt); }
+.api-get { background: rgba(42,122,106,0.15); color: var(--accent-curiosity); }
+.api-path {
+  font-family: 'SF Mono', monospace;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.7);
+}
+.api-desc {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+/* ── Blockquote ── */
+.tension-quote {
+  font-family: var(--font-narrative);
+  font-style: italic;
+  font-size: clamp(1.2rem, 3vw, 1.9rem);
+  line-height: 1.35;
+  color: rgba(255,255,255,0.75);
+  max-width: 640px;
+}
+
+/* ── Footer ── */
+footer {
+  padding: 60px 0 40px;
+  text-align: center;
+}
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+.tech-pill {
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  font-weight: 500;
+  padding: 5px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+}
+
+/* ── Culture strip ── */
+.culture-strip { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 8px; }
+.culture-strip::-webkit-scrollbar { display: none; }
+.culture-card {
+  flex-shrink: 0;
+  width: 260px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.culture-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--accent-grief);
+}
+.culture-card .culture-flag {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+.culture-card .culture-context {
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--accent-grief);
+  font-weight: 600;
+}
+.culture-card .culture-input {
+  font-family: var(--font-narrative);
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.5);
+  font-style: italic;
+  margin-top: 10px;
+  line-height: 1.5;
+}
+.culture-card .culture-prose {
+  font-family: var(--font-narrative);
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.65);
+  margin-top: 14px;
+  line-height: 1.7;
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .hero-phones { display: none; }
+  .bento { grid-template-columns: repeat(2, 1fr); }
+  .bento-wide { grid-column: span 2; }
+}
+@media (max-width: 768px) {
+  section { padding: 64px 0; }
+  .bento { grid-template-columns: 1fr; }
+  .bento-wide { grid-column: span 1; }
+  .arc-grid { grid-template-columns: 1fr; }
+  .api-row { grid-template-columns: 60px 1fr; }
+  .api-desc { display: none; }
+  .flow { flex-direction: column; align-items: center; }
+  .flow-arrow { transform: rotate(90deg); width: auto; padding: 0; }
+  .flow-step { width: 220px; }
+}
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+  .hero { padding-top: 48px; padding-bottom: 48px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════
+     1. HERO
+     ════════════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-layout">
+      <div class="hero-text">
+        <p class="label">Gospel Story</p>
+        <h1 style="margin-top: 20px;">
+          One story.<br>
+          Every language.<br>
+          <span>Shaped by what you carry.</span>
+        </h1>
+        <p class="narrative-text" style="margin-top: 28px; max-width: 460px;">
+          An AI-powered experience that retells true stories from the life of Jesus in your language, your cultural context, shaped by whatever you're going through. No translation tables. No templates. One skeleton, infinite tellings.
+        </p>
+        <div class="hero-ctas">
+          <a href="#get-started" class="btn btn-primary">Get started</a>
+          <a href="#how-it-works" class="btn btn-ghost">How it works</a>
+        </div>
+      </div>
+
+      <!-- Hero phones -->
+      <div class="hero-phones">
+        <!-- Entry phone -->
+        <div class="phone phone-sm" style="margin-top: 40px;">
+          <div class="phone-notch"></div>
+          <div class="phone-content">
+            <p class="mock-label">Begin</p>
+            <p class="mock-heading" style="font-size: 1.1rem; margin-top: 8px;">What are you carrying right now?</p>
+            <p style="font-family: var(--font-narrative); font-size: 0.68rem; color: rgba(255,255,255,0.35); margin-top: 8px;">Any language. Any length.</p>
+            <div class="mock-textarea" style="margin-top: 14px; min-height: 50px; font-size: 0.7rem;">
+              I lost my best friend last month and I don't know how to keep going
+            </div>
+            <div style="margin-top: 10px;">
+              <span style="font-family: var(--font-ui); font-size: 0.6rem; color: rgba(255,255,255,0.3); display: flex; align-items: center; gap: 4px;">
+                <span style="width: 10px; height: 10px; border: 1.5px solid rgba(255,255,255,0.3); border-top-color: rgba(255,255,255,0.7); border-radius: 50%; display: inline-block;"></span>
+                Listening...
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scene phone -->
+        <div class="phone">
+          <div class="phone-notch"></div>
+          <div class="phone-content">
+            <p class="mock-label">Scene 3 &middot; Grief</p>
+            <div class="mock-prose" style="margin-top: 14px;">
+              <p>When Jesus saw Mary weeping, and the people who had come with her also weeping, something shifted in his face. The kind of shift you recognize if you have ever watched someone you love absorb the weight of a room.</p>
+              <p style="margin-top: 10px;">He asked where they had laid him. And then, two words. The shortest verse in all of scripture:</p>
+              <p style="margin-top: 10px; color: rgba(255,255,255,0.9); font-weight: 600;">Jesus wept.</p>
+              <p style="margin-top: 10px;">He did not explain. He did not theologize. He did not say "this is happening for a reason." He cried.</p>
+            </div>
+            <div style="margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(196,166,106,0.1);">
+              <p style="font-family: var(--font-narrative); font-size: 0.68rem; color: rgba(255,255,255,0.5); line-height: 1.5;">When was the last time someone sat in your pain with you instead of trying to fix it?</p>
+              <div class="mock-textarea" style="margin-top: 10px; min-height: 30px; font-size: 0.65rem; padding: 8px 12px;">He just let me cry on the phone. Didn't say anything.</div>
+              <div class="mock-btn" style="margin-top: 10px; font-size: 0.62rem; padding: 6px 14px;">Continue the story &rarr;</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- ════════════════════════════════════════════════════════════
+     2. CORE INTERACTION — Entry flow
+     ════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <p class="label">It starts with you</p>
+    <h2 style="margin-top: 16px; max-width: 500px;">You type what you're going through. The AI listens.</h2>
+    <p class="body-text" style="margin-top: 20px;">
+      No menu. No categories. Just one question: <em>"What are you carrying right now?"</em> Write in any language, any length. The AI detects your language, reads your emotional state, and selects a story arc that meets you where you are.
+    </p>
+    <p class="body-text" style="margin-top: 14px;">
+      Then a bridge sentence appears — one line, streamed word by word, that echoes your own words and invites you into a story about someone who carried something similar, two thousand years ago.
+    </p>
+
+    <!-- Simulated entry flow -->
+    <div style="margin-top: 48px; display: flex; gap: 24px; flex-wrap: wrap;">
+      <!-- Step 1: Input -->
+      <div style="flex: 1; min-width: 280px;">
+        <p class="mock-label" style="margin-bottom: 10px;">Step 1 &mdash; User input</p>
+        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px;">
+          <p class="mock-heading" style="font-size: 1rem;">What are you carrying right now?</p>
+          <div class="mock-textarea" style="margin-top: 14px;">친구를 잃었어요. 아직도 믿기지 않아요.</div>
+          <p style="font-family: var(--font-ui); font-size: 0.65rem; color: var(--text-dim); margin-top: 10px;">
+            <span style="color: var(--accent-curiosity);">Detected:</span> Korean &middot;
+            <span style="color: var(--accent-grief);">Emotion:</span> grief &middot;
+            <span style="color: var(--accent-gold);">Arc:</span> When He Wept
+          </p>
+        </div>
+      </div>
+      <!-- Step 2: Bridge -->
+      <div style="flex: 1; min-width: 280px;">
+        <p class="mock-label" style="margin-bottom: 10px;">Step 2 &mdash; Bridge sentence (streamed)</p>
+        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px;">
+          <p style="font-family: var(--font-ui); font-size: 0.72rem; color: rgba(255,255,255,0.3);">"친구를 잃었어요. 아직도 믿기지 않아요."</p>
+          <p style="font-family: var(--font-narrative); font-size: 1.05rem; color: rgba(255,255,255,0.85); margin-top: 16px; line-height: 1.5;">
+            아직도 믿기지 않는 그 마음, 이천 년 전에도 똑같이 느꼈던 사람들이 있었습니다. 그들의 이야기를 들려드릴게요.<span style="display: inline-block; width: 2px; height: 14px; background: rgba(255,255,255,0.5); vertical-align: middle; margin-left: 2px; animation: none;"></span>
+          </p>
+          <div class="mock-btn" style="margin-top: 20px;">이야기 속으로 &rarr;</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- ════════════════════════════════════════════════════════════
+     3. MODES — Language + Culture contextualization
+     ════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <p class="label">Language</p>
+    <h2 style="margin-top: 16px; max-width: 640px;">The same scene. Four languages. No translation.</h2>
+    <p class="body-text" style="margin-top: 20px;">
+      Each panel shows the same moment from John 11 — generated directly in English, Korean, Japanese, and Spanish. The AI doesn't translate. It <em>retells</em>, using the natural rhythms and emotional register of each language.
+    </p>
+
+    <div class="lang-strip" style="margin-top: 48px;">
+      <!-- English -->
+      <div>
+        <div class="phone phone-sm">
+          <div class="phone-notch"></div>
+          <div class="phone-content">
+            <p class="mock-label" style="color: var(--accent-grief);">Scene 3 &middot; EN</p>
+            <div class="mock-prose" style="margin-top: 10px; font-size: 0.65rem;">
+              <p>When Jesus saw Mary weeping, and the people who had come with her also weeping, something shifted in his face.</p>
+              <p style="margin-top: 8px;">He asked where they had laid him.</p>
+              <p style="margin-top: 8px; color: rgba(255,255,255,0.9); font-weight: 600;">Jesus wept.</p>
+            </div>
+          </div>
+        </div>
+        <p class="lang-phone-label" style="color: var(--text-dim);">English</p>
+      </div>
+
+      <!-- Korean -->
+      <div>
+        <div class="phone phone-sm">
+          <div class="phone-notch"></div>
+          <div class="phone-content">
+            <p class="mock-label" style="color: var(--accent-grief);">장면 3 &middot; KO</p>
+            <div class="mock-prose" style="margin-top: 10px; font-size: 0.65rem;">
+              <p>예수께서 마리아가 우는 것과, 함께 온 사람들이 우는 것을 보셨을 때, 그의 얼굴에 무언가가 변했습니다.</p>
+              <p style="margin-top: 8px;">그가 어디에 두었느냐고 물으셨습니다.</p>
+              <p style="margin-top: 8px; color: rgba(255,255,255,0.9); font-weight: 600;">예수께서 우셨습니다.</p>
+            </div>
+          </div>
+        </div>
+        <p class="lang-phone-label" style="color: var(--text-dim);">Korean</p>
+      </div>
+
+      <!-- Japanese -->
+      <div>
+        <div class="phone phone-sm">
+          <div class="phone-notch"></div>
+          <div class="phone-content">
+            <p class="mock-label" style="color: var(--accent-grief);">場面 3 &middot; JA</p>
+            <div class="mock-prose" style="margin-top: 10px; font-size: 0.65rem;">
+              <p>イエスは、マリアが泣いているのを、一緒に来た人々が泣いているのを見たとき、その顔に何かが変わりました。</p>
+              <p style="margin-top: 8px;">どこに置いたのかと尋ねました。</p>
+              <p style="margin-top: 8px; color: rgba(255,255,255,0.9); font-weight: 600;">イエスは涙を流された。</p>
+            </div>
+          </div>
+        </div>
+        <p class="lang-phone-label" style="color: var(--text-dim);">Japanese</p>
+      </div>
+
+      <!-- Spanish -->
+      <div>
+        <div class="phone phone-sm">
+          <div class="phone-notch"></div>
+          <div class="phone-content">
+            <p class="mock-label" style="color: var(--accent-grief);">Escena 3 &middot; ES</p>
+            <div class="mock-prose" style="margin-top: 10px; font-size: 0.65rem;">
+              <p>Cuando Jes&uacute;s vio a Mar&iacute;a llorando, y a los que hab&iacute;an venido con ella tambi&eacute;n llorando, algo cambi&oacute; en su rostro.</p>
+              <p style="margin-top: 8px;">Pregunt&oacute; d&oacute;nde lo hab&iacute;an puesto.</p>
+              <p style="margin-top: 8px; color: rgba(255,255,255,0.9); font-weight: 600;">Jes&uacute;s llor&oacute;.</p>
+            </div>
+          </div>
+        </div>
+        <p class="lang-phone-label" style="color: var(--text-dim);">Spanish</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- Cultural contextualization -->
+<section>
+  <div class="container">
+    <p class="label">Culture</p>
+    <h2 style="margin-top: 16px; max-width: 640px;">Same grief. Different worlds.</h2>
+    <p class="body-text" style="margin-top: 20px;">
+      Language is only the surface. The AI also contextualizes for <em>culture</em> — how grief is expressed, the social expectations around loss, the emotional textures that make a story feel native rather than imported.
+    </p>
+
+    <div class="culture-strip" style="margin-top: 48px;">
+      <div class="culture-card">
+        <div class="culture-flag">&#127482;&#127480;</div>
+        <p class="culture-context">American &middot; grief</p>
+        <p class="culture-input">"I lost my best friend last month and I still can't feel anything"</p>
+        <p class="culture-prose">The numbness after loss — when people keep telling you it's okay to grieve but you can't find the tears. Martha walked out to meet Jesus on the road, her face set the way yours gets when you're holding it together for everyone else...</p>
+      </div>
+
+      <div class="culture-card">
+        <div class="culture-flag">&#127472;&#127479;</div>
+        <p class="culture-context">Korean &middot; grief</p>
+        <p class="culture-input">"장례식에서 울지 못했어요. 다들 의젓하게 있으라고 해서."</p>
+        <p class="culture-prose">장례식장에서 의젓하게 서 있어야 했던 그 무게. 마르다도 그랬습니다. 사람들 앞에서 무너질 수 없었기에, 밖으로 걸어 나가 예수를 마주했습니다. 그리고 첫마디가 이것이었습니다...</p>
+      </div>
+
+      <div class="culture-card">
+        <div class="culture-flag">&#127471;&#127477;</div>
+        <p class="culture-context">Japanese &middot; grief</p>
+        <p class="culture-input">"泣けないんです。泣いていいのか分からなくて。"</p>
+        <p class="culture-prose">涙を流すことへの許可を、誰かに求めるその気持ち。マルタもまた、悲しみの中にいながらも取り乱さずにいました。けれどイエスの前に立ったとき、彼女は初めて正直に言葉を口にしました...</p>
+      </div>
+
+      <div class="culture-card">
+        <div class="culture-flag">&#127466;&#127480;</div>
+        <p class="culture-context">Spanish &middot; grief</p>
+        <p class="culture-input">"Perd&iacute; a mi abuela y la casa se siente vac&iacute;a sin ella"</p>
+        <p class="culture-prose">Esa casa que sigue oliendo a ella, que todav&iacute;a espera que entre por la puerta. Marta sali&oacute; a encontrarse con Jes&uacute;s en el camino porque la casa ya no era soportable — llena de gente pero vac&iacute;a de la &uacute;nica persona que importaba...</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- ════════════════════════════════════════════════════════════
+     3b. FIVE ARCS
+     ════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <p class="label">Five emotional paths</p>
+    <h2 style="margin-top: 16px; max-width: 600px;">What you're carrying determines which story you enter.</h2>
+    <p class="body-text" style="margin-top: 20px;">
+      Each emotion routes into a different passage from the Gospels. Each arc has its own color world, its own guardrails, its own opening line.
+    </p>
+
+    <div class="arc-grid" style="margin-top: 48px;">
+      <div class="arc-card arc-grief">
+        <p class="arc-emotion">Grief</p>
+        <p class="arc-title">When He Wept</p>
+        <p class="arc-source">John 11:1-44</p>
+        <p class="arc-tagline">A story for the ache that stays after the room goes quiet.</p>
+      </div>
+      <div class="arc-card arc-doubt">
+        <p class="arc-emotion">Doubt</p>
+        <p class="arc-title">The Night He Answered</p>
+        <p class="arc-source">John 20:24-29</p>
+        <p class="arc-tagline">A story for the person who needs more than slogans.</p>
+      </div>
+      <div class="arc-card arc-searching">
+        <p class="arc-emotion">Searching</p>
+        <p class="arc-title">The King Who Came</p>
+        <p class="arc-source">Luke 2 / Matthew 2</p>
+        <p class="arc-tagline">A story about a rescue no one expected.</p>
+      </div>
+      <div class="arc-card arc-curiosity">
+        <p class="arc-emotion">Curiosity</p>
+        <p class="arc-title">Come and See</p>
+        <p class="arc-source">John 1:35-51</p>
+        <p class="arc-tagline">A story for the person who is open, observant, and not yet convinced.</p>
+      </div>
+      <div class="arc-card arc-anger">
+        <p class="arc-emotion">Anger</p>
+        <p class="arc-title">The Storm He Stilled</p>
+        <p class="arc-source">Mark 4:35-41</p>
+        <p class="arc-tagline">A story for the noise inside you when everything feels too much.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- ════════════════════════════════════════════════════════════
+     4. HOW IT WORKS — Architecture flow
+     ════════════════════════════════════════════════════════════ -->
+<section id="how-it-works">
+  <div class="container">
+    <p class="label">How it works</p>
+    <h2 style="margin-top: 16px; max-width: 600px;">One skeleton. Infinite tellings.</h2>
+    <p class="body-text" style="margin-top: 20px;">
+      The system works in six steps. Each story has exactly five beats, generated live from the same skeleton data. The events are fixed by scripture. The telling is shaped by you.
+    </p>
+
+    <div class="flow" style="margin-top: 48px;">
+      <div class="flow-step">
+        <div class="flow-node" style="border-color: rgba(196,166,106,0.2);">&#9998;</div>
+        <h4>Share</h4>
+        <p>User writes what they're carrying in any language</p>
+      </div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step">
+        <div class="flow-node" style="border-color: rgba(74,111,165,0.3);">&#9881;</div>
+        <h4>Classify</h4>
+        <p>Gemini detects language, emotion, selects arc</p>
+      </div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step">
+        <div class="flow-node" style="border-color: rgba(139,45,66,0.3);">&#9836;</div>
+        <h4>Bridge</h4>
+        <p>A sentence streams in their language, echoing their words</p>
+      </div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step">
+        <div class="flow-node" style="border-color: rgba(42,122,106,0.3);">&#9733;</div>
+        <h4>Generate</h4>
+        <p>Five beats stream live from skeleton + guardrails + user context</p>
+      </div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step">
+        <div class="flow-node" style="border-color: rgba(196,131,42,0.3);">&#10067;</div>
+        <h4>Check-in</h4>
+        <p>Between beats, a reflective question deepens the next scene</p>
+      </div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step">
+        <div class="flow-node" style="border-color: rgba(181,32,32,0.3);">&#9670;</div>
+        <h4>Guard</h4>
+        <p>Guardrails ensure no invented dialogue, no church vocab, scripture-faithful</p>
+      </div>
+    </div>
+
+    <!-- System prompt preview -->
+    <div style="margin-top: 56px;">
+      <p class="label" style="margin-bottom: 16px;">Behind the scenes &mdash; Assembled system prompt (color-coded)</p>
+      <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px; font-family: var(--font-ui); font-size: 0.72rem; line-height: 1.7; max-height: 320px; overflow-y: auto;">
+        <div>
+          <span style="color: rgb(147,197,253); font-weight: 600; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em;">The person</span>
+          <p style="color: rgba(147,197,253,0.6); margin-top: 4px;">The reader said: "I lost my best friend last month and I don't know how to keep going"<br>Language: en</p>
+        </div>
+        <div style="margin-top: 14px;">
+          <span style="color: rgb(147,197,253); font-weight: 600; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em;">Deeper context</span>
+          <p style="color: rgba(147,197,253,0.6); margin-top: 4px;">Check-in answer: "He just let me cry on the phone. Didn't say anything."</p>
+        </div>
+        <div style="margin-top: 14px;">
+          <span style="color: rgb(248,113,113); font-weight: 600; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em;">Guardrails (non-negotiable)</span>
+          <p style="color: rgba(248,113,113,0.6); margin-top: 4px;">MUST NOT: Explain why God allows suffering. No theodicy.<br>MUST NOT: Use church vocabulary (saved, sin, repent, salvation, born again).<br>MUST NOT: Rush past the grief to get to the miracle.</p>
+        </div>
+        <div style="margin-top: 14px;">
+          <span style="color: rgb(248,113,113); font-weight: 600; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em;">Scripture bounds</span>
+          <p style="color: rgba(248,113,113,0.6); margin-top: 4px;">John 11:33-35. "Jesus wept." Non-negotiable: the text says he wept &mdash; do not soften to "his eyes glistened" or similar. Two words.</p>
+        </div>
+        <div style="margin-top: 14px;">
+          <span style="color: rgb(196,166,106); font-weight: 600; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em;">Writing style</span>
+          <p style="color: rgba(196,166,106,0.6); margin-top: 4px;">Literary, not devotional. Sit in the ache. Let beats about the delay and the weeping breathe. Do not rush to resolution.</p>
+        </div>
+        <div style="margin-top: 14px;">
+          <span style="color: rgb(134,239,172); font-weight: 600; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em;">This beat</span>
+          <p style="color: rgba(134,239,172,0.6); margin-top: 4px;">Beat 3: "Jesus weeps." When Jesus sees Mary weeping, and the people with her weeping, he is deeply moved. He asks where they have laid Lazarus. And then: Jesus wept.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- ════════════════════════════════════════════════════════════
+     5. FEATURE BENTO
+     ════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <p class="label">Capabilities</p>
+    <h2 style="margin-top: 16px;">What the system does</h2>
+
+    <div class="bento" style="margin-top: 48px;">
+      <div class="bento-card bento-wide">
+        <div class="bento-icon">&#9997;</div>
+        <h3>Live story generation</h3>
+        <p>Each beat streams in real time from Gemini 2.5 Flash. The prose is generated directly in the reader's language — not translated after the fact. Five beats per story, each shaped by the reader's input and check-in answers.</p>
+      </div>
+      <div class="bento-card">
+        <div class="bento-icon">&#128274;</div>
+        <h3>Scripture guardrails</h3>
+        <p>Three layers of fidelity enforcement. No invented dialogue. No attributed emotions beyond the text. Per-beat verse bounds.</p>
+      </div>
+      <div class="bento-card">
+        <div class="bento-icon">&#127760;</div>
+        <h3>Any language on earth</h3>
+        <p>Korean, Japanese, Spanish, Tagalog, Arabic — the AI generates natively. One English skeleton serves every language.</p>
+      </div>
+      <div class="bento-card">
+        <div class="bento-icon">&#128161;</div>
+        <h3>Emotional classification</h3>
+        <p>Structured output from Gemini classifies input into one of five emotional keys. Ambiguous input defaults to "searching."</p>
+      </div>
+      <div class="bento-card bento-wide">
+        <div class="bento-icon">&#128172;</div>
+        <h3>Mid-story check-ins</h3>
+        <p>After each non-end beat, a reflective question pauses the flow. The reader's answer is accumulated and shapes every subsequent beat — the narrator's voice shifts to meet what you shared. The questions are tailored to the beat's content, reflecting the story back as a personal question.</p>
+      </div>
+      <div class="bento-card">
+        <div class="bento-icon">&#127912;</div>
+        <h3>Cultural contextualization</h3>
+        <p>Not just language — the telling adapts to cultural expressions of grief, doubt, and searching.</p>
+      </div>
+      <div class="bento-card">
+        <div class="bento-icon">&#9878;</div>
+        <h3>No church vocabulary</h3>
+        <p>Saved, sin, repent, born again — banned across all five arcs. The story speaks in human language.</p>
+      </div>
+      <div class="bento-card">
+        <div class="bento-icon">&#128065;</div>
+        <h3>Behind the scenes</h3>
+        <p>After the story ends, readers can see every system prompt that was sent — color-coded by section.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- ════════════════════════════════════════════════════════════
+     TENSION QUOTE
+     ════════════════════════════════════════════════════════════ -->
+<section style="padding: 80px 0;">
+  <div class="container">
+    <blockquote class="tension-quote">
+      "You can contextualize the telling, but you cannot change the events."
+    </blockquote>
+    <p class="body-text" style="margin-top: 32px;">
+      The reader's words shape the narrator's voice and the scene's atmosphere — but never appear in the mouths of biblical characters. The narrator bridges the reader's world and the ancient story. Jesus and the other characters speak only what scripture records.
+    </p>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- ════════════════════════════════════════════════════════════
+     6. API REFERENCE
+     ════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <p class="label">API Routes</p>
+    <h2 style="margin-top: 16px;">Two endpoints, streaming responses</h2>
+
+    <div class="api-grid" style="margin-top: 40px;">
+      <div class="api-row">
+        <span class="api-method api-post">POST</span>
+        <span class="api-path">/api/entry</span>
+        <span class="api-desc">Classify input (language + emotion), stream bridge sentence. Headers: X-Detected-Lang, X-Emotional-Key, X-Arc-Slug</span>
+      </div>
+      <div class="api-row">
+        <span class="api-method api-post">POST</span>
+        <span class="api-path">/api/story</span>
+        <span class="api-desc">Generate a story beat. Accepts storySlug, beatId, userInput, lang, previousBeats, checkinAnswers. Streams prose, sends metadata via headers.</span>
+      </div>
+    </div>
+
+    <div style="margin-top: 32px;">
+      <p class="label" style="margin-bottom: 12px;">Response headers from /api/story</p>
+      <div class="code-block"><span class="comment"># Beat metadata sent as HTTP headers</span>
+X-Beat-Id: beat-grief-3
+X-Is-End: false
+X-Beat-Order: 3
+X-Choices: <span class="flag">[{"id":"choice-grief-3","nextBeatId":"beat-grief-4","hint":"Follow him to the tomb"}]</span>
+X-Checkin-Prompt: <span class="flag">When was the last time someone sat in your pain with you...</span>
+X-Illustration-Url: /beat-illustrations/when-he-wept/beat-5.svg</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- ════════════════════════════════════════════════════════════
+     7. GET STARTED
+     ════════════════════════════════════════════════════════════ -->
+<section id="get-started">
+  <div class="container">
+    <p class="label">Get started</p>
+    <h2 style="margin-top: 16px;">Clone, install, run</h2>
+    <p class="body-text" style="margin-top: 16px;">
+      Requires Node.js 20+ and a Google AI API key (Gemini 2.5 Flash). Supabase is optional — the app runs with mock skeleton data by default.
+    </p>
+
+    <div class="code-block" style="margin-top: 32px;"><span class="comment"># Clone</span>
+<span class="cmd">git clone</span> https://github.com/jeeminhan/jesus-story.git
+<span class="cmd">cd</span> jesus-story
+
+<span class="comment"># Install dependencies</span>
+<span class="cmd">npm install</span>
+
+<span class="comment"># Set up environment</span>
+<span class="cmd">cp</span> .env.example .env.local
+<span class="comment"># Add your GOOGLE_GENERATIVE_AI_API_KEY to .env.local</span>
+
+<span class="comment"># Run dev server</span>
+<span class="cmd">npm run dev</span>
+
+<span class="comment"># Run tests</span>
+<span class="cmd">npx vitest run</span>          <span class="comment"># 118 unit/integration tests</span>
+<span class="cmd">npx playwright test</span>     <span class="comment"># E2E tests</span></div>
+
+    <div style="margin-top: 32px;">
+      <p class="label" style="margin-bottom: 12px;">Available scripts</p>
+      <div class="api-grid">
+        <div class="api-row">
+          <span class="api-method api-get" style="font-size: 0.62rem;">RUN</span>
+          <span class="api-path">npm run dev</span>
+          <span class="api-desc">Start the Next.js dev server</span>
+        </div>
+        <div class="api-row">
+          <span class="api-method api-get" style="font-size: 0.62rem;">RUN</span>
+          <span class="api-path">npm run build</span>
+          <span class="api-desc">Production build</span>
+        </div>
+        <div class="api-row">
+          <span class="api-method api-get" style="font-size: 0.62rem;">RUN</span>
+          <span class="api-path">npm run test</span>
+          <span class="api-desc">Run Vitest suite (118 tests)</span>
+        </div>
+        <div class="api-row">
+          <span class="api-method api-get" style="font-size: 0.62rem;">RUN</span>
+          <span class="api-path">npm run test:e2e</span>
+          <span class="api-desc">Run Playwright E2E tests</span>
+        </div>
+        <div class="api-row">
+          <span class="api-method api-get" style="font-size: 0.62rem;">RUN</span>
+          <span class="api-path">npm run seed</span>
+          <span class="api-desc">Seed Supabase with skeleton data</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- ════════════════════════════════════════════════════════════
+     8. FOOTER
+     ════════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <p style="font-family: var(--font-narrative); font-size: 1.1rem; color: rgba(255,255,255,0.7);">Gospel Story</p>
+    <p style="font-family: var(--font-ui); font-size: 0.78rem; color: var(--text-dim); margin-top: 8px; max-width: 420px; margin-left: auto; margin-right: auto;">
+      One story skeleton. Every language. Every culture. Shaped by what you carry.
+    </p>
+    <div class="tech-stack">
+      <span class="tech-pill">Next.js 15</span>
+      <span class="tech-pill">TypeScript</span>
+      <span class="tech-pill">Tailwind CSS</span>
+      <span class="tech-pill">AI SDK v6</span>
+      <span class="tech-pill">Gemini 2.5 Flash</span>
+      <span class="tech-pill">Supabase</span>
+      <span class="tech-pill">Vitest</span>
+      <span class="tech-pill">Playwright</span>
+      <span class="tech-pill">Vercel</span>
+    </div>
+    <p style="font-family: var(--font-ui); font-size: 0.65rem; color: rgba(255,255,255,0.12); margin-top: 32px;">
+      <a href="https://github.com/jeeminhan/jesus-story" style="color: rgba(255,255,255,0.2); text-decoration: none;">github.com/jeeminhan/jesus-story</a>
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
